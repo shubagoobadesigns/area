@@ -3,7 +3,7 @@ from .models import Course, Module3
 
 
 @admin.register(Module3)
-class ModuleAdmin(admin.ModelAdmin):
+class Module3Admin(admin.ModelAdmin):
     list_display = ('course', 'completed_on', 'step',
                     )
     readonly_fields = []

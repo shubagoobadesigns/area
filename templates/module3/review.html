@@ -1,7 +1,7 @@
-{% extends 'decisions/base/review.html' %}
-{% block review %}
-    <div>&bull; Mental Shortcuts &amp; Bias</div>
-    <div>&bull; Facts versus Opinion</div>
-    <div>&bull; Perspective Taking</div>
-    <div>&bull; How Facts Beat Bias</div>
+{% extends 'modules/base/review.html' %}
+{% load module_tags %}
+{% block review_title %}Review: Mental Shortcuts{% endblock %}
+{% block review_content %}
+    {% include 'module2/review/content.html' %}
 {% endblock %}
+{% block next_btn %}{% get_next_btn module "Map Your Journey" nav.nextUrl %}{% endblock %}

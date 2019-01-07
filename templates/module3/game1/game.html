@@ -1,0 +1,111 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - What Do You Predict?{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #answer0, #answer1 {
+            height: inherit !important;
+            text-transform: none !important;
+            line-height: 120%;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        var questions = [
+            {% for question in questions %}
+                {
+                    'title': "{{ question.title }}",
+                    'question': "{{ question.question|safe }}",
+                    'answer0': "{{ question.answer0|safe }}",
+                    'answer1': "{{ question.answer1|safe }}",
+                    'bias_answer': "{{ question.bias_answer|safe }}",
+                {% if forloop.last %}
+                    }
+                {% else %}
+                    },
+                {% endif %}
+            {% endfor %}
+        ];
+
+        var question_num = 0;
+        var num_questions = questions.length;
+        var animation_direction = 'left';
+
+        var random_order = [];
+        for (i = 0; i < num_questions; i++) {
+            random_order.push(i);
+        }
+
+        function answer(val) {
+            var question_ndx = $('#question_index').text();
+            $('#answer_' + question_ndx).val(val);
+            // Show the next question
+            question_num++;
+            return next_question();
+        }
+
+        function next_question() {
+            $('#game').css('position', 'absolute');
+            console.log("question_num: " + question_num + " num_questions:" + num_questions);
+
+            if (question_num >= num_questions) {
+                $('form:last').submit();
+                // return true;
+                return false;
+            }
+
+            if (animation_direction == 'right') {
+                animation_direction = 'left';
+            } else {
+                animation_direction = 'right';
+            }
+            var question_index = random_order[question_num];
+            $('#question_index').text(question_index);
+
+            $('#question').text(questions[question_index]['question']);
+            $('#answer0').text(questions[question_index]['answer0']);
+            $('#answer1').text(questions[question_index]['answer1']);
+
+            if (animation_direction == 'right') {
+                $('#game').css('left', '60%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            } else {
+                $('#game').css('left', '0%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            }
+            return false;
+        }
+
+        $(document).ready(function () {
+            $('#game').width($('h2').width());
+            next_question();
+        });
+    </script>
+
+    <h2 class="center">What Do You Predict?</h2>
+
+    <div>
+        <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
+            <div id="question_wrapper">
+                <p id="question" style="text-align: left"></p>
+                <p id="question_index" style="display: none"></p>
+                <div id="answers" style="margin-left: 5%; margin-top: 20px;">
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for question in questions %}
+        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter0 }}" value=""/>
+    {% endfor %}
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

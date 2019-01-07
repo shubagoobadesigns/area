@@ -1,12 +1,4 @@
-{% extends 'decisions/base/summary.html' %}
-{% block whats_next %}
-    <br/>
-    You and your buddy will receive a summary of your results in an email.
+{% extends 'modules/base/summary.html' %}
+{% block review_content %}
+    {% include 'module3/review/content.html' %}
 {% endblock %}
-{% block summary %}
-    <div>&bull; Mental shortcuts and bias</div>
-    <div>&bull; Perspective Taking</div>
-    <div>&bull; Facts versus Opinion</div>
-    <div>&bull; How Facts beat Bias</div>
-{% endblock %}
-{% block back %}commitment{% endblock %}

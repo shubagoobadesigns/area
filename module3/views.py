@@ -1,105 +1,162 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Module3 as Module, Course
-from module2.models import Module2 as PreviousModule
+from django.urls import reverse
 from datetime import datetime
+
+from .models import Module3 as Module, Module3Form as ModuleForm
+from module2.models import Module2 as PreviousModule
+from decisions.views import base_restart
+from decisions.utils import CheetahSheet, ExampleStudent, ViewHelper
+
+import datetime
 import json
 
+cheetah_sheet6 = CheetahSheet()
+cheetah_sheet6.num = 6
+cheetah_sheet6.title = "Placeholder"
 
-prefix = "module" + str(Module.num()) + "/"
+def navigation():
+    """
+    Ordered list of URLs for this Module
+    """
+    urls = [
+        reverse('module3_intro'),
+        reverse('module3_review'),
+        reverse('module3_map'),
+        reverse('module3_game1_instructions'),
+        reverse('module3_game1_game'),
+        reverse('module3_game1_results'),
+        reverse('module3_summary'),
+    ]
 
-
-def load_course(request):
-    course = None
-    if request.user.is_authenticated():
-        courses = Course.objects.filter(user=request.user)
-        if courses:
-            course = courses.first()
-        else:
-            course = Course(user=request.user)
-            course.save()
-    return course
-
-
-def load_json(json_data):
-    json_object = {}
-    try:
-        json_object = json.loads(json_data)
-    except ValueError, e:
-        pass
-        # TODO - log
-    return json_object
+    return urls
 
 
 @login_required
-def load_module(request, step=''):
-    module = None
-    course = load_course(request)
-    if course:
-        module_list = Module.objects.filter(course=course)
-        if module_list:
-            module = module_list.first()
-            if step:
-                module.step = step
-                module.save()
-        else:
-            module = Module(course=course, step=step)
-            module.save()
-        module.answers_json = ''
-        if module.answers:
-            module.answers_json = load_json(module.answers)
-    if not module:
-        module = Module()
-        module.answers_json = None
-    return module
+def generic_page_controller(request):
+    """
+    Default Page Controller
+    """
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    return render_page(request, module, parsed, {})
+
+
+def render_page(request, module, parsed, context={}):
+    """
+    Default Render Page Handler
+    """
+    context['module'] = module
+    context['nav'] = parsed
+
+    return render(request, parsed['templatePath'], context)
+
+
+def save_form(request, module, parsed):
+    """
+    Default Form Save Handler
+    """
+    form = ModuleForm(request.POST, instance=module)
+    if form.is_valid():
+        form.save()
+        return redirect(parsed['nextUrl'])
+    else:
+        print("Form on step: {0} did not validate".format(parsed['currentStep']))
+        print(form.errors)
 
 @login_required
-def intro(request):
-    module = load_module(request, 'intro')
-    return render(request, prefix+'intro.html', {
-        'module': module,
-    })
+def restart(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    return base_restart(request, Module, parsed['prefix'])
 
 
 @login_required
 def review(request):
-    module = load_module(request, 'review')
-    return render(request, prefix+'review.html', {
-        'module': module,
-        'previous_module': PreviousModule,
-    })
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    context = {
+    }
+
+    return render_page(request, module, parsed, context)
 
 
 @login_required
-def map(request):
-    module = load_module(request, 'map')
-    return render(request, prefix+'map.html', {
-        'module': module,
-    })
+def show_map(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
-
-@login_required
-def instructions(request):
-    module = load_module(request, 'instructions')
-    return render(request, prefix+'instructions.html', {
-        'module': module,
-    })
+    context = {
+        'display_mode': 'all',
+        'btn_label': 'Ready to make better decisions?',
+    }
+    return render_page(request, module, parsed, context)
 
 
 @login_required
 def summary(request):
-    module = load_module(request, 'summary')
-    module.completed_on = datetime.now()
-    module.save()
-    return render(request, prefix+'summary.html', {
-        'module': module,
-    })
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.completed_on = datetime.datetime.now()
+        module.save()
+        return redirect(reverse('decisions_home'))
+
+    context = {}
+
+    return render_page(request, module, parsed, context)
 
 
 @login_required
-def restart(request):
-    module = load_module(request, 'intro')
-    module.completed_on = None
-    module.save()
-    return redirect('/' + str(Module.num()) + '/')
+def game(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    # Add title to each question
+    game_questions = Module.get_game_questions()
+    for title in game_questions.keys():
+        game_questions[title]['title'] = title
+
+    if request.method == 'POST':
+        answers = {}
+        if module.answers:
+            answers = ViewHelper.load_json(module.answers)
+        for i in range(0, len(game_questions.values())):
+            index = str(i)
+            question_i = game_questions.values()[i]
+            attr_i = request.POST.get('answer[' + index + ']')
+            answers[question_i['title']] = attr_i
+        module.answers = json.dumps(answers)
+        #module.biases = json.dumps(calculate_biases(game_questions, answers))
+        module.save()
+
+        #print("Redirecting to: " + parsed['nextUrl'])
+        # TODO: figure out why we cannot calculate the nextUrl
+        return redirect(reverse('module3_game1_results'))
+        #return redirect(parsed['nextUrl'])
+    else:
+        ViewHelper.clear_game_answers(module)
+
+    context = {
+        'num_questions': len(game_questions),
+        'questions': game_questions.values(),
+    }
+
+    print("num_questions: ")
+    print(len(game_questions))
+
+    return render_page(request, module, parsed, context)
+
+"""
+Module Specific Utilities
+"""
+def clear_game_answers(module):
+    if module.answers:
+        module.answers = json.dumps({})
+        module.save()
