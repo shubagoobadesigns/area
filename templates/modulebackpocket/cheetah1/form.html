@@ -1,0 +1,24 @@
+<h3>What is at the center of your decision problem? Is it a person, place or thing? It might be more than one of each.</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ at.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ at.1 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="at[]" class="auto-text-area">{{ at.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="at[]" class="auto-text-area">{{ at.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="at[]" class="auto-text-area">{{ at.1 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}

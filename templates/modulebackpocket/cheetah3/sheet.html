@@ -1,0 +1,51 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            {# check any previous selections #}
+            {% for chosen in at3 %}
+                $(":checkbox[value='{{ chosen }}']").prop('checked', true);
+            {% endfor %}
+        });
+    </script>
+
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <p>Now get beyond the numbers to read the Target's narrative.</p>
+    <p>Pause the module and go search your Target's website more generally to help you identify areas where you might
+        want to question its story.</p>
+
+    <div id="why_options">
+        {% for item in at_numbers %}
+            <div>
+                <label>
+                    <input type="checkbox" name="at3[]" value="{{ item.key }}" onclick='alert("{{ item.answer }}");'/>
+                    <span>{{ item.label }}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Website Done!</button>
+    </div>
+{% endblock %}

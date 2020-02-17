@@ -54,7 +54,7 @@ questions = {
         'no': {},
         'why': 'It is good to learn from others but we also want to develop confidence and conviction in our own decision making. AREA gives you a tool kit to do that.',
     },
-    'I don\'t like to listen to the opinions of other people - I prefer to make my own decisions.': {
+    'I am more likely to follow my own advice than the advice of others.': {
         'yes': {'adventurer': 1},
         'no': {'listener': 1},
         'why': 'Other people may have information that you don\'t have. With the AREA Method you maintain control of your decision making and you make the most of useful resources around you.',

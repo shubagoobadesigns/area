@@ -1,0 +1,17 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Success terms{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Success terms</h2>
+    <p>What are you solving for? Picture that you’ve already made the decision and its successful. How do you feel?</p>
+
+    <h3>Choose from the success keywords below:</h3>
+    <textarea name="problem_to_solve" class="auto-text-area">{{ problem_to_solve }}</textarea>
+
+    <h3>Reframe the decision dilemma as a question</h3>
+    <textarea name="dd_as_question" class="auto-text-area">{{ dd_as_question }}</textarea>
+
+    {% get_next_btn module "Terms Defined!" nav.nextUrl "submit" %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

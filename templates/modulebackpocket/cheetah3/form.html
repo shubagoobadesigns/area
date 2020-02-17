@@ -1,0 +1,26 @@
+<h3>Answer the questions below about how well the Target's website helps you better understand its perspective? Check
+    all that apply</h3>
+
+{% if mode == 'print' %}
+    <ul>
+        {% for item in at_numbers %}
+            <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <div id="why_options">
+        {% for item in at_numbers %}
+            <div>
+                <label>
+                    <input type="checkbox" name="at3[]" value="{{ item.key }}" onclick='alert("{{ item.answer }}");'/>
+                    <span>{{ item.label }}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<h3>What about the website information was <strong>MOST</strong> useful?</h3>
+<textarea name="at3_most" class="auto-text-area">{{ at3_most }}</textarea>
+<p><em>(Example: On the school district website where you are considering buying a home you read 90% of students
+    graduate and go on to college making the town more attractive to you.)</em></p>

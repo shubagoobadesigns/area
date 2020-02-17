@@ -1,0 +1,16 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Decision Dilemma Feedback
+{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <h2 class="center">
+            Feedback & Next Steps For Understanding Your Decision Dilemma
+        </h2>
+        <p>TODO</p>
+
+
+        {% get_next_btn module "Ready to Write My Problem Statement!" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

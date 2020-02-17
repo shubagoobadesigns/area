@@ -1,0 +1,47 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Vision Of Success & Critical Concepts{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Vision Of Success & Critical Concepts</h2>
+    <h3>Now that you’ve selected how you want to feel after you’ve made your decision, identify three things that that
+        have occurred because the decision was successful for you personally: </h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="vs[]" class="auto-text-area">{{ vs.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="vs[]" class="auto-text-area">{{ vs.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="vs[]" class="auto-text-area">{{ vs.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Now invert the problem. Re-frame the 3 items of success as questions and they will serve as your Critical
+        Concepts.</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    {% get_next_btn module "Success Defined!" nav.nextUrl "submit" %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

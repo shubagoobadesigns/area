@@ -1,0 +1,38 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <p><a class="master_term" href="#" data-toggle="tooltip" data-placement="bottom"
+          title="Absolute Targets are the entities at the center of your decision.">Absolute
+        Targets</a> are the entities at the center of your decision. If choosing a college to attend, the Absolute
+        Targets would the colleges you are considering.</p>
+
+    {% include 'modulebackpocket/cheetah1/form.html' %}
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Targets Tagged</button>
+    </div>
+{% endblock %}

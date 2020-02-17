@@ -1,0 +1,52 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Relative Map vs Terrain
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Relative Map vs Terrain</h2>
+
+    <p>Based on researching your Target’s ecosystem check Yes or No:</p>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">&nbsp;</td>
+            <td>&nbsp;</td>
+            <th>Yes</th>
+            <th>No</th>
+        </tr>
+        <tr>
+            <td>1.</td>
+            <td>I understand my Target's point of differentiation from competitors</td>
+            <td><input type="radio" name="target_1" value="1"/></td>
+            <td><input type="radio" name="target_1" value="0"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>I understand my Target's strengths versus its competitors</td>
+            <td><input type="radio" name="target_2" value="1"/></td>
+            <td><input type="radio" name="target_2" value="0"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>I understand my Target's weaknesses versus its competitors</td>
+            <td><input type="radio" name="target_3" value="1"/></td>
+            <td><input type="radio" name="target_3" value="0"/></td>
+        </tr>
+        <tr>
+            <td>4.</td>
+            <td>The public image of my Target is consistent with the way the Target described itself in Absolute</td>
+            <td><input type="radio" name="target_4" value="1"/></td>
+            <td><input type="radio" name="target_4" value="0"/></td>
+        </tr>
+    </table>
+
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Terrain mapped!">Terrain mapped!</button>
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}
