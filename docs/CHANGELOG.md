@@ -1,3 +1,7 @@
+# 6.0.0
+* Add module 4 - AREA backpocket
+* Update How are you feeling to use sliders
+
 # 5.0.0
 * Create base template for cheetah sheet `apply` and `print`
 * Add terms of use in the cheetah sheets `apply` and `print`

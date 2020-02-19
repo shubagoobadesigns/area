@@ -7,7 +7,7 @@ urlpatterns = [
 
     url(r'^intro/?$', views.generic_page_controller, name='backpocket_intro'),
     url(r'^area/?$', views.generic_page_controller, name='backpocket_area'),
-    url(r'^feeling/?$', views.generic_page_controller, name='backpocket_feeling'),
+    url(r'^feeling/?$', views.feeling_start, name='backpocket_feeling'),
     url(r'^game1/game/?$', views.game, name='backpocket_decision_problem'),
     url(r'^explain/?$', views.generic_page_controller, name='backpocket_explain'),
     url(r'^ddd/?$', views.generic_page_controller, name='backpocket_ddd'),

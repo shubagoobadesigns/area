@@ -154,6 +154,25 @@ def cheetah3_sheet(request):
     return render_page(request, module, parsed, context)
 
 
+def feeling_start(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    feeling_start = module.feeling_start
+    if feeling_start is None:
+        feeling_start = 1
+    if feeling_start == "":
+        feeling_start = 1
+
+    context = {
+        'feeling_start': feeling_start,
+    }
+    return render_page(request, module, parsed, context)
+
+
 def game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)

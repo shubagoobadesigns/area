@@ -21,6 +21,8 @@ class Backpocket(BaseModule):
     # cc = critical concepts
     cc = models.TextField(default='')
     dd_as_question = models.TextField(default='')
+    feeling_end = models.TextField(default='')
+    feeling_start = models.TextField(default='')
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
     problem_to_solve = models.TextField(default='')
@@ -258,6 +260,8 @@ class BackpocketForm(ModelForm):
         self.fields['at3_most'].required = False
         self.fields['cc'].required = False
         self.fields['dd_as_question'].required = False
+        self.fields['feeling_start'].required = False
+        self.fields['feeling_end'].required = False
         self.fields['pro_con_least'].required = False
         self.fields['pro_con_most'].required = False
         self.fields['problem_to_solve'].required = False
@@ -274,6 +278,8 @@ class BackpocketForm(ModelForm):
                   'at3_most',
                   'cc',
                   'dd_as_question',
+                  'feeling_end',
+                  'feeling_start',
                   'pro_con_least',
                   'pro_con_most',
                   'problem_to_solve',

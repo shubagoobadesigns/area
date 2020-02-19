@@ -4,172 +4,97 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
-    <script type="text/javascript" src="{% static 'decisions/js/jquery.flip.js' %}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            var clicks = [];
-            clicks['frustrated'] = 0;
-            clicks['thumbs_up'] = 0;
-            clicks['overwhelmed'] = 0;
-            clicks['confused'] = 0;
-            clicks['fear'] = 0;
 
-            $(".flip").flip({
-                trigger: 'click'
+            $('#ex1').slider({
+                ticks: [1, 2, 3, 4, 5],
+                ticks_labels: ['Fear', 'Overwhelmed', 'Frustrated', 'Confused', 'Thumbs Up'],
             });
 
-            $('.back').css('display', 'block');
-            $('#frustrated').click(function () {
-                clicks['frustrated']++;
-                showNext();
-            });
-            $('#thumbs_up').click(function () {
-                clicks['thumbs_up']++;
-                showNext();
-            });
-            $('#overwhelmed').click(function () {
-                clicks['overwhelmed']++;
-                showNext();
-            });
-            $('#confused').click(function () {
-                clicks['confused']++;
-                showNext();
-            });
-            $('#fear').click(function () {
-                clicks['fear']++;
-                showNext();
+            // When page loads
+            show_images({{ feeling_start }});
+
+            var originalVal;
+
+            $('#ex1').slider().on('slideStart', function(ev){
+                originalVal = $('#ex1').data('slider').getValue();
             });
 
-            function showNext() {
-{#                for (var key in clicks) {#}
-{#                    if (clicks[key] == 0) {#}
-{#                        console.log(key + " is still not clicked. Skipping");#}
-{#                        return false;#}
-{#                    }#}
-{#                }#}
+            $('#ex1').slider().on('slideStop', function(ev){
+                var newVal = $('#ex1').data('slider').getValue();
+                if(originalVal != newVal) {
+                    console.log(originalVal + " has changed to " + newVal);
+                    show_images(newVal);
+                }
+            });
 
-                // Everything has been clicked, show the next button
-{#                console.log('All items have been clicked at least once');#}
-                $('#nextBtnSection').css('display', 'block');
+            function show_images(position) {
+                var images = [
+                    'none',
+                    '/static/decisions/img/backpocket/fear.jpg',
+                    '/static/decisions/img/backpocket/overwhelmed.jpg',
+                    '/static/decisions/img/backpocket/frustrated.png',
+                    '/static/decisions/img/backpocket/confused.jpg',
+                    '/static/decisions/img/backpocket/thumbs-up.jpg'
+                ];
+
+                var responses = [
+                    "none",
+                    "<h3>Fear</h3>You have some fear about making your big decision. How will you know that you are solving your problem in a way that will lead to a good outcome for you personally? AREA will help you define your Vision of Success and keep you focused on what matters to you",
+                    "<h3>Overwhelmed</h3>Naming your feelings is part of getting past your biases and a rush to judgment.  So glad you found AREA! It will help you break down and frame your problem and give you clear steps to follow.",
+                    "<h3>Frustrated</h3>Naming your feelings is part of getting past your biases and a rush to judgment. So glad you found AREA! It will give you specific steps to follow to solve your problem.",
+                    "<h3>Confused</h3>You feel confused. AREA will help you have a process for how to break down, frame and research your big decision.",
+                    "<h3>Excited</h3>You feel ready to take on this challenge!  So glad you found AREA! It will help channel your excitement so that you don’t skip steps and ensure that you confront your assumptions."
+                ]
+
+                if (position >= 1 && position <= images.length) {
+                    $('#feeling_image').attr('src', images[position]);
+                    $('#feeling_text').html(responses[position]);
+                }
             }
+
+
         });
     </script>
     <style type="text/css">
-        .reveal {
-            width: 100%;
+        .main div:first-child {
+            margin-top: 0px;
         }
 
-        .reveal td {
-            text-align: center;
-            width: 30%;
-            padding: 5px;
+        .slider.slider-horizontal {
+            width: 450px;
         }
 
-        .front, .flip {
-            height: 150px;
+        #ex1Slider .slider-selection {
+            background: #BABABA;
         }
 
-        .reveal img {
-            height: 120px;
+        #feeling_text {
+            text-align: left;
         }
 
-        .back {
-            display: none;
-        }
-
-        .back p {
-            display: inline-block;
-            vertical-align: middle;;
-            line-height: normal;
-        }
-
-        .front h2, .back h3 {
-            text-align: center;
-            cursor: pointer;
-        }
-
-        .back h3 {
-            padding-top: 30px;
-            cursor: pointer;
-        }
-
-        #nextBtnSection {
-            display: none;
-        }
     </style>
     <h2 class="center">How are you feeling?</h2>
     <p>
-        Before you get started, let’s find out how you are feeling about making your big decision. Choose from the photos below.
+        Before you get started, use the slider below to let us know how you are feeling about making your big decision.
     </p>
 
-    <table class="reveal center">
-    <tr>
-        <td colspan="2">
-            <div class="flip" id="frustrated">
-                <div class="front">
-                    <h2><img src="https://miro.medium.com/max/800/1*xXN2Aj_N77gtZ4ZhHyKvKQ.gif" alt="Frustrated"/></h2>
-                </div>
-                <div class="back">
-                    <h3>Got it! You feel Frustrated. Naming your feelings is part of getting past your biases and a rush to judgment. So glad you found AREA! It will give you specific steps to follow to solve your problem. Now lets define your Decision Dilemma</h3>
-                </div>
-            </div>
-        </td>
-        <td colspan="2">
-            <div class="flip" id="thumbs_up">
-                <div class="front">
-                    <img src="https://www.pinterest.com/pin/759349187143275999/" alt="This is going to be good for me!" />
-                </div>
-                <div class="back">
-                    <h3>Got it! You feel ready to take on this challenge!  So glad you found AREA! It will help channel your excitement so that you don’t skip steps and ensure that you confront your assumptions. Now lets going and define your Decision Dilemma</h3>
-                </div>
-            </div>
-        </td>
-        <td colspan="2">
-            <div class="flip" id="overwhelmed">
-                <div class="front">
-                    <img src="https://media.npr.org/assets/img/2015/12/14/confused-c2e1e9d14491a9486d996da945debcc9d6ce7170-s800-c85.jpg" alt="Too many options!" />
-                </div>
-                <div class="back">
-                    <h3>You feel Overwhelmed. Naming your feelings is part of getting past your biases and a rush to judgment.  So glad you found AREA! It will help you break down and frame your problem and give you clear steps to follow. Now lets define your Decision Dilemma</h3>
-                </div>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="6"><div style="height: 50px;"></div></td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <div class="flip" id="confused">
-                <div class="front">
-                    <img src="https://cdn.pixabay.com/photo/2017/08/25/21/47/confused-2681507_960_720.jpg" alt="Confused">
-                </div>
-                <div class="back">
-                    <h3>Got it! You feel confused. AREA will help you have a process for how to break down, frame and research your big decision. Now lets define your Decision Dilemma.</h3>
-                </div>
-            </div>
-        </td>
-        <td colspan="2">
-            <div class="flip" id="fear">
-                <div class="front">
-                    <img src="https://miro.medium.com/max/1036/0*LxKyWJiijBIYSTLc.jpg" alt="Fear">
-                </div>
-                <div class="back">
-                    <h3>Got it! You have some fear about making your big decision. How will you know that you are solving your problem in a way that will lead to a good outcome for you personally? AREA will help you define your Vision of Success and keep you focused on what matters to you. Now lets define your Decision Dilemma.</h3>
-                </div>
-            </div>
-        </td>
-        <td colspan="2">
-            &nbsp;
-        </td>
-    </tr>
-    <tr>
-        <td colspan="6"><div style="height: 75px;"></div></td>
-    </tr>
-</table>
+    <div class="center">
+        <div style="padding-top: 15px;"></div>
+
+        <input id="ex1" data-slider-id='ex1Slider' type="text"
+               data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="{{ feeling_start }}" name="feeling_start"/>
+
+        <div style="padding-top: 15px;"></div>
+
+        <img name="feeling_image" id="feeling_image" alt="Results" height="300">
+
+        <p id="feeling_text"></p>
+    </div>
 
     <div id="nextBtnSection">
-        {% get_next_btn module "Tell Me More" nav.nextUrl %}
+        {% get_next_btn module "Tell Me More" nav.nextUrl "submit" %}
     </div>
     {% get_back_link module nav.previousUrl %}
 {% endblock %}
