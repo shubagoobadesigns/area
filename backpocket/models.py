@@ -31,7 +31,7 @@ class Backpocket(BaseModule):
 
     @staticmethod
     def num():
-        return 10000
+        return 3
 
     # For the time being only save the cheetah sheet answers
     # If you have to add/remove fields from this list, make sure to re-run
@@ -54,7 +54,7 @@ class Backpocket(BaseModule):
     # internally it's still module 0
     @staticmethod
     def display_num():
-        return 1
+        return 4
 
     @staticmethod
     def name():
