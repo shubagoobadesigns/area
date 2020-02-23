@@ -21,6 +21,8 @@ class Module3(BaseModule):
     # cc = critical concepts
     cc = models.TextField(default='')
     dd_as_question = models.TextField(default='')
+    # decision dilemma parameters
+    dd_params = models.TextField(default='')
     feeling_end = models.TextField(default='')
     feeling_start = models.TextField(default='')
     pro_con_least = models.TextField(default='')
@@ -161,6 +163,31 @@ class Module3(BaseModule):
                 'question': "does the problem weigh on you",
                 'labels': ['No impact', 'Some impact', 'Long term impact'],
             },
+            {
+                'key': 'long_term',
+                'question': "do you have a deadline in which to make this decision",
+                'labels': ['No impact', 'Some impact', 'Long term impact'],
+            },
+            {
+                'key': 'harmful',
+                'question': "will this decision set you on a specific path that will crowd out other options",
+                'labels': ['Harmless', 'Some harm', 'Harmful'],
+            },
+            {
+                'key': 'harmful',
+                'question': "do you worry you’ll have regrets if you make the wrong decision",
+                'labels': ['Harmless', 'Some harm', 'Harmful'],
+            },
+            {
+                'key': 'outcome',
+                'question': "are you being heavily influenced by others to choose one outcome",
+                'labels': ['Not influenced', 'Some influence', 'Heavily influenced'],
+            },
+            {
+                'key': 'harmful',
+                'question': "would a poor decision be costly to you",
+                'labels': ['No costly', 'Somewhat costly', 'Very costly'],
+            },
         ]
 
         return ddd_parameters
@@ -282,6 +309,7 @@ class Module3Form(ModelForm):
         self.fields['at3_most'].required = False
         self.fields['cc'].required = False
         self.fields['dd_as_question'].required = False
+        self.fields['dd_params'].required = False
         self.fields['feeling_start'].required = False
         self.fields['feeling_end'].required = False
         self.fields['pro_con_least'].required = False
@@ -300,6 +328,7 @@ class Module3Form(ModelForm):
                   'at3_most',
                   'cc',
                   'dd_as_question',
+                  'dd_params',
                   'feeling_end',
                   'feeling_start',
                   'pro_con_least',

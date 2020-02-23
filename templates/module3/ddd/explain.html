@@ -5,10 +5,14 @@
 {% block content %}
     <div class="center">
         <h2 class="center">
-            Feedback & Next Steps For Understanding Your Decision Dilemma
+            How High Stakes Is Your Decision?
         </h2>
-        <p>TODO</p>
 
+        <ul>
+        {% for dd_parameter in ddd_parameters %}
+            <li>{{ dd_parameter.question }}</li>
+        {% endfor %}
+        </ul>
 
         {% get_next_btn module "Ready to Write My Problem Statement!" nav.nextUrl %}
     </div>

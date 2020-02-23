@@ -16,7 +16,7 @@
                 step: 1,
                 ticks: [1, 2, 3],
                 ticks_labels: tick_labels,
-                value: 2
+                value: {{ current_answer }}
             });
 
             var originalVal;
@@ -69,7 +69,7 @@
     <div class="center">
         <div style="padding-top: 15px;"></div>
 
-        <input id="ex1" data-slider-id='ex1Slider' type="text" name="{{ slider_name }}"/>
+        <input id="ex1" data-slider-id='ex1Slider' type="text" name="{{ form_name }}"/>
 
     </div>
 

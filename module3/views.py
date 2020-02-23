@@ -32,8 +32,6 @@ def navigation():
         reverse('backpocket_intro'),
         reverse('backpocket_area'),
         reverse('backpocket_feeling'),
-        reverse('backpocket_decision_problem'),
-        reverse('backpocket_explain'),
         reverse('backpocket_ddd_1'),
         reverse('backpocket_ddd_2'),
         reverse('backpocket_ddd_3'),
@@ -42,6 +40,7 @@ def navigation():
         reverse('backpocket_ddd_6'),
         reverse('backpocket_ddd_7'),
         reverse('backpocket_ddd_8'),
+        reverse('backpocket_ddd_explain'),
         reverse('backpocket_vision'),
         reverse('backpocket_cheetah1_sheet'),
         reverse('backpocket_cheetah2_sheet'),
@@ -173,6 +172,10 @@ def ddd(request):
 
     ddd_parameters = module.get_ddd_parameters()
 
+    dd_params = {}
+    if module.dd_params:
+        dd_params = load_json(module.dd_params)
+
     # What is our current step?
     currentStep = int(parsed['step'])
     # Name of the form field we're saving
@@ -183,7 +186,12 @@ def ddd(request):
     labels = ddd_parameters[currentStep-1]['labels']
 
     if request.method == 'POST':
-        module.at3 = json.dumps(request.POST.getlist(form_name))
+        if form_name not in dd_params:
+            dd_params[form_name] = ""
+
+        dd_params[form_name] = request.POST.get(form_name)
+
+        module.dd_params = json.dumps(dd_params)
         return save_form(request, module, parsed)
 
     # Show a different text blob based on their feeling
@@ -192,11 +200,33 @@ def ddd(request):
     else:
         feeling_bad = False
 
+    # Did we answer this already?
+    current_answer = 1
+    if form_name in dd_params:
+        current_answer = dd_params[form_name]
+        if current_answer is None:
+            current_answer = 1
+
     context = {
+        'current_answer': current_answer,
         'feeling_bad': feeling_bad,
         'form_name': form_name,
         'labels': labels,
         'question': question,
+    }
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def ddd_explain(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    ddd_parameters = module.get_ddd_parameters()
+
+    context = {
+        'ddd_parameters': ddd_parameters,
+        'dd_answers': module.dd_params,
     }
     return render_page(request, module, parsed, context)
 
