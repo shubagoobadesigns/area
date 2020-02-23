@@ -8,52 +8,20 @@
             How High Stakes Is Your Decision?
         </h2>
 
-        You scored <h1>{{ total }}</h1>
-
-        <table border="1" width="100%">
-            <tbody>
-            <tr>
-                <td width="50%">
-                    {% if total >= 8 and total <= 10 %}
-                    <h2>
-                        Not urgent, not long term, not unknown- are you making a series of assumptions about the impact your decision will have on you?
-                    </h2>
-                    {% else %}
-                        Not urgent, not long term, not unknown- are you making a series of assumptions about the impact your decision will have on you?
-                    {% endif %}
-                </td>
-                <td width="50%">
-                    {% if total >= 12 and total <= 16 %}
-                    <h2>
-                        Somewhat urgent, somewhat confusing, somewhat harmful: Exploring your problem in greater detail and the ramifications of the outcome will give you a  greater sense of confidence and conviction that you’ve made the right choice
-                    </h2>
-                    {% else %}
-                        Somewhat urgent, somewhat confusing, somewhat harmful: Exploring your problem in greater detail and the ramifications of the outcome will give you a  greater sense of confidence and conviction that you’ve made the right choice
-                    {% endif %}
-                </td>
-            </tr>
-            <tr>
-                <td width="50%">
-                    {% if total >= 17 and total <= 20 %}
-                    <h2>
-                        You are concerned about how to move forward with your problem solving and how your decision will impact you. Framing your problem around what matters most to you and then engaging with the research process will help you better evaluate your options and come to conviction.
-                    </h2>
-                    {% else %}
-                        You are concerned about how to move forward with your problem solving and how your decision will impact you. Framing your problem around what matters most to you and then engaging with the research process will help you better evaluate your options and come to conviction.
-                    {% endif %}
-                </td>
-                <td width="50%">
-                    {% if total >= 21 and total <= 24 %}
-                    <h2>
-                        Urgent, long-term, unknown outcome that could be harmful if you get it wrong-You are facing a high-stakes decision. Your Vision of Success and Critical Concepts will focus your work on what really matters to you in the outcome.
-                    </h2>
-                    {% else %}
-                        Urgent, long-term, unknown outcome that could be harmful if you get it wrong-You are facing a high-stakes decision. Your Vision of Success and Critical Concepts will focus your work on what really matters to you in the outcome.
-                    {% endif %}
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <p>
+        {% if total >= 8 and total <= 10 %}
+            Not urgent, not long term, not unknown- are you making a series of assumptions about the impact your decision will have on you?
+        {% endif %}
+        {% if total >= 12 and total <= 16 %}
+            Somewhat urgent, somewhat confusing, somewhat harmful: Exploring your problem in greater detail and the ramifications of the outcome will give you a  greater sense of confidence and conviction that you’ve made the right choice
+        {% endif %}
+        {% if total >= 17 and total <= 20 %}
+            You are concerned about how to move forward with your problem solving and how your decision will impact you. Framing your problem around what matters most to you and then engaging with the research process will help you better evaluate your options and come to conviction.
+        {% endif %}
+        {% if total >= 21 and total <= 24 %}
+            Urgent, long-term, unknown outcome that could be harmful if you get it wrong-You are facing a high-stakes decision. Your Vision of Success and Critical Concepts will focus your work on what really matters to you in the outcome.
+        {% endif %}
+        </p>
 
         {% get_next_btn module "Ready to Write My Problem Statement!" nav.nextUrl %}
     </div>
