@@ -41,6 +41,7 @@ def navigation():
         reverse('backpocket_ddd_7'),
         reverse('backpocket_ddd_8'),
         reverse('backpocket_ddd_explain'),
+        reverse('backpocket_ddd_defined'),
         reverse('backpocket_vision'),
         reverse('backpocket_cheetah1_sheet'),
         reverse('backpocket_cheetah2_sheet'),

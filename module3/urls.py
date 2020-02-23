@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^ddd/8/?$', views.ddd, name='backpocket_ddd_8'),
     url(r'^ddd/explain/?$', views.ddd_explain, name='backpocket_ddd_explain'),
 
+    url(r'^ddd/defined/?$', views.generic_page_controller, name='backpocket_ddd_defined'),
+
     url(r'^vision/?$', views.vision, name='backpocket_vision'),
     url(r'^cheetah1/sheet/?$', views.cheetah1_sheet, name='backpocket_cheetah1_sheet'),
     url(r'^cheetah2/sheet/?$', views.cheetah2_sheet, name='backpocket_cheetah2_sheet'),
