@@ -151,13 +151,13 @@ class Module3(BaseModule):
             {
                 'key': 'outcome',
                 'question': "do you have a sense of how this decision will play out",
-                'labels': [ 'Nope', 'Somewhat', 'Yes' ],
+                'labels': [ 'No', 'Somewhat', 'Yes' ],
                 'values': [1, 2, 3],
             },
             {
                 'key': 'outcome',
                 'question': "are you stumped",
-                'labels': ['Nope', 'Somewhat', 'Yes'],
+                'labels': ['No', 'Somewhat', 'Yes'],
                 'values': [1, 2, 3],
             },
             {
@@ -193,7 +193,7 @@ class Module3(BaseModule):
             {
                 'key': 'harmful',
                 'question': "would a poor decision be costly to you",
-                'labels': ['No costly', 'Somewhat costly', 'Very costly'],
+                'labels': ['Not costly', 'Somewhat costly', 'Very costly'],
                 'values': [1, 2, 3],
             },
         ]
