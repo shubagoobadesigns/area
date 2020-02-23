@@ -1,0 +1,103 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n module_tags %}
+{% block title %}{% block h1 %}Success terms
+{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+    .explanation {
+        display: none;
+        font-size: 0.8em;
+        padding-top: 5px;
+        visibility: hidden;
+    }
+    </style>
+    <h2 class="center">What are you solving for?</h2>
+    <strong>Display the decision dilemma as a question</strong>
+    <p>Picture that you’ve already made the decision and its successful. How do you feel?</p>
+
+    <p>Select all the success phrases that apply. I want to feel:</p>
+
+    <div id="why_options">
+        {% for value in sample_student.cc_as_question %}
+            <div>
+                <label>
+                    <input type="checkbox" name="cc_as_question[]" value="{{ value.successful }}"/>
+                    <span>{{ value.question }}</span>
+                    {% if value.successful == 1 %}
+                        <span class="explanation"><strong>YES!</strong> {{ value.explanation }}</span>
+                    {% else %}
+                        <span class="explanation"><strong>CHOOSE ANOTHER</strong> {{ value.explanation }}</span>
+                    {% endif %}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% get_next_btn module "Nylah's Critical Concepts" nav.nextUrl "submit" %}
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#next').click(validate);
+            $("input:checkbox[name='cc_as_question[]']").click(showExplanation);
+        });
+
+        function showExplanation() {
+            var checked = $(this).prop('checked');
+            var explanation = $(this).next().next();
+            var current = explanation.css('display');
+            if (current == 'none') {
+                explanation.css('display', 'block').css('visibility', 'visible');
+            } else {
+                explanation.css('display', 'none').css('visibility', 'hidden');
+            }
+        }
+
+        function validate() {
+            var correctTotal = 3;
+            var correct = 0;
+            var incorrect = 0;
+            var error_msg = "";
+
+            $("input:checkbox[name='cc_as_question[]']").each(function() {
+                if ($(this).prop('checked')) {
+                    if ($(this).val() == 1) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                        console.log($(this));
+                    }
+                }
+            });
+
+            if (correct < correctTotal) {
+                error_msg = "Please choose all that apply";
+            }
+            else if (incorrect > 0) {
+                error_msg = "You have selected some incorrect responses. Please try again"
+            }
+
+            if (error_msg != "") {
+                alert(error_msg);
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+{% endblock %}
