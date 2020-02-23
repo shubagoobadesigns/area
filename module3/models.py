@@ -151,42 +151,50 @@ class Module3(BaseModule):
             {
                 'key': 'outcome',
                 'question': "do you have a sense of how this decision will play out",
-                'labels': [ 'Unlikely', 'Somewhat Unlikely', 'Very Likely' ],
+                'labels': [ 'Nope', 'Somewhat', 'Yes' ],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'outcome',
                 'question': "are you stumped",
-                'labels': ['Unlikely', 'Somewhat Unlikely', 'Very Likely'],
+                'labels': ['Nope', 'Somewhat', 'Yes'],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'long_term',
                 'question': "does the problem weigh on you",
-                'labels': ['No impact', 'Some impact', 'Long term impact'],
+                'labels': ['No', 'Somewhat', 'Yes'],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'long_term',
                 'question': "do you have a deadline in which to make this decision",
-                'labels': ['No impact', 'Some impact', 'Long term impact'],
+                'labels': ['No', 'Somewhat', 'Yes'],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'harmful',
                 'question': "will this decision set you on a specific path that will crowd out other options",
-                'labels': ['Harmless', 'Some harm', 'Harmful'],
+                'labels': ['Harmless', 'Some impact', 'Harmful'],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'harmful',
                 'question': "do you worry you’ll have regrets if you make the wrong decision",
-                'labels': ['Harmless', 'Some harm', 'Harmful'],
+                'labels': ['Harmless', 'Some impact', 'Harmful'],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'outcome',
                 'question': "are you being heavily influenced by others to choose one outcome",
                 'labels': ['Not influenced', 'Some influence', 'Heavily influenced'],
+                'values': [1, 2, 3],
             },
             {
                 'key': 'harmful',
                 'question': "would a poor decision be costly to you",
                 'labels': ['No costly', 'Somewhat costly', 'Very costly'],
+                'values': [1, 2, 3],
             },
         ]
 
