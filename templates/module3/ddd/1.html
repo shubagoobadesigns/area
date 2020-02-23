@@ -6,6 +6,9 @@
 {% block content %}
     <script type="text/javascript">
         $(document).ready(function () {
+            $('#next').click(validate);
+
+
             var tick_labels = [];
             {% for l in labels %}tick_labels.push('{{ l }}');
             {% endfor %}
@@ -34,6 +37,14 @@
 
         });
     </script>
+
+    <script type="text/javascript">
+        function validate() {
+            confirm("Let’s check your gut assumptions with evidence. Just be careful of your own biases; it may make you less open-minded to disconfirming evidence.");
+        }
+    </script>
+
+
     <style type="text/css">
         .main div:first-child {
             margin-top: 0px;

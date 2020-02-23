@@ -224,9 +224,17 @@ def ddd_explain(request):
 
     ddd_parameters = module.get_ddd_parameters()
 
+    total = 0
+    print(module.dd_params)
+    if module.dd_params:
+        answers = load_json(module.dd_params)
+        for form_name in answers:
+            total += int(answers[form_name])
+
     context = {
         'ddd_parameters': ddd_parameters,
         'dd_answers': module.dd_params,
+        'total': total,
     }
     return render_page(request, module, parsed, context)
 
