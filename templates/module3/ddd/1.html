@@ -1,0 +1,80 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Decision Dilemma Parameters{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tick_labels = [];
+            {% for l in labels %}tick_labels.push('{{ l }}');
+            {% endfor %}
+
+            $('#ex1').slider({
+                min: 1,
+                max: tick_labels.length,
+                step: 1,
+                ticks: [1, 2, 3],
+                ticks_labels: tick_labels,
+                value: 2
+            });
+
+            var originalVal;
+
+            $('#ex1').slider().on('slideStart', function(ev){
+                originalVal = $('#ex1').data('slider').getValue();
+            });
+
+            $('#ex1').slider().on('slideStop', function(ev){
+                var newVal = $('#ex1').data('slider').getValue();
+                if(originalVal != newVal) {
+                    console.log(originalVal + " has changed to " + newVal);
+                }
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        .main div:first-child {
+            margin-top: 0px;
+        }
+
+        .slider.slider-horizontal {
+            width: 450px;
+        }
+
+        #ex1Slider .slider-selection {
+            background: #BABABA;
+        }
+
+        #feeling_text {
+            text-align: left;
+        }
+
+    </style>
+    <h2 class="center">How are you feeling?</h2>
+
+    <p>
+    {% if feeling_bad %}
+        You’ve identified your first bias: Good job!<br /><br />
+        You named your feeling about making this big decision. Let’s help you break it down and feel better by defining your decision problem.
+    {% else %}
+        Good job!<br /><br />
+        You’re on your way. Let’s continue to make progress!
+    {% endif %}
+    </p>
+
+    <h3>On a scale of 1-3, {{ question }}?</h3>
+
+    <div class="center">
+        <div style="padding-top: 15px;"></div>
+
+        <input id="ex1" data-slider-id='ex1Slider' type="text" name="{{ slider_name }}"/>
+
+    </div>
+
+    <div id="nextBtnSection">
+        {% get_next_btn module "Tell Me More" nav.nextUrl "submit" %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

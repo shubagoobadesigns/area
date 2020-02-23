@@ -22,7 +22,6 @@ from module0 import urls as module0_urls
 from module1 import urls as module1_urls
 from module2 import urls as module2_urls
 from module3 import urls as module3_urls
-from backpocket import urls as backpocket_urls
 from student_class import urls as student_class_urls
 admin.autodiscover()
 
@@ -36,7 +35,6 @@ urlpatterns = [
     url(r'^1/', include(module1_urls)),
     url(r'^2/', include(module2_urls)),
     url(r'^3/', include(module3_urls)),
-    url(r'^backpocket/', include(backpocket_urls)),
 ]
 
 if settings.DEBUG:

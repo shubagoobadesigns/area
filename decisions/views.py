@@ -6,7 +6,7 @@ from .models import Course
 from module0.models import Module0
 from module1.models import Module1
 from module2.models import Module2
-#from module3.models import Module3
+from module3.models import Module3
 from student_class.models import StudentClass
 
 from decisions.utils import ViewHelper
@@ -73,7 +73,7 @@ def home(request):
     module0 = ViewHelper.load_module(request, '', Module0)
     module1 = ViewHelper.load_module(request, '', Module1)
     module2 = ViewHelper.load_module(request, '', Module2)
-    #module3 = ViewHelper.load_module(request, '', Module3)
+    module3 = ViewHelper.load_module(request, '', Module3)
 
     student_classes = None
     if request.user.is_staff:
@@ -112,7 +112,7 @@ def home(request):
         'module0': module0,
         'module1': module1,
         'module2': module2,
-        #'module3': module3,
+        'module3': module3,
         'student_classes': student_classes,
         'my_classes': StudentClass.my_classes(course),
         'open_classes': StudentClass.open_classes(course),

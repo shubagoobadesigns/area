@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'area_app',
-    'backpocket',
     'decisions',
     'module0',
     'module1',
