@@ -52,8 +52,9 @@
         }
 
     </style>
-    <h2 class="center">How are you feeling?</h2>
+    <h2 class="center">Decision Dilemma Parameters</h2>
 
+    {% if form_name == "ddd_1" %}
     <p>
     {% if feeling_bad %}
         You’ve identified your first bias: Good job!<br /><br />
@@ -63,6 +64,7 @@
         You’re on your way. Let’s continue to make progress!
     {% endif %}
     </p>
+    {% endif %}
 
     <h3>On a scale of 1-3, {{ question }}?</h3>
 
