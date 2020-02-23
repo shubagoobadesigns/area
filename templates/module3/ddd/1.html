@@ -76,7 +76,11 @@
     </div>
 
     <div id="nextBtnSection">
-        {% get_next_btn module "Tell Me More" nav.nextUrl "submit" %}
+        {% if form_name == "ddd_8" %}
+        {% get_next_btn module "Parameters Set!" nav.nextUrl "submit" %}
+        {% else %}
+        {% get_next_btn module "Next Bias" nav.nextUrl "submit" %}
+        {% endif %}
     </div>
     {% get_back_link module nav.previousUrl %}
 {% endblock %}
