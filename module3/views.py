@@ -7,7 +7,7 @@ from .models import Module3 as Module, Module3Form as ModuleForm
 
 from decisions.decorator import active_user_required
 from decisions.views import load_json, load_module, base_restart
-from decisions.utils import CheetahSheet, ViewHelper
+from decisions.utils import CheetahSheet, Nylah, ViewHelper
 
 import json
 
@@ -23,33 +23,41 @@ cheetah_sheet3 = CheetahSheet()
 cheetah_sheet3.num = 3
 cheetah_sheet3.title = "The Story of Your Target's Website"
 
+nylah = Nylah()
+
 # Create your views here.
 def navigation():
     """
     Ordered list of URLs for this Module
     """
     urls = [
-        reverse('backpocket_intro'),
-        reverse('backpocket_area'),
-        reverse('backpocket_feeling'),
-        reverse('backpocket_ddd_1'),
-        reverse('backpocket_ddd_2'),
-        reverse('backpocket_ddd_3'),
-        reverse('backpocket_ddd_4'),
-        reverse('backpocket_ddd_5'),
-        reverse('backpocket_ddd_6'),
-        reverse('backpocket_ddd_7'),
-        reverse('backpocket_ddd_8'),
-        reverse('backpocket_ddd_explain'),
-        reverse('backpocket_ddd_defined'),
-        reverse('backpocket_vision'),
-        reverse('backpocket_cheetah1_sheet'),
-        reverse('backpocket_cheetah2_sheet'),
-        reverse('backpocket_cheetah3_sheet'),
-        reverse('backpocket_sum_up'),
-        reverse('backpocket_relative'),
-        reverse('backpocket_relative2'),
-        reverse('backpocket_relative3'),
+        reverse('module3_intro'),
+        reverse('module3_area'),
+        reverse('module3_feeling'),
+        reverse('module3_ddd_1'),
+        reverse('module3_ddd_2'),
+        reverse('module3_ddd_3'),
+        reverse('module3_ddd_4'),
+        reverse('module3_ddd_5'),
+        reverse('module3_ddd_6'),
+        reverse('module3_ddd_7'),
+        reverse('module3_ddd_8'),
+        reverse('module3_ddd_explain'),
+        reverse('module3_ddd_defined'),
+        reverse('module3_success_terms'),
+        reverse('module3_vision'),
+        reverse('module3_game1_instructions'),
+        reverse('module3_game1_game'),
+        reverse('module3_game1_results'),
+        reverse('module3_cheetah1_intro'),
+        reverse('module3_cheetah1_sheet'),
+        reverse('module3_cheetah2_sheet'),
+        reverse('module3_cheetah2_sheet2'),
+        reverse('module3_cheetah3_sheet'),
+        reverse('module3_sum_up'),
+        reverse('module3_relative'),
+        reverse('module3_relative2'),
+        reverse('module3_relative3'),
 
     ]
 
@@ -76,6 +84,7 @@ Default Render Page Handler
 def render_page(request, module, parsed, context={}):
     context['module'] = module
     context['nav'] = parsed
+    context['sample_student'] = nylah
 
     return render(request, parsed['templatePath'], context)
 
@@ -122,7 +131,9 @@ def cheetah1_sheet(request):
 
     context = {
         'at': ViewHelper.load_json(module.at),
+        'cc': ViewHelper.load_json(module.cc),
         'cheetah_sheet': cheetah_sheet1,
+        'vs': ViewHelper.load_json(module.vs),
     }
     return render_page(request, module, parsed, context)
 
@@ -285,7 +296,7 @@ def game(request):
 
         #print("Redirecting to: " + parsed['nextUrl'])
         # TODO: figure out why we cannot calculate the nextUrl
-        return redirect(reverse('backpocket_explain'))
+        return redirect(reverse('module3_game1_results'))
         #return redirect(parsed['nextUrl'])
     else:
         ViewHelper.clear_game_answers(module)
@@ -295,6 +306,38 @@ def game(request):
         'questions': game_questions.values(),
     }
 
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def game1_results(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.br = json.dumps(request.POST.getlist('br[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'answers': module.answers_json,
+        'br': ViewHelper.load_json(module.br),
+        'questions': module.get_game_questions(),
+    }
+
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def success_terms(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.success_terms = json.dumps(request.POST.getlist('success_terms[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'success_terms': ViewHelper.load_json(module.success_terms),
+    }
     return render_page(request, module, parsed, context)
 
 
@@ -311,11 +354,10 @@ def vision(request):
 
     context = {
         'cc': ViewHelper.load_json(module.cc),
+        'success_terms': ViewHelper.load_json(module.success_terms),
         'vs': ViewHelper.load_json(module.vs),
     }
     return render_page(request, module, parsed, context)
-
-
 
 
 def calculate_biases(game_questions, answers):

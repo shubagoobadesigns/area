@@ -3,9 +3,148 @@
 {% load module_tags %}
 {% block title %}{% block h1 %}Vision Of Success & Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+        #pro_con p {
+            font-size: 1em;
+        }
+
+        .table .cheetahQuestions {
+            width: 60%;
+            margin-top: 10px;
+        }
+
+        .question {
+            color: #1e2846;
+            font-size: 18px;
+            font-weight: 800 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('.modal').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            /* Force the redirect back to the previous page */
+            $('#back').click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });
+        })
+    </script>
+
     <h2 class="center">Vision Of Success & Critical Concepts</h2>
-    <h3>Now that you’ve selected how you want to feel after you’ve made your decision, identify three things that that
-        have occurred because the decision was successful for you personally: </h3>
+    <p>You told us that you want to feel:</p>
+    <ul>
+        {% for phrase in success_terms %}
+            <li>{{ phrase }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="center">
+        <button id="showProfileBtn">Show Example</button>
+    </div>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <p>In Module 1, we met {{ sample_student.name|title }} and learned about <span class="master_term_simple">Critical Concepts</span>
+                and {{ sample_student.pronoun_object }} <span
+                        class="master_term_simple">Vision of Success</span>. Below
+                are {{ sample_student.pronoun_object }} CCs and rephrased as questions to
+                help {{ sample_student.pronoun_object }} investigate the answers.</p>
+
+            <p><strong>{{ sample_student.name|title }}'s CCs</strong></p>
+            <table class="table">
+                <tbody>
+                {% for value in sample_student.cc %}
+                    <tr>
+                        <td width="5">{{ forloop.counter }}.</td>
+                        <td style="border-bottom: 1px solid black;">{{ value }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <p><strong>{{ sample_student.name|title }}'s CCs as questions</strong></p>
+            <table class="table">
+                <tbody>
+                {% for value in sample_student.cc_as_question %}
+                    {% if value.successful == 1 %}
+                        <tr>
+                            <td width="5">{{ value.num }}.</td>
+                            <td style="border-bottom: 1px solid black;">{{ value.question }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
+    </div>
+
+    <h3>Now picture that you’ve made your decision successfully. Share three things that will help you have those
+        feelings after you’ve solved your problem: </h3>
     <table class="table">
         <tbody>
         <tr>
@@ -23,8 +162,7 @@
         </tbody>
     </table>
 
-    <h3>Now invert the problem. Re-frame the 3 items of success as questions and they will serve as your Critical
-        Concepts.</h3>
+    <h3>Re-frame the 3 items as questions and they will serve as your Critical Concepts.</h3>
     <table class="table">
         <tbody>
         <tr>
@@ -42,6 +180,8 @@
         </tbody>
     </table>
 
-    {% get_next_btn module "Success Defined!" nav.nextUrl "submit" %}
+    <div class="center">
+        <button id="completeBtn" value="Success Defined!">Success Defined!</button>
+    </div>
     {% get_back_link module nav.previousUrl %}
 {% endblock %}

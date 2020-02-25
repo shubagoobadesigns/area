@@ -8,7 +8,39 @@
             {% for chosen in at2 %}
                 $(":checkbox[value='{{ chosen }}']").prop('checked', true);
             {% endfor %}
+
+            start_timer();
         });
+
+        function start_timer() {
+            // Set the date we're counting down to
+            var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+                // Get today's date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now and the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Output the result in an element with id="demo"
+                document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                  + minutes + "m " + seconds + "s ";
+
+                // If the count down is over, write some text
+                if (distance < 0) {
+                  clearInterval(x);
+                  document.getElementById("demo").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        }
     </script>
 
     <style type="text/css">
@@ -30,14 +62,20 @@
 
     <p>All high-stakes decisions have numbers involved. Focusing on numbers has two benefits:</p>
     <ol>
-    <li>It enables you to see your Target as objectively and uninfluenced as possible.</li>
-    <li>It also allows the Target to present data on what it considers to be its main issues.</li>
+        <li>It enables you to see your Target as objectively and uninfluenced as possible.</li>
+        <li>It also allows the Target to present data on what it considers to be its main issues.</li>
     </ol>
-    <p>Pause the module here. Go to the Internet and search your Target’s website(s). Focus on finding relevant numerical data to your decision problem</p>
+    <p>Time to do your first research! Pause the module here. Go to the Internet and search your Target’s website(s) for
+        numbers relevant to your decision. We’ll start a timer that signals you to come back to the module in 10 minutes
+        to keep going on your problem solving.</p>
 
-    <p><strong>Need some tips?</strong></p>
-    <p> If you're deciding about buying a home or leasing more workspace, numerical data from the location's website would provide pricing information on the homes/spaces in your target location and property taxes</p>
-    {% include 'module3/cheetah2/form.html' %}
+    <button type="button" class="btn" data-toggle="collapse" data-target="#example">Show Example</button>
+    <div id="example" class="collapse">
+        <p>If you’re deciding about buying a home or leasing more workspace, useful numerical data would be the cost of
+            the homes/spaces in your target location and property taxes.</p>
+    </div>
+
+    <p id="demo"></p>
 
     <div class="space"></div>
 

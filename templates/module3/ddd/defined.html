@@ -7,10 +7,10 @@
     <p>The quiz helped you check in with your gut feelings about your decision. Now lets define your Decision Dilemma:</p>
 
     <h3>What problem do you need to solve?</h3>
-    <textarea name="problem_to_solve" class="auto-text-area">{{ problem_to_solve }}</textarea>
+    <textarea name="problem_to_solve" class="auto-text-area">{{ module.problem_to_solve }}</textarea>
 
     <h3>Reframe the decision dilemma as a question</h3>
-    <textarea name="dd_as_question" class="auto-text-area">{{ dd_as_question }}</textarea>
+    <textarea name="dd_as_question" class="auto-text-area">{{ module.dd_as_question }}</textarea>
 
     {% get_next_btn module "Dilemma Defined!" nav.nextUrl "submit" %}
     {% get_back_link module nav.previousUrl %}

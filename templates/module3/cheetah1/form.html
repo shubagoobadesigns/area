@@ -1,8 +1,9 @@
-<h3>What is at the center of your decision problem? Is it a person, place or thing? It might be more than one of each.</h3>
+<h3>What is at the center of your decision problem? Is it a person, place or thing? It might be more than one of each. Name them. If choosing new software for you company, the Absolute Targets would be the software packages and providers.</h3>
 {% if mode == 'print' %}
     <ul>
         <li><span style="border-bottom: 1px solid black;">{{ at.0 }}</li>
         <li><span style="border-bottom: 1px solid black;">{{ at.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ at.2 }}</li>
     </ul>
 {% else %}
     <table class="table">
@@ -17,7 +18,7 @@
         </tr>
         <tr>
             <td width="5">3.</td>
-            <td><textarea name="at[]" class="auto-text-area">{{ at.1 }}</textarea></td>
+            <td><textarea name="at[]" class="auto-text-area">{{ at.2 }}</textarea></td>
         </tr>
         </tbody>
     </table>

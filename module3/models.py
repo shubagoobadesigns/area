@@ -7,6 +7,27 @@ from django.forms import ModelForm
 from decisions.models import Course, BaseModule
 from simple_history.models import HistoricalRecords
 
+# List of all of the DB fields for this module
+db_fields = [
+    'answers',
+    'at',
+    'at2',
+    'at2_most',
+    'at3',
+    'at3_most',
+    'br',
+    'cc',
+    'dd_as_question',
+    'dd_params',
+    'feeling_end',
+    'feeling_start',
+    'pro_con_least',
+    'pro_con_most',
+    'problem_to_solve',
+    'success_terms',
+    'vs',
+]
+
 # Create your models here.
 class Module3(BaseModule):
     answers = models.TextField(default='')
@@ -18,6 +39,8 @@ class Module3(BaseModule):
     at2_most = models.TextField(default='')
     at3 = models.TextField(default='')
     at3_most = models.TextField(default='')
+    # br = bias remedies
+    br = models.TextField(default='')
     # cc = critical concepts
     cc = models.TextField(default='')
     dd_as_question = models.TextField(default='')
@@ -28,6 +51,7 @@ class Module3(BaseModule):
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
     problem_to_solve = models.TextField(default='')
+    success_terms = models.TextField(default='')
     # vs = vision of success
     vs = models.TextField(default='')
 
@@ -204,77 +228,82 @@ class Module3(BaseModule):
     @staticmethod
     def get_game_questions():
         game_questions = {
-            'outcome1': {
-                'question': 'Do you have a sense of how this decision will play out?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'outcome',
+            'projection1': {
+                'question': 'You see tickets for your favorite band playing a show nearby. Do you',
+                'answer0': 'Buy two tickets, of course your friend will want to come',
+                'answer1': 'Ask your friend before commiting her to buying them',
+                'bias': 'projection',
                 'bias_answer': 0,
-                'yes': "Let's check your gut assumptions with evidence. Just be careful of your own biases; it may make you less open-minded to disconfirming evidence.",
-                'no': "Let's find some information to help you better understand the implications of your outcome options",
             },
-            'outcome2': {
-                'question': 'Are you stumped?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'outcome',
+            'authority1': {
+                'question': 'A co-worker who has been around much longer than you shows you how to complete a task &quot;the way it has always been done.&quot;',
+                'answer0': 'Follow his advice - he has been there a long time',
+                'answer1': 'Try out new ways - you never know if you don’t try!',
+                'bias': 'authority',
                 'bias_answer': 0,
-                'yes': "Let's find some information to help you better understand the implications of your outcome options",
-                'no': "Let's check your gut assumptions with evidence",
             },
-            'long_term1': {
-                'question': 'Does the problem weigh on you?',
-                'answer0': 'Yes',
-                'answer1': 'No',
+            'authority2': {
+                'question': 'Your landlord suggests that you commit to your lease for another year, do you',
+                'answer0': 'Automatically resign',
+                'answer1': 'Look around before you recommit',
+                'bias': 'authority',
+                'bias_answer': 0,
+            },
+            'authority3': {
+                'question': 'Recently all your friends joined the same gym, do you',
+                'answer0': 'Join right alongside them',
+                'answer1': 'Stick with running outside',
                 'bias': 'long_term',
                 'bias_answer': 0,
-                'yes': "Let's check your gut’s feelings with evidence",
-                'no': "How important a decision is it for you?",
             },
-            'long_term2': {
-                'question': 'Do you have a deadline in which to make this decision?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'long_term',
+            'liking1': {
+                'question': 'You get nervous when you have to talk in front of people but your friend asks you to perform in an open mic night with her. Do you',
+                'answer0': 'Say yes because they are your friend',
+                'answer1': 'Say no because it isn’t your thing',
+                'bias': 'liking',
                 'bias_answer': 0,
-                'yes': "Let's find some information to help you better understand the implications of your outcome options",
-                'no': "Let's take the time to gather some information to help you better understand the implications of your outcome options",
             },
-            'harmful1': {
-                'question': 'Will this decision set you on a specific path that will crowd out other options?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'harmful',
+            'optimism1': {
+                'question': 'You just applied for a new job, do you',
+                'answer0': 'Assume you’re an above average candidate',
+                'answer1': 'Assume the pool of candidates is full of competition',
+                'bias': 'optimism',
                 'bias_answer': 0,
-                'yes': "Let's check your gut assumption with evidence.",
-                'no': "Let's take the time to gather some information to help you better understand the implications of your outcome options",
             },
-            'harmful2': {
-                'question': 'If you make the wrong decision, do you worry you’ll have regrets?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'harmful',
+            'liking2': {
+                'question': 'Your local grocery store has banned plastic bags. Do you',
+                'answer0': 'Assume your friends and neighbors feel the same way you do',
+                'answer1': "Ask around to find out other people's opinions",
+                'bias': 'liking',
                 'bias_answer': 0,
-                'yes': "Let's check your gut assumption with evidence.",
-                'no': "Let's take the time to gather some information to help you better understand the implications of your outcome options",
             },
-            'outcome3': {
-                'question': 'Are you being heavily influenced by others to choose one outcome?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'outcome',
+            'planning1': {
+                'question': 'You have a big interview in two days. Do you',
+                'answer0': 'Review the company and make a list of questions so you can prepare tomorrow',
+                'answer1': 'Figure you’re good on your feet and tomorrow night will be enough time',
+                'bias': 'planning',
                 'bias_answer': 0,
-                'yes': "What are the incentives of the people trying to influence your outcome?",
-                'no': "Let's find some information to help you better understand the implications of your outcome options",
             },
-            'harmful3': {
-                'question': 'Would a poor decision be costly to you?',
-                'answer0': 'Yes',
-                'answer1': 'No',
-                'bias': 'harmful',
+            'optimism2': {
+                'question': 'You buy a new car and are considering getting AAA, do you',
+                'answer0': 'Absolutely get it - you never know what could happen',
+                'answer1': 'Assume you’ll be able to figure it out if anything happens',
+                'bias': 'optimism',
                 'bias_answer': 0,
-                'yes': "Let's check your assumption with evidence.",
-                'no': "Let's take the time to gather some information to help you better understand the implications of your outcome options",
+            },
+            'planning2': {
+                'question': 'When you look at your to do list, do you',
+                'answer0': 'Start at the top and work your way down until you’re out of time',
+                'answer1': 'Go through the list and prioritize items to get done first',
+                'bias': 'planning',
+                'bias_answer': 0,
+            },
+            'social1': {
+                'question': 'You hear co-workers are going to leave work early on a sunny day, do you',
+                'answer0': 'Go along with them, the whole office is',
+                'answer1': 'Stick behind, you don’t follow crowds',
+                'bias': 'social',
+                'bias_answer': 0,
             },
         }
 
@@ -299,6 +328,61 @@ class Module3(BaseModule):
 
         return relative_map
 
+    @staticmethod
+    def get_success_terms():
+        return [
+            {
+                'question': "A sense of personal agency",
+                'explanation': "I want to feel an increase sense of personal agency",
+                'phrase': 'empowered',
+            },
+            {
+                'question': "That I didn’t rush to judgment",
+                'explanation': "I want to better spot and challenge assumptions and judgments",
+                'phrase': "I didn't rush to judgment",
+            },
+            {
+                'question': "That I have a clear direction",
+                'explanation': "I want to be able to know how to implement my decision",
+                'phrase': 'A clear sense of direction',
+            },
+            {
+                'question': "That I am knowledgeable about next steps",
+                'explanation': "I want to learn AREA and build my decision-making skill set",
+                'phrase': 'Knowledgeable about the next steps to take',
+            },
+            {
+                'question': "That I looked at the problem from a variety of perspectives",
+                'explanation': "I want to know that I checked my ego and examined other voices",
+                'phrase': 'That I looked at the problem from a variety of perspectives',
+            },
+            {
+                'question': "That I am enhancing harmony with others",
+                'explanation': "I want to strengthen my relationship with others by solving my problem holistically",
+                'phrase': 'Harmony with others',
+            },
+            {
+                'question': "A sense of relief that I solved my problem",
+                'explanation': "I want a sense of closure",
+                'phrase': 'Relief that I solved my problem',
+            },
+            {
+                'question': "Confident that I strengthened my decision-making capabilities",
+                'explanation': "I want to be a more confident decision-maker",
+                'phrase': 'Confidence that I strengthened my decision-making capabilities',
+            },
+            {
+                'question': "That I chose the right option for me",
+                'explanation': "I want to feel an Increase in self-efficacy",
+                'phrase': 'Conviction that I chose the right option for me',
+            },
+            {
+                'question': "Stay true to my values",
+                'explanation': "I want to identify what matters most to me",
+                'phrase': 'True to my values',
+            },
+        ]
+
     class Meta:
         verbose_name = "Module 4 Data - Backpocket AREA"
         verbose_name_plural = "Module 4 Data - Backpocket AREA"
@@ -309,38 +393,10 @@ class Module3Form(ModelForm):
         # Not all fields are available all at once so set these to false for now
         # If you forget to set the .required to false, you'll get a
         # django 'bool' object has no attribute 'disabled' error
-        self.fields['answers'].required = False
-        self.fields['at'].required = False
-        self.fields['at2'].required = False
-        self.fields['at2_most'].required = False
-        self.fields['at3'].required = False
-        self.fields['at3_most'].required = False
-        self.fields['cc'].required = False
-        self.fields['dd_as_question'].required = False
-        self.fields['dd_params'].required = False
-        self.fields['feeling_start'].required = False
-        self.fields['feeling_end'].required = False
-        self.fields['pro_con_least'].required = False
-        self.fields['pro_con_most'].required = False
-        self.fields['problem_to_solve'].required = False
-        self.fields['vs'].required = False
-
+        for field_name in db_fields:
+            # print("Setting {} to False".format(field_name))
+            self.fields[field_name].required = False
 
     class Meta:
         model = Module3
-        fields = ['answers',
-                  'at',
-                  'at2',
-                  'at2_most',
-                  'at3',
-                  'at3_most',
-                  'cc',
-                  'dd_as_question',
-                  'dd_params',
-                  'feeling_end',
-                  'feeling_start',
-                  'pro_con_least',
-                  'pro_con_most',
-                  'problem_to_solve',
-                  'vs',
-                  ]
+        fields = db_fields

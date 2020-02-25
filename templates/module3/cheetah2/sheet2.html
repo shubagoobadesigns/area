@@ -1,0 +1,38 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            {# check any previous selections #}
+            {% for chosen in at2 %}
+                $(":checkbox[value='{{ chosen }}']").prop('checked', true);
+            {% endfor %}
+        });
+    </script>
+
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    {% include 'module3/cheetah2/form.html' %}
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Numbers Named</button>
+    </div>
+{% endblock %}

@@ -24,26 +24,31 @@
     </style>
 
     <p><strong>Decision problem:</strong> This is my problem from page 6</p>
-    <br />
-    <strong>Vision of Success</strong>
-    <ul>
-        <li>VOS 1</li>
-        <li>VOS 2</li>
-        <li>VOS 3</li>
-    </ul>
-    <strong>Critical Concepts</strong>
-    <ul>
-        <li>CC 1</li>
-        <li>CC 2</li>
-        <li>CC 3</li>
-    </ul>
 
-    <p>You've done the spadework. Let’s take action. Identify your Absolute Targets.</p>
+    <table class="table">
+    <thead>
+        <th>Vision of Success</th>
+        <th>Critical Concepts</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border-bottom: 1px solid black;">{{ vs.0 }}.</td>
+            <td style="border-bottom: 1px solid black;">{{ cc.0 }}</td>
+        </tr>
+        <tr>
+            <td style="border-bottom: 1px solid black;">{{ vs.1 }}.</td>
+            <td style="border-bottom: 1px solid black;">{{ cc.1 }}</td>
+        </tr>
+        <tr>
+            <td style="border-bottom: 1px solid black;">{{ vs.2 }}.</td>
+            <td style="border-bottom: 1px solid black;">{{ cc.2 }}</td>
+        </tr>
+    </tbody>
+    </table>
 
-    <p><a class="master_term" href="#" data-toggle="tooltip" data-placement="bottom"
-          title="Absolute Targets are the entities at the center of your decision.">Absolute
-        Targets</a> are the entities at the center of your decision. If choosing a college to attend, the Absolute
-        Targets would the colleges you are considering.</p>
+    <p>You've done the spadework. Let’s take action. Identify your <a class="master_term" href="#" data-toggle="tooltip" data-placement="bottom"
+          title="Absolute Targets are the entities at the center of your decision. If choosing a college to attend, the Absolute
+        Targets would the colleges you are considering.">Absolute Targets</a>.</p>
 
     {% include 'module3/cheetah1/form.html' %}
 

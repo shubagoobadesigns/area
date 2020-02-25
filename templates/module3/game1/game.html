@@ -1,7 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load module_tags %}
-{% block title %}{% block h1 %}Your Decision Dilemma Parameters{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}BIAS Game{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         #clock {
@@ -130,10 +130,7 @@
         });
     </script>
 
-    <h2 class="center">Your Decision Dilemma Parameters</h2>
-
-    <p>Let’s get clear on defining your decision problem.</p>
-    <p>Answer Yes or No to the below questions and AREA will help you better break down and frame the problem you want to solve</p>
+    <h2 class="center">BIAS Game</h2>
 
     {% if attr == 'easy' %}
         <div class="center">

@@ -1,0 +1,44 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}BIAS Results!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">BIAS Results!</h2>
+    <p>
+        Your tendency is: top two biases.
+    </p>
+
+    <p class="space">
+        Try these BIAS remedies to check and challenge your assumptions and judgements:
+        <ul>
+            <li>Be more conscious and aware of actions</li>
+            <li>Check for facts</li>
+            <li>Get a second opinion</li>
+            <li>Get feedback on your strengths and blind spots from someone who knows you, your values and how you make decisions</li>
+        </ul>
+    </p>
+
+    <h3>Commit! How will you use the Bias Remedies you selected?</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="br[]" class="auto-text-area">{{ br.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="br[]" class="auto-text-area">{{ br.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="br[]" class="auto-text-area">{{ br.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div id="nextBtnSection">
+        {% get_next_btn module "Tell Me More" nav.nextUrl "submit" %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}
