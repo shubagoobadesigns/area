@@ -1,21 +1,31 @@
-{% extends 'modules/base/intro.html' %}
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
 
-{% block pre_title %}
-    <h1>Make Your Big Decisions</h1>
+{% block title %}
+    {% define 'pageTitle' '' %}
+    {% define 'nextBtnLabel' "Get Started" %}
+    {{ block.super }}
 {% endblock %}
 
-{% block module_title %}
-    <div>
-        <span class="green">B</span>
-        <span class="yellow">E</span>
-        <span class="light-blue">T</span>
-        <span class="red">T</span>
-        <span class="yellow">E</span>
-        <span class="light-blue">R</span>
+{% block content_body %}
+    <div class="center">
+        <h1 class="pre_title">
+            Make Your Big Decisions
+        </h1>
+        <h1 class="module_title">
+            <div>
+                <span class="green">B</span>
+                <span class="yellow">E</span>
+                <span class="light-blue">T</span>
+                <span class="red">T</span>
+                <span class="yellow">E</span>
+                <span class="light-blue">R</span>
+            </div>
+        </h1>
+
+        <img src="{% static 'decisions/img/backpocket/captain_hook.jpg' %}" height="450px"/>
     </div>
-{% endblock %}
 
-{% block module_subtitle %}
     <p>This module will guide you through the AREA Method.</p>
     <p>Complete the steps and we will analyze your work and thinking to help you make your big decisions better!</p>
 {% endblock %}
