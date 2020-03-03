@@ -81,8 +81,11 @@
         <div style="float: left; padding-top: 10px; padding-right: 0px; width: 77%;">
             {% block content_body %}{% endblock %}
         </div>
-
-    {% block next_btn %}{% get_next_btn module nextBtnLabel nav.nextUrl %}{% endblock %}
+    {% block next_btn %}
+        <div class="center">
+            <button id="completeBtn" value="{{ nextBtnLabel }}" onclick="submit();">{{ nextBtnLabel }}</button>
+        </div>
+    {% endblock %}
     {% block previous_btn %}{% get_back_link module nav.previousUrl %}{% endblock %}
 
 {% endblock %}

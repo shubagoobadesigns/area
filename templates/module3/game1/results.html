@@ -1,172 +1,57 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{% block h1 %}BIAS Results!{% endblock %}{% endblock %}
-{% block extra_head %}
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "BIAS Results" %}
+    {% define 'nextBtnLabel' "Remedies Defined" %}
+    {{ block.super }}
 {% endblock %}
-{% block content %}
-    <style type="text/css">
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
 
-        .modal-content {
-            background-color: #eee;
-            margin: auto;
-            padding: 20px;
-            /* border: 1px solid #888888; */
-            width: 70%;
-        }
+{% block modal_content %}
+    <p>Robyn’s tendency: Authority and Optimism</p>
+    <p>Robyn’s Bias Remedies:</p>
+    <ul>
+        <li>Check for facts</li>
+        <li>Get a second opinion</li>
+        <li>Get feedback on strengths and blind spots</li>
+    </ul>
+{% endblock %}
 
-        #pro_con {
-            background-color: #eee;
-        }
-
-        #pro_con p {
-            font-size: 1em;
-        }
-
-        .table .cheetahQuestions {
-            width: 60%;
-            margin-top: 10px;
-        }
-
-        .question {
-            color: #1e2846;
-            font-size: 18px;
-            font-weight: 800 !important;
-        }
-    </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var minTextLength = 2;
-
-            function validate() {
-                var valid = true;
-
-                /* Scan each text field and ensure that it has at least min chars length */
-                return valid;
-            }
-
-            $('#showProfileBtn').click(function () {
-                /* Show modal */
-                $('.modal').css('display', 'block');
-                return false;
-            });
-
-            $('#closeBtn').click(function () {
-                /* Hide modal */
-                $('.modal').css('display', 'none');
-                return false;
-            });
-
-            /* Validate the form and submit */
-            $('#completeBtn').click(function () {
-                var results = validate();
-                if (results) {
-                    $('form').submit();
-                }
-                return results;
-            });
-
-            /* Force the redirect back to the previous page */
-            $('#back').click(function () {
-                window.location.href = $(this).attr('href');
-            });
-
-            /* Clicking anywhere outside of the modal closes the modal */
-            $(window).click(function (e) {
-                $('.modal').css('display', 'none');
-                return false;
-            });
-        })
-    </script>
-
-    <h2 class="center">BIAS Results!</h2>
+{% block content_header %}
     <p>Your tendency is:</p>
     <ul>
     {% for bias in biases %}
         <li>{{ bias }}</li>
     {% endfor %}
     </ul>
+{% endblock %}
 
-    <div id="pro_con" class="modal">
-        <div class="modal-content">
-            <h4>Example</h4>
-            <table width="100%">
-                <tr>
-                    <td>Robyn's</td>
-                    <td><strong>tendencies</strong></td>
-                    <td><strong>remedies</strong></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>Authority</td>
-                    <td>Check for facts</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>Optimism</td>
-                    <td>Get a second opinion</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td>Get feedback on strengths and blind spots</td>
-                </tr>
-            </table>
+{% block content_body %}
+    <p>
+        Try these BIAS remedies to check and challenge your assumptions and judgements:
+        <ul>
+            <li>Be more conscious and aware of actions</li>
+            <li>Check for facts</li>
+            <li>Get a second opinion</li>
+            <li>Get feedback on your strengths and blind spots from someone who knows you, your values and how you make decisions</li>
+        </ul>
+    </p>
 
-            <p class="center">
-                <button id="closeBtn">Click to Close</button>
-            </p>
-        </div>
-    </div>
-
-    <div style="float: right; padding-top: 50px;">
-        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
-    </div>
-    <div style="float: left; width: 75%; padding-top: 10px;">
-        <p>
-            Try these BIAS remedies to check and challenge your assumptions and judgements:
-            <ul>
-                <li>Be more conscious and aware of actions</li>
-                <li>Check for facts</li>
-                <li>Get a second opinion</li>
-                <li>Get feedback on your strengths and blind spots from someone who knows you, your values and how you make decisions</li>
-            </ul>
-        </p>
-
-        <h3>Commit! How will you use the Bias Remedies you selected?</h3>
-        <table class="table">
-            <tbody>
-            <tr>
-                <td width="5">1.</td>
-                <td><textarea name="br[]" class="auto-text-area">{{ br.0 }}</textarea></td>
-            </tr>
-            <tr>
-                <td width="5">2.</td>
-                <td><textarea name="br[]" class="auto-text-area">{{ br.1 }}</textarea></td>
-            </tr>
-            <tr>
-                <td width="5">3.</td>
-                <td><textarea name="br[]" class="auto-text-area">{{ br.2 }}</textarea></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="center">
-        <button id="completeBtn" value="Tell Me More">Tell Me More</button>
-    </div>
-    {% get_back_link module nav.previousUrl %}
+    <h3>Commit! How will you use the Bias Remedies you selected?</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="br[]" class="auto-text-area">{{ br.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="br[]" class="auto-text-area">{{ br.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="br[]" class="auto-text-area">{{ br.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}

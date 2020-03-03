@@ -14,7 +14,10 @@
                 $("#time").text(timeleft);
                 if (timeleft <= 0) {
                     clearInterval(downloadTimer);
-                    window.location.href = '{{ nav.nextUrl }}';
+                    // window.location.href = '{{ nav.nextUrl }}';
+                    $('#more_time').css('display', 'block');
+                    $('#timer').hide();
+                    return false;
                 }
             }, 1000);
             return false;
@@ -63,14 +66,6 @@
             width: 70%;
         }
 
-        #pro_con {
-            background-color: #eee;
-        }
-
-        #pro_con p {
-            font-size: 1em;
-        }
-
         .table .cheetahQuestions {
             width: 60%;
             margin-top: 10px;
@@ -95,7 +90,7 @@
 
             $('#showProfileBtn').click(function () {
                 /* Show modal */
-                $('.modal').css('display', 'block');
+                $('#show_example').css('display', 'block');
                 return false;
             });
 
@@ -127,25 +122,37 @@
         })
     </script>
 
-    <div id="pro_con" class="modal">
+    <div class="modal" id="show_example">
         <div class="modal-content">
-            <h4>Example</h4>
-            <p>Robyn's Numbers:</p>
-            <ul>
-                <li>Number of VPs</li>
-                <li>Tenure length of last Midwest VP</li>
-                <li>Number of days travelling</li>
-                <li>Salary</li>
-                <li>Cost of living in Milwaukee</li>
-                <li>Graduation rates of the local high schools</li>
-            </ul>
-
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                <p>Robyn's Numbers:</p>
+                <ul>
+                    <li>Number of VPs</li>
+                    <li>Tenure length of last Midwest VP</li>
+                    <li>Number of days travelling</li>
+                    <li>Salary</li>
+                    <li>Cost of living in Milwaukee</li>
+                    <li>Graduation rates of the local high schools</li>
+                </ul>
+            </div>
+            <div style="padding-top: 10px;"></div>
             <p class="center">
                 <button id="closeBtn">Click to Close</button>
             </p>
         </div>
     </div>
 
+    <div class="modal" id="more_time">
+        <div class="modal-content">
+            <p>You'll want your numbers for our next page</p>
+            <p class="center">
+                <button id="closeBtn">I Need More Time</button>
+                <button id="completeBtn">Ready to Go!</button>
+            </p>
+        </div>
+    </div>
 
     <div style="float: right; padding-top: 50px;">
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
@@ -158,7 +165,9 @@
         </ol>
         <p>Time to do your first research! Pause the module here.</p>
 
-        <img src="{% static 'decisions/img/backpocket/kermit-typing.gif' %}" height="100px"/>
+        <div style="text-align: center;">
+            <img src="{% static 'decisions/img/backpocket/kermit-typing.gif' %}" height="250px"/>
+        </div>
 
         <p>Go to the Internet and search your Target’s website(s) for
             numbers relevant to your decision. We’ll start a timer that signals you to come back to the module in 10 minutes

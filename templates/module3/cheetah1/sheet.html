@@ -112,21 +112,23 @@
         })
     </script>
 
-    <div id="pro_con" class="modal">
+    <div class="modal">
         <div class="modal-content">
-            <h4>Example</h4>
-            <p>Robyn's Targets:</p>
-            <ul>
-                <li>The job position, VP of Sales Midwest,</li>
-                <li>The location: Milwaukee</li>
-            </ul>
-
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                <p>Robyn's Targets:</p>
+                <ul>
+                    <li>The job position, VP of Sales Midwest,</li>
+                    <li>The location: Milwaukee</li>
+                </ul>
+            </div>
+            <div style="padding-top: 10px;"></div>
             <p class="center">
                 <button id="closeBtn">Click to Close</button>
             </p>
         </div>
     </div>
-
 
     <div style="float: right; padding-top: 50px;">
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
