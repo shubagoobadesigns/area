@@ -344,7 +344,7 @@ class Module3(BaseModule):
             {
                 'question': "That I didn’t rush to judgment",
                 'explanation': "I want to better spot and challenge assumptions and judgments",
-                'phrase': "I didn't rush to judgment",
+                'phrase': "I want to better spot and challenge assumptions and judgments",
             },
             {
                 'question': "That I have a clear direction",
@@ -353,38 +353,38 @@ class Module3(BaseModule):
             },
             {
                 'question': "That I am knowledgeable about next steps",
-                'explanation': "I want to learn AREA and build my decision-making skill set",
-                'phrase': 'Knowledgeable about the next steps to take',
+                'explanation': "Knowledgeable about the next steps to take",
+                'phrase': 'I want to learn AREA and build my decision-making skill set',
             },
             {
                 'question': "That I looked at the problem from a variety of perspectives",
-                'explanation': "I want to know that I checked my ego and examined other voices",
-                'phrase': 'That I looked at the problem from a variety of perspectives',
+                'explanation': "That I looked at the problem from a variety of perspectives",
+                'phrase': 'I want to know that I checked my ego and examined other voices',
             },
             {
                 'question': "That I am enhancing harmony with others",
-                'explanation': "I want to strengthen my relationship with others by solving my problem holistically",
-                'phrase': 'Harmony with others',
+                'explanation': "Harmony with others",
+                'phrase': 'I want to strengthen my relationship with others by solving my problem holistically',
             },
             {
                 'question': "A sense of relief that I solved my problem",
-                'explanation': "I want a sense of closure",
-                'phrase': 'Relief that I solved my problem',
+                'explanation': "Relief that I solved my problem",
+                'phrase': 'I want a sense of closure',
             },
             {
                 'question': "Confident that I strengthened my decision-making capabilities",
-                'explanation': "I want to be a more confident decision-maker",
-                'phrase': 'Confidence that I strengthened my decision-making capabilities',
+                'explanation': "Confidence that I strengthened my decision-making capabilities",
+                'phrase': 'I want to be a more confident decision-maker',
             },
             {
                 'question': "That I chose the right option for me",
-                'explanation': "I want to feel an Increase in self-efficacy",
-                'phrase': 'Conviction that I chose the right option for me',
+                'explanation': "Conviction that I chose the right option for me",
+                'phrase': 'I want to feel an Increase in self-efficacy',
             },
             {
                 'question': "Stay true to my values",
-                'explanation': "I want to identify what matters most to me",
-                'phrase': 'True to my values',
+                'explanation': "True to my values",
+                'phrase': 'I want to identify what matters most to me',
             },
         ]
 
