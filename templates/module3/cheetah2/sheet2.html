@@ -120,17 +120,21 @@
 
     <div id="pro_con" class="modal">
         <div class="modal-content">
-            <h4>Example</h4>
-            <p>Robyn's Answers:</p>
-            <ul>
-                <li>Located good numbers</li>
-                <li>4. Data told a story of high turnover, lots of travel, variety of graduation data, Reasonable cost of living.</li>
-                <li>Most useful: Are the number of travel days necessary?</li>
-            </ul>
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                <h4>Example</h4>
+                <p>Robyn's Answers:</p>
+                <ul>
+                    <li>Located good numbers</li>
+                    <li>4. Data told a story of high turnover, lots of travel, variety of graduation data, Reasonable cost of living.</li>
+                    <li>Most useful: Are the number of travel days necessary?</li>
+                </ul>
 
-            <p class="center">
-                <button id="closeBtn">Click to Close</button>
-            </p>
+                <p class="center">
+                    <button id="closeBtn">Click to Close</button>
+                </p>
+            </div>
         </div>
     </div>
 
