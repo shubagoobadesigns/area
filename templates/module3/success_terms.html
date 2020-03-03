@@ -151,13 +151,13 @@
                 <div>
                     <label>
                         {% if value.phrase in success_terms %}
-                        <input type="checkbox" name="success_terms[]" value="{{ value.explanation }}" checked="checked"/>
-                        <span>{{ value.question }}</span>
-                        <span class="explanation" style="display: block; visibility: visible;">{{ value.phrase }}</span>
+                        <input type="checkbox" name="success_terms[]" value="{{ value.answer }}" checked="checked"/>
+                        <span>{{ value.success_term }}</span>
+                        <span class="explanation" style="display: block; visibility: visible;">{{ value.answer }}</span>
                         {% else %}
-                        <input type="checkbox" name="success_terms[]" value="{{ value.explanation }}"/>
-                        <span>{{ value.question }}</span>
-                        <span class="explanation">{{ value.phrase }}</span>
+                        <input type="checkbox" name="success_terms[]" value="{{ value.answer }}"/>
+                        <span>{{ value.success_term }}</span>
+                        <span class="explanation">{{ value.answer }}</span>
                         {% endif %}
                     </label>
                 </div>
