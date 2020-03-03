@@ -1,0 +1,88 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{{ pageTitle }}{% endblock %}
+{% block content %}
+    {% block modal_header %}
+        <style type="text/css">
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0); /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            }
+
+            .modal-content {
+                background-color: #eee;
+                margin: auto;
+                padding: 20px;
+                /* border: 1px solid #888888; */
+                width: 70%;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#showProfileBtn').click(function () {
+                    /* Show modal */
+                    $('.modal').css('display', 'block');
+                    return false;
+                });
+
+                $('#closeBtn').click(function () {
+                    /* Hide modal */
+                    $('.modal').css('display', 'none');
+                    return false;
+                });
+
+                /* Force the redirect back to the previous page */
+                $('#back').click(function () {
+                    window.location.href = $(this).attr('href');
+                });
+
+                /* Clicking anywhere outside of the modal closes the modal */
+                $(window).click(function (e) {
+                    $('.modal').css('display', 'none');
+                    return false;
+                });
+            })
+        </script>
+    {% endblock %}
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock %}
+
+        <div class="modal">
+            <div class="modal-content">
+                <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+                <h2>{% block modal_title %}Example{% endblock %}</h2>
+                <div style="display: block; padding-left: 75px;">
+                    {% block modal_content %}{% endblock %}
+                </div>
+                <div style="padding-top: 10px;"></div>
+                <p class="center">
+                    <button id="closeBtn">Click to Close</button>
+                </p>
+            </div>
+        </div>
+
+    <h2 class="center">{{ pageTitle }}</h2>
+
+    {% block content_header %}{% endblock %}
+
+        <div style="float: right; padding-top: 50px;">
+            <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+        </div>
+        <div style="float: left; padding-top: 10px; padding-right: 0px; width: 77%;">
+            {% block content_body %}{% endblock %}
+        </div>
+
+    {% block next_btn %}{% get_next_btn module nextBtnLabel nav.nextUrl %}{% endblock %}
+    {% block previous_btn %}{% get_back_link module nav.previousUrl %}{% endblock %}
+
+{% endblock %}

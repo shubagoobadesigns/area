@@ -1,163 +1,65 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{% block h1 %}Vision Of Success & Critical Concepts{% endblock %}{% endblock %}
-{% block content %}
-    <style type="text/css">
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
 
-        .modal-content {
-            background-color: #eee;
-            margin: auto;
-            padding: 20px;
-            /* border: 1px solid #888888; */
-            width: 70%;
-        }
+{% block title %}
+    {% define 'pageTitle' "Vision Of Success & Critical Concepts" %}
+    {% define 'nextBtnLabel' "Success Defined" %}
+    {{ block.super }}
+{% endblock %}
 
-        #pro_con {
-            background-color: #eee;
-        }
+{% block modal_content %}
+    <p>Robyn's Vision of Success includes:</p>
+    <ul>
+        <li>Feeling confident about having the right skills.</li>
+        <li>Well informed about the new location.</li>
+        <li>Excited about this new challenge.</li>
+    </ul>
+{% endblock %}
 
-        #pro_con p {
-            font-size: 1em;
-        }
-
-        .table .cheetahQuestions {
-            width: 60%;
-            margin-top: 10px;
-        }
-
-        .question {
-            color: #1e2846;
-            font-size: 18px;
-            font-weight: 800 !important;
-        }
-    </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var minTextLength = 2;
-
-            function validate() {
-                var valid = true;
-
-                /* Scan each text field and ensure that it has at least min chars length */
-                return valid;
-            }
-
-            $('#showProfileBtn').click(function () {
-                /* Show modal */
-                $('.modal').css('display', 'block');
-                return false;
-            });
-
-            $('#closeBtn').click(function () {
-                /* Hide modal */
-                $('.modal').css('display', 'none');
-                return false;
-            });
-
-            /* Validate the form and submit */
-            $('#completeBtn').click(function () {
-                var results = validate();
-                if (results) {
-                    $('form').submit();
-                }
-                return results;
-            });
-
-            /* Force the redirect back to the previous page */
-            $('#back').click(function () {
-                window.location.href = $(this).attr('href');
-            });
-
-            /* Clicking anywhere outside of the modal closes the modal */
-            $(window).click(function (e) {
-                $('.modal').css('display', 'none');
-                return false;
-            });
-        })
-    </script>
-
-    <h2 class="center">Vision Of Success & Critical Concepts</h2>
+{% block content_header %}
     <p>You told us that you want to feel:</p>
     <ul>
         {% for phrase in success_terms %}
             <li>{{ phrase }}</li>
         {% endfor %}
     </ul>
+{% endblock %}
 
-    <div id="pro_con" class="modal">
-        <div class="modal-content">
-            <h4>Example</h4>
-            <p>Robyn's Vision of Success includes:</p>
-            <ul>
-                <li>Feeling confident about having the right skills.</li>
-                <li>Well informed about the new location.</li>
-                <li>Excited about this new challenge.</li>
-            </ul>
+{% block content_body %}
+    <h3>Now picture that you’ve made your decision successfully. Share three things that will help you have those
+        feelings after you’ve solved your problem: </h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="vs[]" class="auto-text-area">{{ vs.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="vs[]" class="auto-text-area">{{ vs.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="vs[]" class="auto-text-area">{{ vs.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
 
-            <p class="center">
-                <button id="closeBtn">Click to Close</button>
-            </p>
-        </div>
-    </div>
-
-    <div style="float: right; padding-top: 50px;">
-        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
-    </div>
-    <div style="float: left; width: 75%; padding-top: 10px;">
-        <h3>Now picture that you’ve made your decision successfully. Share three things that will help you have those
-            feelings after you’ve solved your problem: </h3>
-        <table class="table">
-            <tbody>
-            <tr>
-                <td width="5">1.</td>
-                <td><textarea name="vs[]" class="auto-text-area">{{ vs.0 }}</textarea></td>
-            </tr>
-            <tr>
-                <td width="5">2.</td>
-                <td><textarea name="vs[]" class="auto-text-area">{{ vs.1 }}</textarea></td>
-            </tr>
-            <tr>
-                <td width="5">3.</td>
-                <td><textarea name="vs[]" class="auto-text-area">{{ vs.2 }}</textarea></td>
-            </tr>
-            </tbody>
-        </table>
-
-        <h3>Re-frame the 3 items as questions and they will serve as your Critical Concepts.</h3>
-        <table class="table">
-            <tbody>
-            <tr>
-                <td width="5">1.</td>
-                <td><textarea name="cc[]" class="auto-text-area">{{ cc.0 }}</textarea></td>
-            </tr>
-            <tr>
-                <td width="5">2.</td>
-                <td><textarea name="cc[]" class="auto-text-area">{{ cc.1 }}</textarea></td>
-            </tr>
-            <tr>
-                <td width="5">3.</td>
-                <td><textarea name="cc[]" class="auto-text-area">{{ cc.2 }}</textarea></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="center">
-        <button id="completeBtn" value="Success Defined!">Success Defined!</button>
-    </div>
-    {% get_back_link module nav.previousUrl %}
+    <h3>Re-frame the 3 items as questions and they will serve as your Critical Concepts.</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
 {% endblock %}

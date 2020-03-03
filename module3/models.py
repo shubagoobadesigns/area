@@ -337,54 +337,44 @@ class Module3(BaseModule):
         # phrase -> answer (in the skin)
         return [
             {
-                'question': "A sense of personal agency",
-                'explanation': "I want to feel empowered",
-                'phrase': 'I want to feel empowered',
+                'success_term': "A sense of personal agency",
+                'answer': "I want to feel empowered",
             },
             {
-                'question': "That I didn’t rush to judgment",
-                'explanation': "I want to better spot and challenge assumptions and judgments",
-                'phrase': "I want to better spot and challenge assumptions and judgments",
+                'success_term': "That I didn’t rush to judgment",
+                'answer': "I want to better spot and challenge assumptions and judgments",
             },
             {
-                'question': "That I have a clear direction",
-                'explanation': "A clear sense of direction",
-                'phrase': 'I want to be able to know how to implement my decision',
+                'success_term': "That I have a clear direction",
+                'answer': 'I want to be able to know how to implement my decision',
             },
             {
-                'question': "That I am knowledgeable about next steps",
-                'explanation': "Knowledgeable about the next steps to take",
-                'phrase': 'I want to learn AREA and build my decision-making skill set',
+                'success_term': "That I am knowledgeable about next steps",
+                'answer': 'I want to learn AREA and build my decision-making skill set',
             },
             {
-                'question': "That I looked at the problem from a variety of perspectives",
-                'explanation': "That I looked at the problem from a variety of perspectives",
-                'phrase': 'I want to know that I checked my ego and examined other voices',
+                'success_term': "That I looked at the problem from a variety of perspectives",
+                'answer': 'I want to know that I checked my ego and examined other voices',
             },
             {
-                'question': "That I am enhancing harmony with others",
-                'explanation': "Harmony with others",
-                'phrase': 'I want to strengthen my relationship with others by solving my problem holistically',
+                'success_term': "That I am enhancing harmony with others",
+                'answer': 'I want to strengthen my relationship with others by solving my problem holistically',
             },
             {
-                'question': "A sense of relief that I solved my problem",
-                'explanation': "Relief that I solved my problem",
-                'phrase': 'I want a sense of closure',
+                'success_term': "A sense of relief that I solved my problem",
+                'answer': 'I want a sense of closure',
             },
             {
-                'question': "Confident that I strengthened my decision-making capabilities",
-                'explanation': "Confidence that I strengthened my decision-making capabilities",
-                'phrase': 'I want to be a more confident decision-maker',
+                'success_term': "Confident that I strengthened my decision-making capabilities",
+                'answer': 'I want to be a more confident decision-maker',
             },
             {
-                'question': "That I chose the right option for me",
-                'explanation': "Conviction that I chose the right option for me",
-                'phrase': 'I want to feel an Increase in self-efficacy',
+                'success_term': "That I chose the right option for me",
+                'answer': 'I want to feel an Increase in self-efficacy',
             },
             {
-                'question': "Stay true to my values",
-                'explanation': "True to my values",
-                'phrase': 'I want to identify what matters most to me',
+                'success_term': "Stay true to my values",
+                'answer': 'I want to identify what matters most to me',
             },
         ]
 
