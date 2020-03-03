@@ -348,8 +348,8 @@ class Module3(BaseModule):
             },
             {
                 'question': "That I have a clear direction",
-                'explanation': "I want to be able to know how to implement my decision",
-                'phrase': 'A clear sense of direction',
+                'explanation': "A clear sense of direction",
+                'phrase': 'I want to be able to know how to implement my decision',
             },
             {
                 'question': "That I am knowledgeable about next steps",
