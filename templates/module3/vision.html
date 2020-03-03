@@ -1,6 +1,5 @@
 {% extends 'decisions/base.html' %}
-{% load bootstrap %}
-{% load module_tags %}
+{% load bootstrap module_tags static %}
 {% block title %}{% block h1 %}Vision Of Success & Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
@@ -99,43 +98,15 @@
         {% endfor %}
     </ul>
 
-    <div class="center">
-        <button id="showProfileBtn">Show Example</button>
-    </div>
-
     <div id="pro_con" class="modal">
         <div class="modal-content">
-            <p>In Module 1, we met {{ sample_student.name|title }} and learned about <span class="master_term_simple">Critical Concepts</span>
-                and {{ sample_student.pronoun_object }} <span
-                        class="master_term_simple">Vision of Success</span>. Below
-                are {{ sample_student.pronoun_object }} CCs and rephrased as questions to
-                help {{ sample_student.pronoun_object }} investigate the answers.</p>
-
-            <p><strong>{{ sample_student.name|title }}'s CCs</strong></p>
-            <table class="table">
-                <tbody>
-                {% for value in sample_student.cc %}
-                    <tr>
-                        <td width="5">{{ forloop.counter }}.</td>
-                        <td style="border-bottom: 1px solid black;">{{ value }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <p><strong>{{ sample_student.name|title }}'s CCs as questions</strong></p>
-            <table class="table">
-                <tbody>
-                {% for value in sample_student.cc_as_question %}
-                    {% if value.successful == 1 %}
-                        <tr>
-                            <td width="5">{{ value.num }}.</td>
-                            <td style="border-bottom: 1px solid black;">{{ value.question }}</td>
-                        </tr>
-                    {% endif %}
-                {% endfor %}
-                </tbody>
-            </table>
-
+            <h4>Example</h4>
+            <p>Robyn's Vision of Success includes:</p>
+            <ul>
+                <li>Feeling confident about having the right skills.</li>
+                <li>Well informed about the new location.</li>
+                <li>Excited about this new challenge.</li>
+            </ul>
 
             <p class="center">
                 <button id="closeBtn">Click to Close</button>
@@ -143,42 +114,47 @@
         </div>
     </div>
 
-    <h3>Now picture that you’ve made your decision successfully. Share three things that will help you have those
-        feelings after you’ve solved your problem: </h3>
-    <table class="table">
-        <tbody>
-        <tr>
-            <td width="5">1.</td>
-            <td><textarea name="vs[]" class="auto-text-area">{{ vs.0 }}</textarea></td>
-        </tr>
-        <tr>
-            <td width="5">2.</td>
-            <td><textarea name="vs[]" class="auto-text-area">{{ vs.1 }}</textarea></td>
-        </tr>
-        <tr>
-            <td width="5">3.</td>
-            <td><textarea name="vs[]" class="auto-text-area">{{ vs.2 }}</textarea></td>
-        </tr>
-        </tbody>
-    </table>
+    <div style="float: right; padding-top: 50px;">
+        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+    </div>
+    <div style="float: left; width: 75%; padding-top: 10px;">
+        <h3>Now picture that you’ve made your decision successfully. Share three things that will help you have those
+            feelings after you’ve solved your problem: </h3>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td width="5">1.</td>
+                <td><textarea name="vs[]" class="auto-text-area">{{ vs.0 }}</textarea></td>
+            </tr>
+            <tr>
+                <td width="5">2.</td>
+                <td><textarea name="vs[]" class="auto-text-area">{{ vs.1 }}</textarea></td>
+            </tr>
+            <tr>
+                <td width="5">3.</td>
+                <td><textarea name="vs[]" class="auto-text-area">{{ vs.2 }}</textarea></td>
+            </tr>
+            </tbody>
+        </table>
 
-    <h3>Re-frame the 3 items as questions and they will serve as your Critical Concepts.</h3>
-    <table class="table">
-        <tbody>
-        <tr>
-            <td width="5">1.</td>
-            <td><textarea name="cc[]" class="auto-text-area">{{ cc.0 }}</textarea></td>
-        </tr>
-        <tr>
-            <td width="5">2.</td>
-            <td><textarea name="cc[]" class="auto-text-area">{{ cc.1 }}</textarea></td>
-        </tr>
-        <tr>
-            <td width="5">3.</td>
-            <td><textarea name="cc[]" class="auto-text-area">{{ cc.2 }}</textarea></td>
-        </tr>
-        </tbody>
-    </table>
+        <h3>Re-frame the 3 items as questions and they will serve as your Critical Concepts.</h3>
+        <table class="table">
+            <tbody>
+            <tr>
+                <td width="5">1.</td>
+                <td><textarea name="cc[]" class="auto-text-area">{{ cc.0 }}</textarea></td>
+            </tr>
+            <tr>
+                <td width="5">2.</td>
+                <td><textarea name="cc[]" class="auto-text-area">{{ cc.1 }}</textarea></td>
+            </tr>
+            <tr>
+                <td width="5">3.</td>
+                <td><textarea name="cc[]" class="auto-text-area">{{ cc.2 }}</textarea></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
     <div class="center">
         <button id="completeBtn" value="Success Defined!">Success Defined!</button>

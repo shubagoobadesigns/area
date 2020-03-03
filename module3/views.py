@@ -317,8 +317,15 @@ def game1_results(request):
         module.br = json.dumps(request.POST.getlist('br[]'))
         return save_form(request, module, parsed)
 
+    results = []
+    biases = load_json(module.biases)
+    for bias in biases:
+        results.append(bias)
+
     context = {
         'answers': module.answers_json,
+        # Just get the top 2
+        'biases': [results[0],results[1]],
         'br': ViewHelper.load_json(module.br),
         'questions': module.get_game_questions(),
     }

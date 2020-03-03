@@ -15,6 +15,7 @@ db_fields = [
     'at2_most',
     'at3',
     'at3_most',
+    'biases',
     'br',
     'cc',
     'dd_as_question',
@@ -39,6 +40,7 @@ class Module3(BaseModule):
     at2_most = models.TextField(default='')
     at3 = models.TextField(default='')
     at3_most = models.TextField(default='')
+    biases = models.TextField(default='')
     # br = bias remedies
     br = models.TextField(default='')
     # cc = critical concepts
