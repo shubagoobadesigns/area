@@ -332,11 +332,14 @@ class Module3(BaseModule):
 
     @staticmethod
     def get_success_terms():
+        # question
+        # explanation -> success terms (in the skin)
+        # phrase -> answer (in the skin)
         return [
             {
                 'question': "A sense of personal agency",
-                'explanation': "I want to feel an increase sense of personal agency",
-                'phrase': 'empowered',
+                'explanation': "I want to feel empowered",
+                'phrase': 'I want to feel empowered',
             },
             {
                 'question': "That I didn’t rush to judgment",

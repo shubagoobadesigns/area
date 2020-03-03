@@ -26,30 +26,143 @@
         visibility: hidden;
     }
     </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('.modal').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Causes the button clicks to fail */
+            /*
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });*/
+        });
+    </script>
+
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+        #pro_con p {
+            font-size: 1em;
+        }
+
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <h4>Example</h4>
+            <p>Robyn's success terms:</p>
+            <ul>
+                <li>That I didn't rush to judgement</li>
+                <li>That I have a clear direction</li>
+                <li>That I am knowledgeable about next steps</li>
+                <li>That I chose the right option for me</li>
+            </ul>
+
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
+    </div>
+
+
     <h2 class="center">Success terms</h2>
 
     <h3>What are you solving for?</h3>
     <p style="border-bottom: 1px solid black;"><strong>{{ module.dd_as_question }}</strong></p>
     <p>Picture that you’ve already made the decision and its successful. How do you feel?</p>
 
-    <p>Select all the success phrases that apply. I want to feel:</p>
-
-    <div id="why_options">
-        {% for value in module.get_success_terms %}
-            <div>
-                <label>
-                    {% if value.phrase in success_terms %}
-                    <input type="checkbox" name="success_terms[]" value="{{ value.phrase }}" checked="checked"/>
-                    <span>{{ value.question }}</span>
-                    <span class="explanation" style="display: block; visibility: visible;">{{ value.explanation }}</span>
-                    {% else %}
-                    <input type="checkbox" name="success_terms[]" value="{{ value.phrase }}"/>
-                    <span>{{ value.question }}</span>
-                    <span class="explanation">{{ value.explanation }}</span>
-                    {% endif %}
-                </label>
-            </div>
-        {% endfor %}
+    <div style="float: right; padding-top: 50px;">
+        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+    </div>
+    <div style="float: left; width: 75%; padding-top: 10px;">
+        <p>Select all the success phrases that apply. I want to feel:</p>
+        <div id="why_options">
+            {% for value in module.get_success_terms %}
+                <div>
+                    <label>
+                        {% if value.phrase in success_terms %}
+                        <input type="checkbox" name="success_terms[]" value="{{ value.explanation }}" checked="checked"/>
+                        <span>{{ value.question }}</span>
+                        <span class="explanation" style="display: block; visibility: visible;">{{ value.phrase }}</span>
+                        {% else %}
+                        <input type="checkbox" name="success_terms[]" value="{{ value.explanation }}"/>
+                        <span>{{ value.question }}</span>
+                        <span class="explanation">{{ value.phrase }}</span>
+                        {% endif %}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
     {% get_next_btn module "Terms Defined!" nav.nextUrl "submit" %}
