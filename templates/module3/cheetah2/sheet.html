@@ -1,46 +1,25 @@
 {% extends 'modules/cheetah/sheet.html' %}
+{% load static %}
 {% block cheetah_content %}
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
-
-            {# check any previous selections #}
-            {% for chosen in at2 %}
-                $(":checkbox[value='{{ chosen }}']").prop('checked', true);
-            {% endfor %}
-
-            start_timer();
         });
 
-        function start_timer() {
-            // Set the date we're counting down to
-            var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
-
-            // Update the count down every 1 second
-            var x = setInterval(function() {
-                // Get today's date and time
-                var now = new Date().getTime();
-
-                // Find the distance between now and the count down date
-                var distance = countDownDate - now;
-
-                // Time calculations for days, hours, minutes and seconds
-                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                // Output the result in an element with id="demo"
-                document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-                  + minutes + "m " + seconds + "s ";
-
-                // If the count down is over, write some text
-                if (distance < 0) {
-                  clearInterval(x);
-                  document.getElementById("demo").innerHTML = "EXPIRED";
+        function countdown() {
+            $('#timer').show()
+            var timeleft = 3;
+            var downloadTimer = setInterval(function () {
+                timeleft--;
+                $("#time").text(timeleft);
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    window.location.href = '{{ nav.nextUrl }}';
                 }
             }, 1000);
+            return false;
         }
+
     </script>
 
     <style type="text/css">
@@ -60,26 +39,140 @@
         }
     </style>
 
-    <p>All high-stakes decisions have numbers involved. Focusing on numbers has two benefits:</p>
-    <ol>
-        <li>It enables you to see your Target as objectively and uninfluenced as possible.</li>
-        <li>It also allows the Target to present data on what it considers to be its main issues.</li>
-    </ol>
-    <p>Time to do your first research! Pause the module here. Go to the Internet and search your Target’s website(s) for
-        numbers relevant to your decision. We’ll start a timer that signals you to come back to the module in 10 minutes
-        to keep going on your problem solving.</p>
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
 
-    <button type="button" class="btn" data-toggle="collapse" data-target="#example">Show Example</button>
-    <div id="example" class="collapse">
-        <p>If you’re deciding about buying a home or leasing more workspace, useful numerical data would be the cost of
-            the homes/spaces in your target location and property taxes.</p>
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+        #pro_con p {
+            font-size: 1em;
+        }
+
+        .table .cheetahQuestions {
+            width: 60%;
+            margin-top: 10px;
+        }
+
+        .question {
+            color: #1e2846;
+            font-size: 18px;
+            font-weight: 800 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('.modal').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            /* Force the redirect back to the previous page */
+            $('#back').click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });
+        })
+    </script>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <h4>Example</h4>
+            <p>Robyn's Numbers:</p>
+            <ul>
+                <li>Number of VPs</li>
+                <li>Tenure length of last Midwest VP</li>
+                <li>Number of days travelling</li>
+                <li>Salary</li>
+                <li>Cost of living in Milwaukee</li>
+                <li>Graduation rates of the local high schools</li>
+            </ul>
+
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
     </div>
 
-    <p id="demo"></p>
 
-    <div class="space"></div>
-
-    <div class="center">
-        <button id="completeBtn" value="Complete Cheetah Sheet">Numbers Named</button>
+    <div style="float: right; padding-top: 50px;">
+        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
     </div>
+    <div style="float: left; width: 75%; padding-top: 10px;">
+        <p>All high-stakes decisions have numbers involved. Focusing on numbers has two benefits:</p>
+        <ol>
+            <li>It enables you to see your Target as objectively and uninfluenced as possible.</li>
+            <li>It also allows the Target to present data on what it considers to be its main issues.</li>
+        </ol>
+        <p>Time to do your first research! Pause the module here.</p>
+
+        <img src="{% static 'decisions/img/backpocket/kermit-typing.gif' %}" height="100px"/>
+
+        <p>Go to the Internet and search your Target’s website(s) for
+            numbers relevant to your decision. We’ll start a timer that signals you to come back to the module in 10 minutes
+            to keep going on your problem solving.</p>
+
+
+        <div class="center start">
+            <button id="next" type="button"><a href="#" onclick="return countdown()">Start the Pause Now!</a></button>
+        </div>
+    </div>
+
+    <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 20%"
+         id="timer">
+        <div style="font-size: 256px; color: #f6653c" id="time">3</div>
+    </div>
+
 {% endblock %}
