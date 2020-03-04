@@ -136,7 +136,7 @@
 
     <h2 class="center">Success terms</h2>
 
-    <h3>What are you solving for?</h3>
+    <p>What are you solving for?</p>
     <p style="border-bottom: 1px solid black;"><strong>{{ module.dd_as_question }}</strong></p>
     <p>Picture that you’ve already made the decision and its successful. How do you feel?</p>
 
@@ -144,7 +144,7 @@
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
     </div>
     <div style="float: left; width: 75%; padding-top: 10px;">
-        <p>Select all the success phrases that apply. I want to feel:</p>
+        <h3>Select all the success phrases that apply. I want to feel:</h3>
         <div id="why_options">
             {% for value in module.get_success_terms %}
                 <div>

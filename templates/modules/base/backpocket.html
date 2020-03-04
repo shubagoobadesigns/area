@@ -75,12 +75,14 @@
 
     {% block content_header %}{% endblock %}
 
+    <div>
         <div style="float: right; padding-top: 50px;">
             <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
         </div>
         <div style="float: left; padding-top: 10px; padding-right: 0px; width: 77%;">
             {% block content_body %}{% endblock %}
         </div>
+    </div>
 
     {% block next_btn %}
         <div class="center">

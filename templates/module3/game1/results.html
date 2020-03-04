@@ -21,7 +21,7 @@
     <p>Your tendency is:</p>
     <ul>
     {% for bias in biases %}
-        <li>{{ bias }}</li>
+        <li>{{ bias | title }} - Add definition from earlier module</li>
     {% endfor %}
     </ul>
 {% endblock %}

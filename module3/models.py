@@ -238,7 +238,7 @@ class Module3(BaseModule):
                 'bias_answer': 0,
             },
             'authority1': {
-                'question': 'A co-worker who has been around much longer than you shows you how to complete a task &quot;the way it has always been done.&quot;',
+                'question': 'A co-worker who has been around much longer than you shows you how to complete a task "the way it has always been done."',
                 'answer0': 'Follow his advice - he has been there a long time',
                 'answer1': 'Try out new ways - you never know if you don’t try!',
                 'bias': 'authority',
@@ -246,7 +246,7 @@ class Module3(BaseModule):
             },
             'authority2': {
                 'question': 'Your landlord suggests that you commit to your lease for another year, do you',
-                'answer0': 'Automatically resign',
+                'answer0': 'Automatically renew',
                 'answer1': 'Look around before you recommit',
                 'bias': 'authority',
                 'bias_answer': 0,
@@ -259,7 +259,7 @@ class Module3(BaseModule):
                 'bias_answer': 0,
             },
             'liking1': {
-                'question': 'You get nervous when you have to talk in front of people but your friend asks you to perform in an open mic night with her. Do you',
+                'question': 'You get nervous when you have to talk in front of people but a friend asks you to perform in an open mic night with her. Do you',
                 'answer0': 'Say yes because they are your friend',
                 'answer1': 'Say no because it isn’t your thing',
                 'bias': 'liking',
@@ -291,7 +291,7 @@ class Module3(BaseModule):
                 'answer0': 'Absolutely get it - you never know what could happen',
                 'answer1': 'Assume you’ll be able to figure it out if anything happens',
                 'bias': 'optimism',
-                'bias_answer': 0,
+                'bias_answer': 1,
             },
             'planning2': {
                 'question': 'When you look at your to do list, do you',
