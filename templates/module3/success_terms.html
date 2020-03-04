@@ -97,10 +97,6 @@
             background-color: #eee;
         }
 
-        #pro_con p {
-            font-size: 1em;
-        }
-
         #why_options div {
             margin-bottom: 10px;
         }
@@ -119,18 +115,21 @@
 
     <div id="pro_con" class="modal">
         <div class="modal-content">
-            <h4>Example</h4>
-            <p>Robyn's success terms:</p>
-            <ul>
-                <li>That I didn't rush to judgement</li>
-                <li>That I have a clear direction</li>
-                <li>That I am knowledgeable about next steps</li>
-                <li>That I chose the right option for me</li>
-            </ul>
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                <p>Robyn's success terms:</p>
+                <ul>
+                    <li>That I didn't rush to judgement</li>
+                    <li>That I have a clear direction</li>
+                    <li>That I am knowledgeable about next steps</li>
+                    <li>That I chose the right option for me</li>
+                </ul>
 
-            <p class="center">
-                <button id="closeBtn">Click to Close</button>
-            </p>
+                <p class="center">
+                    <button id="closeBtn">Click to Close</button>
+                </p>
+            </div>
         </div>
     </div>
 
@@ -164,6 +163,7 @@
             {% endfor %}
         </div>
     </div>
+
 
     {% get_next_btn module "Terms Defined!" nav.nextUrl "submit" %}
     {% get_back_link module nav.previousUrl %}
