@@ -175,14 +175,15 @@ def cheetah3_sheet(request):
         module.at3 = json.dumps(request.POST.getlist('at3[]'))
         return save_form(request, module, parsed)
 
+    cheetah_sheet = cheetah_sheet3
     if parsed['step'] == 'sheet2':
-        cheetah_sheet3 = cheetah_sheet3_2
+        cheetah_sheet = cheetah_sheet3_2
 
     context = {
         'at3': ViewHelper.load_json(module.at3),
         'at3_most': module.at3_most,
         'at_numbers': Module.get_at3_numbers(),
-        'cheetah_sheet': cheetah_sheet3,
+        'cheetah_sheet': cheetah_sheet,
     }
     return render_page(request, module, parsed, context)
 
