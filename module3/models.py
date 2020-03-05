@@ -99,7 +99,7 @@ class Module3(BaseModule):
         at_numbers = [
             {
                 'key': "1",
-                'label': "I located numerical data that is useful to better understanding my Target(s)",
+                'label': "I located numerical data that is useful to better understand my Target(s)",
                 'answer': "Good! Numbers allow you to see the Target as objectively and uninfluenced as possible.",
             },
             {
@@ -238,7 +238,7 @@ class Module3(BaseModule):
                 'bias_answer': 0,
             },
             'authority1': {
-                'question': 'A co-worker who has been around much longer than you shows you how to complete a task "the way it has always been done."',
+                'question': 'A co-worker who has been around much longer than you shows you how to complete a task the way it has always been done.',
                 'answer0': 'Follow his advice - he has been there a long time',
                 'answer1': 'Try out new ways - you never know if you don’t try!',
                 'bias': 'authority',

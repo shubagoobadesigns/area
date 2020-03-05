@@ -1,14 +1,28 @@
 {% extends 'modules/cheetah/sheet.html' %}
+{% load static %}
 {% block cheetah_content %}
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
-
-            {# check any previous selections #}
-            {% for chosen in at3 %}
-                $(":checkbox[value='{{ chosen }}']").prop('checked', true);
-            {% endfor %}
         });
+
+        function countdown() {
+            $('#timer').show()
+            var timeleft = 3;
+            var downloadTimer = setInterval(function () {
+                timeleft--;
+                $("#time").text(timeleft);
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    // window.location.href = '{{ nav.nextUrl }}';
+                    $('#more_time').css('display', 'block');
+                    $('#timer').hide();
+                    return false;
+                }
+            }, 1000);
+            return false;
+        }
+
     </script>
 
     <style type="text/css">
@@ -28,24 +42,136 @@
         }
     </style>
 
-    <p>Now get beyond the numbers to read the Target's narrative.</p>
-    <p>Pause the module and go search your Target's website more generally to help you identify areas where you might
-        want to question its story.</p>
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
 
-    <div id="why_options">
-        {% for item in at_numbers %}
-            <div>
-                <label>
-                    <input type="checkbox" name="at3[]" value="{{ item.key }}" onclick='alert("{{ item.answer }}");'/>
-                    <span>{{ item.label }}</span>
-                </label>
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        .table .cheetahQuestions {
+            width: 60%;
+            margin-top: 10px;
+        }
+
+        .question {
+            color: #1e2846;
+            font-size: 18px;
+            font-weight: 800 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('#show_example').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            /* Force the redirect back to the previous page */
+            $('#back').click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });
+        })
+    </script>
+
+    <div class="modal" id="show_example">
+        <div class="modal-content">
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                <p>Robyn's answers:</p>
+                <p>By searching her Absolute Targets' websites Robyn found:</p>
+                <ul>
+                    <li>Her company's national site is searchable for the Midwest region.</li>
+                    <li>Midwest region page lists the products made locally and office contacts.</li>
+                    <li>Midwest site more focused on tourism than sales. Who is it aimed at? Does this reveal a potential mis-match between Robyn's expectation and the company's?</li>
+                </ul>
             </div>
-        {% endfor %}
+            <div style="padding-top: 10px;"></div>
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
     </div>
 
-    <div class="space"></div>
-
-    <div class="center">
-        <button id="completeBtn" value="Complete Cheetah Sheet">Website Done!</button>
+    <div class="modal" id="more_time">
+        <div class="modal-content">
+            <p>You'll want your numbers for our next page</p>
+            <p class="center">
+                <button id="closeBtn">I Need More Time</button>
+                <button id="completeBtn">Ready to Go!</button>
+            </p>
+        </div>
     </div>
+
+    <div style="float: right; padding-top: 50px;">
+        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+    </div>
+    <div style="float: left; width: 75%; padding-top: 10px;">
+        <p>Now get beyond the numbers to read the Target’s narrative.</p>
+        <p>Get ready for more research. Pause the module and go search your Target’s website. How does it explain its value and does that shed light on your Decision Problem?</p>
+        <p>Go to the Internet and search your Target’s website(s) for numbers relevant to your decision. Take as much time as you need to find useful data.</p>
+
+        <div style="text-align: center;">
+            <img src="{% static 'decisions/img/backpocket/girl-magnify.gif' %}" height="250px"/>
+        </div>
+
+        <div class="center start">
+            <button id="next" type="button"><a href="#" onclick="return countdown()">Start the Pause Now!</a></button>
+        </div>
+    </div>
+
+    <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 20%"
+         id="timer">
+        <div style="font-size: 256px; color: #f6653c" id="time">3</div>
+    </div>
+
 {% endblock %}

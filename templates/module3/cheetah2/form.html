@@ -3,7 +3,9 @@
 {% if mode == 'print' %}
     <ul>
         {% for item in at_numbers %}
-        <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
+            {% if item.key in at2 %}
+                <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
+            {% endif %}
         {% endfor %}
     </ul>
 {% else %}
@@ -11,8 +13,15 @@
         {% for item in at_numbers %}
             <div>
                 <label>
-                    <input type="checkbox" name="at2[]" value="{{ item.key }}" onclick='alert("{{ item.answer }}");'/>
+                    {% if item.key in at2 %}
+                    <input type="checkbox" name="at2[]" value="{{ item.key }}" checked="checked"/>
                     <span>{{ item.label }}</span>
+                    <span class="explanation" style="display: block; visibility: visible;">{{ item.answer }}</span>
+                    {% else %}
+                    <input type="checkbox" name="at2[]" value="{{ item.key }}"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation">{{ item.answer }}</span>
+                    {% endif %}
                 </label>
             </div>
         {% endfor %}
@@ -21,4 +30,3 @@
 
 <h3>What numerical data was MOST useful?</h3>
 <textarea name="at2_most" class="auto-text-area">{{ at2_most }}</textarea>
-<p><em>(Example: Understanding that the property taxes are too high to live in this area)</em></p>

@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Module3 as Module, Module3Form as ModuleForm
+from module2.models import Module2 as Module2
+
 
 from decisions.decorator import active_user_required
 from decisions.views import load_json, load_module, base_restart
@@ -54,6 +56,7 @@ def navigation():
         reverse('module3_cheetah2_sheet'),
         reverse('module3_cheetah2_sheet2'),
         reverse('module3_cheetah3_sheet'),
+        reverse('module3_cheetah3_sheet2'),
         reverse('module3_sum_up'),
         reverse('module3_relative'),
         reverse('module3_relative2'),
@@ -317,15 +320,32 @@ def game1_results(request):
         module.br = json.dumps(request.POST.getlist('br[]'))
         return save_form(request, module, parsed)
 
-    results = []
+    bias_results = []
     biases = load_json(module.biases)
-    for bias in biases:
-        results.append(bias)
+
+    bias_definitions = Module2.get_biases()
+    for key,value in biases.items():
+        # Return the top two biases
+        if len(bias_results) >= 2:
+            break
+
+        # Find the label and definition
+        for definition in bias_definitions:
+            if definition['key'] == key:
+                # Get the label and definition
+                bias_results.append({
+                    'key': key,
+                    'label': definition['label'],
+                    'definition': definition['definition']
+                })
+                break
+
+    print("Total bias results")
+    print(bias_results)
 
     context = {
         'answers': module.answers_json,
-        # Just get the top 2
-        'biases': [results[0],results[1]],
+        'biases': bias_results,
         'br': ViewHelper.load_json(module.br),
         'questions': module.get_game_questions(),
     }

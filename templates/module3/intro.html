@@ -2,13 +2,13 @@
 {% load module_tags static %}
 
 {% block title %}
-    {% define 'pageTitle' '' %}
+    {% define 'pageTitle' 'Backpocket AREA' %}
     {% define 'nextBtnLabel' "Get Started" %}
     {{ block.super }}
 {% endblock %}
 
 {% block content_body %}
-    <div class="center">
+    <div class="center" xmlns="http://www.w3.org/1999/html">
         <h1 class="pre_title">
             Make Your Big Decisions
         </h1>
@@ -23,7 +23,10 @@
             </div>
         </h1>
 
-        <img src="{% static 'decisions/img/backpocket/captain_hook.jpg' %}" height="450px"/>
+        <img src="{% static 'decisions/img/backpocket/captain_hook.png' %}" width="480px"/>
+        <p style="margin-top: -50px; padding-bottom: 30px; font-weight: bold;">
+            <em>"OK, Mr. Hook. Seems you're trying to decide between a career in pirating or massage theraphy. Well, maybe we can help you narrow it down."</em>
+        </p>
     </div>
 
     <p>This module will guide you through the AREA Method.</p>

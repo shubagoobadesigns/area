@@ -21,7 +21,7 @@
     <p>Your tendency is:</p>
     <ul>
     {% for bias in biases %}
-        <li>{{ bias | title }} - Add definition from earlier module</li>
+        <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="{{ bias.definition }}">{{ bias.label }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
