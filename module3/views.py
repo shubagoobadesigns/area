@@ -25,6 +25,11 @@ cheetah_sheet3 = CheetahSheet()
 cheetah_sheet3.num = 3
 cheetah_sheet3.title = "The Story of Your Target's Website"
 
+cheetah_sheet3_2 = CheetahSheet()
+cheetah_sheet3_2.num = 3
+cheetah_sheet3_2.title = "Absolute Website Data Quality"
+
+
 nylah = Nylah()
 
 # Create your views here.
@@ -164,9 +169,14 @@ def cheetah3_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
+    # print(parsed)
+
     if request.method == 'POST':
         module.at3 = json.dumps(request.POST.getlist('at3[]'))
         return save_form(request, module, parsed)
+
+    if parsed['step'] == 'sheet2':
+        cheetah_sheet3 = cheetah_sheet3_2
 
     context = {
         'at3': ViewHelper.load_json(module.at3),
