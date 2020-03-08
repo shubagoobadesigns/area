@@ -4,9 +4,8 @@
 {% endblock %}{% endblock %}
 {% block content %}
     <div class="center">
-        <h2 class="center">
-            How High Stakes Is Your Decision?
-        </h2>
+    {% include 'module3/progress_bar/i.html' with selection="dd" %}
+        <h2 class="center">How High Stakes Is Your Decision?</h2>
 
         <p>
         {% if total >= 8 and total <= 11 %}
