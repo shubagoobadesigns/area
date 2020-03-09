@@ -21,6 +21,10 @@ cheetah_sheet2 = CheetahSheet()
 cheetah_sheet2.num = 2
 cheetah_sheet2.title = "Navigating Numbers"
 
+cheetah_sheet2_2 = CheetahSheet()
+cheetah_sheet2_2.num = 2
+cheetah_sheet2_2.title = "Absolute Data Quality"
+
 cheetah_sheet3 = CheetahSheet()
 cheetah_sheet3.num = 3
 cheetah_sheet3.title = "The Story of Your Target's Website"
@@ -29,6 +33,9 @@ cheetah_sheet3_2 = CheetahSheet()
 cheetah_sheet3_2.num = 3
 cheetah_sheet3_2.title = "Absolute Website Data Quality"
 
+cheetah_sheet4 = CheetahSheet()
+cheetah_sheet4.num = 4
+cheetah_sheet4.title = "Relative: Map vs Terrain"
 
 nylah = Nylah()
 
@@ -63,9 +70,9 @@ def navigation():
         reverse('module3_cheetah3_sheet'),
         reverse('module3_cheetah3_sheet2'),
         reverse('module3_sum_up'),
-        reverse('module3_relative'),
-        reverse('module3_relative2'),
-        reverse('module3_relative3'),
+        reverse('module3_cheetah4_intro'),
+        reverse('module3_cheetah4_sheet'),
+        reverse('module3_cheetah4_sheet2'),
 
     ]
 
@@ -118,17 +125,6 @@ def save_form(request, module, parsed):
 Module Specific Controllers
 """
 @active_user_required
-def at_results(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    context = {
-        'at_results': "green",
-    }
-    return render_page(request, module, parsed, context)
-
-
-@active_user_required
 def cheetah1_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -152,6 +148,19 @@ def cheetah2_sheet(request):
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
     if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet2,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah2_sheet2(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
         module.at2 = json.dumps(request.POST.getlist('at2[]'))
         return save_form(request, module, parsed)
 
@@ -159,7 +168,7 @@ def cheetah2_sheet(request):
         'at2': ViewHelper.load_json(module.at2),
         'at2_most': module.at2_most,
         'at_numbers': Module.get_at2_numbers(),
-        'cheetah_sheet': cheetah_sheet2,
+        'cheetah_sheet': cheetah_sheet2_2,
     }
     return render_page(request, module, parsed, context)
 
@@ -169,21 +178,92 @@ def cheetah3_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
-    # print(parsed)
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet3,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah3_sheet2(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
     if request.method == 'POST':
         module.at3 = json.dumps(request.POST.getlist('at3[]'))
         return save_form(request, module, parsed)
 
-    cheetah_sheet = cheetah_sheet3
-    if parsed['step'] == 'sheet2':
-        cheetah_sheet = cheetah_sheet3_2
-
     context = {
         'at3': ViewHelper.load_json(module.at3),
         'at3_most': module.at3_most,
         'at_numbers': Module.get_at3_numbers(),
-        'cheetah_sheet': cheetah_sheet,
+        'cheetah_sheet': cheetah_sheet3_2,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah4_intro(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet4,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah4_sheet(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.at4 = json.dumps(request.POST.getlist('at4[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'at4': ViewHelper.load_json(module.at4),
+        'at_numbers': Module.get_at4_numbers(),
+        'cheetah_sheet': cheetah_sheet4,
+    }
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def cheetah4_sheet2(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    at4 = ViewHelper.load_json(module.at4)
+    yes = 0
+
+    at_numbers = Module.get_at4_numbers()
+    total = len(at_numbers)
+
+    for ans in at4:
+        yes += 1
+    no = total - yes
+
+    # Mixed
+    if yes == no:
+        results = "mixed"
+    # If mostly yes,
+    elif yes > no:
+        results = "yes"
+    # If mostly no
+    else:
+        results = "no"
+
+    context = {
+        'cheetah_sheet': cheetah_sheet4,
+        'results': results,
     }
     return render_page(request, module, parsed, context)
 
@@ -353,6 +433,7 @@ def game1_results(request):
 
     print("Total bias results")
     print(bias_results)
+    print(parsed)
 
     context = {
         'answers': module.answers_json,
@@ -375,6 +456,21 @@ def success_terms(request):
 
     context = {
         'success_terms': ViewHelper.load_json(module.success_terms),
+    }
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def sum_up(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    sorted_sum_up = calculate_sum_up(module)
+    # Get the last value color
+    selected_color = sorted_sum_up[-1][1]
+
+    context = {
+        'at_results': selected_color,
     }
     return render_page(request, module, parsed, context)
 
@@ -420,3 +516,47 @@ def calculate_biases(game_questions, answers):
             biases[bias]['biased'] += 1
         biases[bias]['ratio'] = int(float(biases[bias]['biased']) / float(biases[bias]['total']) * 100)
     return biases
+
+def calculate_sum_up(module):
+    # See https://docs.google.com/spreadsheets/d/14oco-rnnKWTQ1SnSdUAQVBZjWnUSNsr08QFYxQpQg-I/edit#gid=0
+    scores = {
+        'at2': [
+            'green',
+            'blue',
+            'red',
+            'green'
+        ],
+        'at3': [
+            'green',
+            'red',
+            'blue',
+            'green'
+        ]
+    }
+
+    at2 = ViewHelper.load_json(module.at2)
+    at3 = ViewHelper.load_json(module.at3)
+
+    # Arrays are zero-based index so deduct 1
+    sum_up = {
+        'green': 0,
+        'red': 0,
+        'blue': 0,
+    }
+
+    for ans in at2:
+        # print(ans)
+        ndx = int(ans)-1
+        color = scores['at2'][ndx]
+        sum_up[color] += 1
+
+    for ans in at3:
+        # print(ans)
+        ndx = int(ans)-1
+        color = scores['at3'][ndx]
+        sum_up[color] += 1
+
+    # print(sum_up)
+    sorted_sum_up = sorted((value, key) for (key, value) in sum_up.items())
+
+    return sorted_sum_up

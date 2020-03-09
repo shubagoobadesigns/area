@@ -15,6 +15,9 @@ db_fields = [
     'at2_most',
     'at3',
     'at3_most',
+    'at4',
+    'at4_least',
+    'at4_most',
     'biases',
     'br',
     'cc',
@@ -40,6 +43,9 @@ class Module3(BaseModule):
     at2_most = models.TextField(default='')
     at3 = models.TextField(default='')
     at3_most = models.TextField(default='')
+    at4 = models.TextField(default='')
+    at4_least = models.TextField(default='')
+    at4_most = models.TextField(default='')
     biases = models.TextField(default='')
     # br = bias remedies
     br = models.TextField(default='')
@@ -99,7 +105,7 @@ class Module3(BaseModule):
         at_numbers = [
             {
                 'key': "1",
-                'label': "I located numerical data that is useful to better understand my Target(s)",
+                'label': "I located numerical data that is useful to my decision-making",
                 'answer': "Good! Numbers allow you to see the Target as objectively and uninfluenced as possible.",
             },
             {
@@ -114,7 +120,7 @@ class Module3(BaseModule):
             },
             {
                 'key': "4",
-                'label': "The numerical data tells a story about my Target(s).",
+                'label': "The cumulative data tells a story about my Target(s.",
                 'answer': "Good! That means you may consider if the story that you understand about the Target is consistent with its numerical story.",
             },
         ]
@@ -136,8 +142,40 @@ class Module3(BaseModule):
             },
             {
                 'key': "3",
-                'label': "It makes me want to question part of my Target's story",
-                'answer': "You need more research to understand your Target",
+                'label': "The information I found conflicted with my expectations",
+                'answer': "Why? So what? How does this impact your decision problem? ",
+            },
+            {
+                'key': "4",
+                'label': "The cumulative information tells a story about my Target(s)",
+                'answer': "Good! Does the story form the numbers agree with the website story?",
+            },
+        ]
+
+        return at_numbers
+
+    @staticmethod
+    def get_at4_numbers():
+        at_numbers = [
+            {
+                'key': "1",
+                'label': "I understand my Target’s point of differentiation from others",
+                'answer': "",
+            },
+            {
+                'key': "2",
+                'label': "I understand my Target's strengths versus others’",
+                'answer': "",
+            },
+            {
+                'key': "3",
+                'label': "I understand my Target's weaknesses versus its others",
+                'answer': "",
+            },
+            {
+                'key': "4",
+                'label': "The public image of my Target is consistent with the way the Target described itself in Absolute",
+                'answer': "",
             },
         ]
 

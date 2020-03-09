@@ -1,5 +1,9 @@
 {% extends 'modules/cheetah/sheet.html' %}
-{% load static %}
+{% load module_tags static %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/a1.html' %}
+    {{ block.super }}
+{% endblock %}
 {% block cheetah_content %}
     <script type="text/javascript">
         $(document).ready(function () {

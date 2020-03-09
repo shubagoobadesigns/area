@@ -1,10 +1,7 @@
-<h3>Did you find numbers that help you better understand your <a class="master_term" href="#" data-toggle="tooltip" data-placement="bottom"
-              title="The person, place or thing at the center of your decision problem.">Decision Target</a>?  Check all that apply:</h3>
-
 {% if mode == 'print' %}
     <ul>
         {% for item in at_numbers %}
-            {% if item.key in at2 %}
+            {% if item.key in at4 %}
                 <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
             {% endif %}
         {% endfor %}
@@ -14,12 +11,12 @@
         {% for item in at_numbers %}
             <div>
                 <label>
-                    {% if item.key in at2 %}
-                    <input type="checkbox" name="at2[]" value="{{ item.key }}" checked="checked"/>
+                    {% if item.key in at4 %}
+                    <input type="checkbox" name="at4[]" value="{{ item.key }}" checked="checked"/>
                     <span>{{ item.label }}</span>
                     <span class="explanation" style="display: block; visibility: visible;">{{ item.answer }}</span>
                     {% else %}
-                    <input type="checkbox" name="at2[]" value="{{ item.key }}"/>
+                    <input type="checkbox" name="at4[]" value="{{ item.key }}"/>
                     <span>{{ item.label }}</span>
                     <span class="explanation">{{ item.answer }}</span>
                     {% endif %}
@@ -28,6 +25,3 @@
         {% endfor %}
     </div>
 {% endif %}
-
-<h3>What numerical data was <strong><u>MOST useful</u></strong>?</h3>
-<textarea name="at2_most" class="auto-text-area">{{ at2_most }}</textarea>

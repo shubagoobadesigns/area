@@ -31,14 +31,14 @@ urlpatterns = [
     url(r'^cheetah1/sheet/?$', views.cheetah1_sheet, name='module3_cheetah1_sheet'),
 
     url(r'^cheetah2/sheet/?$', views.cheetah2_sheet, name='module3_cheetah2_sheet'),
-    url(r'^cheetah2/sheet2/?$', views.cheetah2_sheet, name='module3_cheetah2_sheet2'),
+    url(r'^cheetah2/sheet2/?$', views.cheetah2_sheet2, name='module3_cheetah2_sheet2'),
 
     url(r'^cheetah3/sheet/?$', views.cheetah3_sheet, name='module3_cheetah3_sheet'),
-    url(r'^cheetah3/sheet2/?$', views.cheetah3_sheet, name='module3_cheetah3_sheet2'),
+    url(r'^cheetah3/sheet2/?$', views.cheetah3_sheet2, name='module3_cheetah3_sheet2'),
 
-    url(r'^sum_up/?$', views.at_results, name='module3_sum_up'),
-    url(r'^relative/intro/?$', views.generic_page_controller, name='module3_relative'),
-    url(r'^relative/understand/?$', views.generic_page_controller, name='module3_relative2'),
-    url(r'^relative/useful/?$', views.generic_page_controller, name='module3_relative3'),
+    url(r'^sum_up/?$', views.sum_up, name='module3_sum_up'),
+    url(r'^cheetah4/intro/?$', views.cheetah4_intro, name='module3_cheetah4_intro'),
+    url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module3_cheetah4_sheet'),
+    url(r'^cheetah4/sheet2/?$', views.cheetah4_sheet2, name='module3_cheetah4_sheet2'),
 
 ]

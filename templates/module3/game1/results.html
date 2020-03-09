@@ -4,6 +4,7 @@
 {% block title %}
     {% define 'pageTitle' "BIAS Results" %}
     {% define 'nextBtnLabel' "Remedies Defined" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/dd.html' %}
     {{ block.super }}
 {% endblock %}
 
@@ -21,7 +22,7 @@
     <p>Your tendency is:</p>
     <ul>
     {% for bias in biases %}
-        <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="{{ bias.definition }}">{{ bias.label }}</a></li>
+        <li>{% get_master_term bias.label %}</li>
     {% endfor %}
     </ul>
 {% endblock %}

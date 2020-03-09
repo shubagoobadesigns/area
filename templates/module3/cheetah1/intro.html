@@ -1,5 +1,9 @@
 {% extends 'modules/cheetah/intro.html' %}
-
+{% load module_tags static %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/a1.html' %}
+    {{ block.super }}
+{% endblock %}
 {% block cheetah_content %}
     <p>On the next page you’ll find a Cheetah Sheet.</p>
 

@@ -39,6 +39,41 @@ class ExampleStudent:
     def pronoun_object(self):
         return self.pronoun_object
 
+class MasterTerm:
+    def __init__(self):
+        self.master_terms = {
+            "Authority Bias": {
+                'definition': "The tendency to take on the opinion of someone who is seen as an authority figure",
+            },
+            "Decision Target": {
+                'definition': "The person, place or thing at the center of your decision problem"
+            },
+            "Liking Bias": {
+                'definition': "Gravitating toward things and people we like",
+            },
+            "Optimism Bias": {
+                'definition': "Believing everything will turn out well",
+            },
+            "Planning Bias": {
+                'definition': "Underestimating how long a task will take, even if you've done it before",
+            },
+            "Projection Bias": {
+                'definition': "Putting your own thoughts and desires onto others around you",
+            },
+            "Relative": {
+                'definition': "The R in AREA is for sources that are RELATED to your decision target but not from the Target itself",
+            },
+            "Social Proof": {
+                'definition': "Following the crowd, letting your opinion be influenced by reputation",
+            },
+        }
+
+    def get_definition(self, key):
+        if key in self.master_terms:
+            return self.master_terms[key]
+        else:
+            return { 'definition': "Not defined" }
+
 class Nylah(ExampleStudent):
     # Nylah's first attempt without Critical Concepts
     def without_cc(self):

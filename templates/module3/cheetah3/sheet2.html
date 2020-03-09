@@ -1,5 +1,9 @@
 {% extends 'modules/cheetah/sheet.html' %}
 {% load static module_tags %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/a1.html' %}
+    {{ block.super }}
+{% endblock %}
 {% block cheetah_content %}
     <style type="text/css">
         #why_options div {
@@ -131,7 +135,7 @@
         </div>
     </div>
 
-    <p>Answer the questions below about how well the Target's website helps you better understand its perspective? Check all that apply.</p>
+    <p>Answer the questions below: What did you learn from reading the Target’s website? Check all that apply.</p>
 
     <div style="float: right; padding-top: 50px;">
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>

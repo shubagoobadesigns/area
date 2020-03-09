@@ -9,50 +9,49 @@
         });
     </script>
 
+    {% include 'module3/progress_bar/a1.html' %}
     <div class="center">
-        <h2 class="center">
-            So what did you learn from Absolute research about your Target’s perspective?</h2>
+        <h2 class="center">Absolute: Sum up</h2>
     </div>
 
     <div>
-        <p>Here is an analysis of your work and thinking so far:</p>
+        <p>Sum up Absolute research from your {% get_master_term "Decision Target" %}'s perspective? Here is an analysis of your work and thinking so far:</p>
 
+        <div class="center">
+            {% with 'decisions/img/backpocket/'|add:at_results|add:'.png' as image_static %}
+                <img src="{% static image_static %}" width="350px" />
+            {% endwith %}
+        </div>
         {% if at_results == "green" %}
-        <p><strong>Nice job!</strong></p>
-        <p>You are doing well collecting data, it seems relevant to better understanding your Target and you
-            are making progress toward solving your decision! Move on to Relative but note that you want to be careful
-            about <a class="master_term" href="#" data-toggle="tooltip" data-placement="bottom"
-                     title="definition">Confirmation Bias</a>,
-            where we see what we expect to and might overlook disconfirming data.</p>
+            <p><strong>Nice job!</strong></p>
+            <p>You are doing well collecting data, it seems relevant to better understanding your Target and you
+                are making progress toward solving your decision! Move on to Relative but note that you want to be careful
+                about {% get_master_term "Confirmation Bias" %}, where we see what we expect to and might overlook disconfirming data.</p>
         {% endif %}
 
         {% if at_results == "blue" %}
-        <p>You’ve found some data, but you’re not sure its useful or complete for better understanding your Target.</p>
-        <p>Where else might you look for information? Don’t fall prey to <a class="master_term" href="#"
-                                                                            data-toggle="tooltip"
-                                                                            data-placement="bottom"
-                                                                            title="definition">Projection Bias</a> where
-            you might assume that since you didn’t find useful data that it doesn’t exist.</p>
-        <p>If you choose to progress to Relative now you may well need to loop back to Absolute to find more
-            details.</p>
+            <p>You’ve found some data, but you’re not sure its useful or complete for better understanding your Target.</p>
+            <p>Where else might you look for information? Don’t fall prey to {% get_master_term "Projection Bias" %} where
+                you might assume that since you didn’t find useful data that it doesn’t exist.</p>
+            <p>If you choose to progress to {% get_master_term "Relative" "top" %} now you may well need to loop back to Absolute to find more
+                details.</p>
         {% endif %}
 
         {% if at_results == "red" %}
-        <p>Despite good effort it seems that you didn’t find what you were looking for. Two tips:</p>
-        <ol>
-            <li>Come at the problem from a different vantage point? For example, if you are searching for which doctoral
-                program to apply to could you instead look at people in careers you aspire to and look at their graduate
-                degrees and alma maters?
-            </li>
-            <li>Ask yourself why the data you expected might not be available? For example, if you searched a website
-                for a nursing home and didn’t find pricing data, why might there not be pricing transparency?
-            </li>
-        </ol>
-        <p>If you choose to move on to Relative without finding useful Absolute data, you might need to loop back at
-            some point.</p>
-        <p>Be wary of <a class="master_term" href="#" data-toggle="tooltip" data-placement="bottom"
-                         title="definition">Scarcity Bias</a>, concerned that only a limited amount of information
-            exists.</p>
+            <p>Despite good effort it seems that you didn’t find what you were looking for. Two tips:</p>
+            <ol>
+                <li>Come at the problem from a different vantage point? For example, if you are searching for which doctoral
+                    program to apply to could you instead look at people in careers you aspire to and look at their graduate
+                    degrees and alma maters?
+                </li>
+                <li>Ask yourself why the data you expected might not be available? For example, if you searched a website
+                    for a nursing home and didn’t find pricing data, why might there not be pricing transparency?
+                </li>
+            </ol>
+            <p>If you choose to move on to {% get_master_term "Relative" "top" %} without finding useful Absolute data, you might need to loop back at
+                some point.</p>
+            <p>Be wary of {% get_master_term "Scarcity Bias" "top" %}, concerned that only a limited amount of information
+                exists.</p>
         {% endif %}
 
 

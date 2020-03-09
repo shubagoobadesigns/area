@@ -1,7 +1,7 @@
 {% extends 'modules/cheetah/sheet.html' %}
-{% load module_tags static %}
+{% load static module_tags %}
 {% block progress_bar %}
-    {% define 'progressBarTemplate' 'module3/progress_bar/a1.html' %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
     {{ block.super }}
 {% endblock %}
 {% block cheetah_content %}
@@ -120,20 +120,13 @@
             <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
             <h2>{% block modal_title %}Example{% endblock %}</h2>
             <div style="display: block; padding-left: 75px;">
-                <p>Robyn's Decision Problem</p>
-                <ul>
-                    <li>Do I have the right skills for the VP of Sales Midwest promotion?</li>
-                    <li>Do I want to live in the new location: Milwaukee?</li>
-                </ul>
-                <p>Robyn chose all but (2) because she found relevant data.<br /></p>
-                <p>The data revealed:</p>
-                <ul>
-                    <li><strong><u>Useful: Did Not Make Sense:</u></strong> The VP Midwest position has had high turnover (3 VPs in 10 years: Why?).</li>
-                    <li><strong><u>Useful: Did not make sense:</u></strong> The position historically required lots of travel (about one week per month: That’s a lot!)</li>
-                    <li><strong><u>Useful:</u></strong> Milwaukee provides good bang for the buck (reasonably priced city)</li>
-                </ul>
-                <p>All 3 pieces of numerical data combine to <strong><u>Tell a story:</u></strong> Milwaukee is a city with a reasonable cost of living but the job has high turnover and lots of travel.</p>
-                <p><strong><u>Most useful</u></strong> data: Number of travel days, raising the question: Are the number of travel days necessary to succeed?</p>
+                <p>Robyn's answers</p>
+                <ol>
+                    <li>Yes (Higher salary)</li>
+                    <li>Yes (Lower cost of living)</li>
+                    <li>Yes (More travel, less workplace diversity, more laid back culture)</li>
+                    <li>No (The information was focused on tourism versus business development)</li>
+                </ol>
 
                 <p class="center">
                     <button id="closeBtn">Click to Close</button>
@@ -142,19 +135,41 @@
         </div>
     </div>
 
+    <p>Based on researching your Target’s ecosystem check all that apply:</p>
+
     <div style="float: right; padding-top: 50px;">
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
     </div>
-    <div style="float: left; width: 75%; padding-top: 10px;">
-        {% include 'module3/cheetah2/form.html' %}
+    <div style="float: left; width: 75%; padding-top: 10px; padding-bottom: 40px;">
+        {% if results == "yes" %}
+            <p>Nice Job!</p>
+            <p>You understand your target's ecosystem.</p>
+            <p>Your challenge: Develop a few questions that you can answer in our next step: A news search.</p>
+        {% endif %}
+        {% if results == "no" %}
+            <p>If your Target’s value isn't clear, why might that be?</p>
+            <p>Your challenge: Formulate a few hypotheses as to why the value isn’t clear. Might you need more data or analysis?</p>
+        {% endif %}
+        {% if results == "mixed" %}
+            <p>You've identified some of the reasons your Target is unique, but some elude you.</p>
+            <p>Your challenge: What other data would be useful to gain clarity? Develop a few questions that can direct your work and thinking.</p>
+        {% endif %}
+
+        {% include 'module3/cheetah4/form2.html' %}
     </div>
 
-    {% get_next_btn module "Numbers Named!" nav.nextUrl "submit" %}
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Terrain Mapped!</button>
+    </div>
+
+
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('#next').click(validate);
-            $("input:checkbox[name='at2[]']").click(showExplanation);
+            $("input:checkbox[name='at4[]']").click(showExplanation);
         });
 
         function showExplanation() {
@@ -174,7 +189,7 @@
             var incorrect = 0;
             var error_msg = "";
 
-            $("input:checkbox[name='at2[]']").each(function() {
+            $("input:checkbox[name='at4[]']").each(function() {
                 if ($(this).prop('checked')) {
                     if ($(this).val() == 1) {
                         correct++;
@@ -188,4 +203,5 @@
             return true;
         }
     </script>
+
 {% endblock %}

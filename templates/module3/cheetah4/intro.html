@@ -1,7 +1,7 @@
 {% extends 'modules/cheetah/sheet.html' %}
 {% load module_tags static %}
 {% block progress_bar %}
-    {% define 'progressBarTemplate' 'module3/progress_bar/a1.html' %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
     {{ block.super }}
 {% endblock %}
 {% block cheetah_content %}
@@ -131,19 +131,13 @@
             <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
             <h2>{% block modal_title %}Example{% endblock %}</h2>
             <div style="display: block; padding-left: 75px;">
-                <p>Robyn's answers:</p>
-                <p>She searched her company’s website and found:</p>
+                <p>Robyn’s industry research:</p>
                 <ul>
-                    <li>The Midwest region page of her company lists products made locally and the office address. </li>
-                    <li>Midwest site more focused on tourism, listing local events, than sales related information. There is a disconnect. Why isn’t the Midwest page geared toward promoting sales?</li>
+                    <li>Comparing current job with new job responsibilities</li>
+                    <li>Comparing current travel to new travel demands</li>
+                    <li>Comparing costs in Milwaukee to Boston</li>
+                    <li>Comparing opportunities for single professionals</li>
                 </ul>
-
-                <p>Analysis of what Robyn found from her website search:</p>
-                <ul>
-                    <li>Why is the Midwest page filled with tourism information?</li>
-                    <li>Does this mean that a new VP might want to revamp the office and its messages on sales?</li>
-                </ul>
-
             </div>
             <div style="padding-top: 10px;"></div>
             <p class="center">
@@ -166,12 +160,12 @@
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
     </div>
     <div style="float: left; width: 75%; padding-top: 10px;">
-        <p>Now compare the numerical data with how the Target describes itself and its value on its website and materials. Is there a disconnect?</p>
-        <p>Get ready for more research. Pause the module and go search your Target’s website. How does it explain its value and does that shed light on your Decision Problem? If it conflicts with the numerical data you found: why?</p>
-        <p>Go to the Internet and search your Target’s website(s) for information relevant to your decision. Take as much time as you need to find useful data.</p>
+        <p>You’ve examined your Target itself. Now put your Target into its broader ecosystem. How does your Target stack up against its competition? And does that change how you see and understand your Target.</p>
+        <p>Pause the module here. Search for information about your Target’s industry or competitors.</p>
 
         <div style="text-align: center;">
-            <img src="{% static 'decisions/img/backpocket/girl-magnify.gif' %}" height="250px"/>
+            Placeholder image
+{#            <img src="{% static 'decisions/img/backpocket/girl-magnify.gif' %}" height="250px"/>#}
         </div>
     </div>
 

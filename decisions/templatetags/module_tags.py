@@ -2,6 +2,7 @@ from django import template
 from django.urls import reverse
 from django.templatetags import static
 from django.core.urlresolvers import NoReverseMatch
+from decisions.utils import MasterTerm
 
 register = template.Library()
 
@@ -14,6 +15,18 @@ def define(context, key, value):
 @register.simple_tag(takes_context=True)
 def get_static_url(context):
     return "http://13.57.240.107"
+
+@register.inclusion_tag('decisions/snippets/decision_term.html')
+def get_master_term(term, placement="bottom"):
+    mt = MasterTerm()
+    t = mt.get_definition(term)
+    # print(t)
+
+    return {
+        'term': term,
+        'definition': t['definition'],
+        'placement': placement
+    }
 
 @register.inclusion_tag('decisions/snippets/badge.html')
 def get_module_badge(badge_label):
