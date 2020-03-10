@@ -1,10 +1,8 @@
-{% extends 'modules/cheetah/sheet.html' %}
-{% load module_tags static %}
-{% block progress_bar %}
-    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
-    {{ block.super }}
-{% endblock %}
-{% block cheetah_content %}
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Relative: Internet Search
+{% endblock %}{% endblock %}
+{% block content %}
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -154,7 +152,8 @@
 
     <div class="modal" id="more_time">
         <div class="modal-content">
-            <p>You'll want your numbers for our next page</p>
+            <p>You'll want to learn from other perspectives about your Decision Target for our next page.</p>
+            <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
             <p class="center">
                 <button id="closeBtn">I Need More Time</button>
                 <button id="completeBtn">Ready to Go!</button>
@@ -162,12 +161,16 @@
         </div>
     </div>
 
+    {% include 'module3/progress_bar/r.html' %}
+    <div class="center">
+        <h2 class="center">Relative: Internet Search</h2>
+    </div>
     <div style="float: right; padding-top: 50px;">
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
     </div>
     <div style="float: left; width: 75%; padding-top: 10px;">
         <p>Now you’ve examined your Decision Target and its competition/ecosystem. Next up: A broad Internet search.</p>
-        <p>Pause the module here. Search for information about your Target’s industry or competitors.</p>
+        <p>Pause the module here. Search for news and information about your Decision Target to learn from other perspectives.</p>
 
         <div style="text-align: center;">
             <img src="{% static 'decisions/img/backpocket/panda-research.gif' %}" height="250px"/>
