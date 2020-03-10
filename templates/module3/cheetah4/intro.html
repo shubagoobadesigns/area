@@ -1,10 +1,8 @@
-{% extends 'modules/cheetah/sheet.html' %}
-{% load module_tags static %}
-{% block progress_bar %}
-    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
-    {{ block.super }}
-{% endblock %}
-{% block cheetah_content %}
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Relative: Map vs Terrain
+{% endblock %}{% endblock %}
+{% block content %}
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -148,13 +146,20 @@
 
     <div class="modal" id="more_time">
         <div class="modal-content">
-            <p>You'll want your numbers for our next page</p>
+            <p>You'll want to see your target in context for our next page</p>
+            <p>Clicking "I need more time" will take back to the previous page to give you more time to conduct your research.</p>
             <p class="center">
                 <button id="closeBtn">I Need More Time</button>
                 <button id="completeBtn">Ready to Go!</button>
             </p>
         </div>
     </div>
+
+    {% include 'module3/progress_bar/r.html' %}
+    <div class="center">
+        <h2 class="center">Relative: Map vs Terrain</h2>
+    </div>
+
 
     <div style="float: right; padding-top: 50px;">
         <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
