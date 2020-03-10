@@ -41,4 +41,11 @@ urlpatterns = [
     url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module3_cheetah4_sheet'),
     url(r'^cheetah4/sheet2/?$', views.cheetah4_sheet2, name='module3_cheetah4_sheet2'),
 
+    url(r'^cheetah5/intro/?$', views.cheetah5_intro, name='module3_cheetah5_intro'),
+    url(r'^cheetah5/sheet/?$', views.cheetah5_sheet, name='module3_cheetah5_sheet'),
+
+    url(r'^cheetah6/sheet/?$', views.cheetah5_sheet, name='module3_cheetah6_sheet'),
+    url(r'^cheetah6/sheet2/?$', views.cheetah5_sheet2, name='module3_cheetah6_sheet2'),
+    url(r'^cheetah6/sheet3/?$', views.cheetah5_sheet3, name='module3_cheetah6_sheet3'),
+
 ]

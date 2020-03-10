@@ -23,19 +23,35 @@ cheetah_sheet2.title = "Navigating Numbers"
 
 cheetah_sheet2_2 = CheetahSheet()
 cheetah_sheet2_2.num = 2
-cheetah_sheet2_2.title = "Absolute Data Quality"
+cheetah_sheet2_2.title = "Absolute: Data Quality"
 
 cheetah_sheet3 = CheetahSheet()
 cheetah_sheet3.num = 3
-cheetah_sheet3.title = "The Story of Your Target's Website"
+cheetah_sheet3.title = "Absolute: The Story of Your Target's Website"
 
 cheetah_sheet3_2 = CheetahSheet()
 cheetah_sheet3_2.num = 3
-cheetah_sheet3_2.title = "Absolute Website Data Quality"
+cheetah_sheet3_2.title = "Absolute: Website Data Quality"
 
 cheetah_sheet4 = CheetahSheet()
 cheetah_sheet4.num = 4
 cheetah_sheet4.title = "Relative: Map vs Terrain"
+
+cheetah_sheet5 = CheetahSheet()
+cheetah_sheet5.num = 5
+cheetah_sheet5.title = "Relative: Internet Search"
+
+cheetah_sheet6 = CheetahSheet()
+cheetah_sheet6.num = 6
+cheetah_sheet6.title = "Exploration: Great Questions Roadmap"
+
+cheetah_sheet6_2 = CheetahSheet()
+cheetah_sheet6_2.num = 6
+cheetah_sheet6_2.title = "Exploration: GP + GQ = IQ"
+
+cheetah_sheet6_3 = CheetahSheet()
+cheetah_sheet6_3.num = 6
+cheetah_sheet6_3.title = "Exploration: Interview Quality"
 
 nylah = Nylah()
 
@@ -73,6 +89,11 @@ def navigation():
         reverse('module3_cheetah4_intro'),
         reverse('module3_cheetah4_sheet'),
         reverse('module3_cheetah4_sheet2'),
+        reverse('module3_cheetah5_intro'),
+        reverse('module3_cheetah5_sheet'),
+        reverse('module3_cheetah6_sheet'),
+        reverse('module3_cheetah6_sheet2'),
+        reverse('module3_cheetah6_sheet3'),
 
     ]
 
@@ -232,7 +253,6 @@ def cheetah4_sheet(request):
     }
     return render_page(request, module, parsed, context)
 
-
 @active_user_required
 def cheetah4_sheet2(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
@@ -267,6 +287,76 @@ def cheetah4_sheet2(request):
     }
     return render_page(request, module, parsed, context)
 
+
+@active_user_required
+def cheetah5_intro(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet5,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah5_sheet(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.at5 = json.dumps(request.POST.getlist('at5[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'at5': ViewHelper.load_json(module.at5),
+        'at5_least': module.at5_least,
+        'at5_most': module.at5_most,
+        'at_numbers': Module.get_at5_numbers(),
+        'cheetah_sheet': cheetah_sheet5,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah5_sheet(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet6,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah5_sheet2(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet6_2,
+    }
+    return render_page(request, module, parsed, context)
+
+@active_user_required
+def cheetah5_sheet3(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet6_3,
+    }
+    return render_page(request, module, parsed, context)
 
 @active_user_required
 def ddd(request):

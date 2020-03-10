@@ -1,0 +1,42 @@
+<p>Based on researching your Target’s ecosystem check all that apply:</p>
+{% if mode == 'print' %}
+    <ul>
+        {% for item in at_numbers %}
+            {% if item.key in at5 %}
+                <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <div id="why_options">
+        {% for item in at_numbers %}
+            <div>
+                <label>
+                    {% if item.key in at5 %}
+                    <input type="checkbox" name="at5[]" value="{{ item.key }}" checked="checked"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation" style="display: block; visibility: visible;">{{ item.answer }}</span>
+                    {% else %}
+                    <input type="checkbox" name="at5[]" value="{{ item.key }}"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation">{{ item.answer }}</span>
+                    {% endif %}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<h3>What about the Literature Review was <strong><u>MOST useful</u></strong> to learning from the perspective of published sources</h3>
+{% if mode == 'print' %}
+    <p>{{ at5_most }}</p>
+{% else %}
+    <textarea name="at5_most" class="auto-text-area">{{ at5_most }}</textarea>
+{% endif %}
+
+<h3>What about the Literature Review was <strong><u>LEAST useful</u></strong> to learning from the perspective of published sources?</h3>
+{% if mode == 'print' %}
+    <p>{{ at5_least }}</p>
+{% else %}
+    <textarea name="at5_least" class="auto-text-area">{{ at5_least }}</textarea>
+{% endif %}

@@ -48,6 +48,15 @@ class MasterTerm:
             "Decision Target": {
                 'definition': "The person, place or thing at the center of your decision problem"
             },
+            "Exploration": {
+                'definition': "Exploration moves your work beyond document-based sources to conduct interviews"
+            },
+            "Good Prospects": {
+                'definition': "Good prospects are the right people to talk to about your decision problem"
+            },
+            "Great Questions": {
+                'definition': "Practical, actionable questions to get you answers"
+            },
             "Liking Bias": {
                 'definition': "Gravitating toward things and people we like",
             },

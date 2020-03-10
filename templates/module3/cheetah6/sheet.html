@@ -1,0 +1,201 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% load static module_tags %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/e.html' %}
+    {{ block.super }}
+{% endblock %}
+{% block cheetah_content %}
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+    .explanation {
+        display: none;
+        font-size: 0.8em;
+        padding-top: 5px;
+        visibility: hidden;
+    }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('.modal').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Causes the button clicks to fail */
+            /*
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });*/
+        });
+    </script>
+
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                <p>Robyn’s Great Questions:</p>
+                <p>What qualities have been successful in this job in the past?</p>
+                <ul>
+                    <li>Is the heavy travel necessary?</li>
+                    <li>Why did the former VP leave?</li>
+                    <li>How do the sales goals in this region compare with actual results for the past three years? Why?</li>
+                </ul>
+
+                <p class="center">
+                    <button id="closeBtn">Click to Close</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div style="float: right; padding-top: 50px;">
+        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+    </div>
+    <div style="float: left; width: 75%; padding-top: 10px; padding-bottom: 40px;">
+        <p>You are now ready to move beyond documents to mine the perspective of real people!</p>
+        <p>Welcome to {% get_master_term "Exploration" %}: Let’s find {% get_master_term "Good Prospects" %} and ask them {% get_master_term "Great Questions" %}:</p>
+
+        <div style="text-align: center; padding-top: 10px;">
+            <h4 style="margin-bottom: -20px;">GP + GQ = IQ</h4>
+            <p style="font-size: 14px;"><em>Good Prospects + Great Questions = Interview Quality</em></p>
+        </div>
+
+        <p>Before identifying the right people for you to interview, let's identify the right questions to get you practical and actionable information.</p>
+
+        {% include 'module3/cheetah6/form.html' %}
+    </div>
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Articles Analyzed!</button>
+    </div>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#next').click(validate);
+            $("input:checkbox[name='at4[]']").click(showExplanation);
+        });
+
+        function showExplanation() {
+            var checked = $(this).prop('checked');
+            var explanation = $(this).next().next();
+            var current = explanation.css('display');
+            if (current == 'none') {
+                explanation.css('display', 'block').css('visibility', 'visible');
+            } else {
+                explanation.css('display', 'none').css('visibility', 'hidden');
+            }
+        }
+
+        function validate() {
+            var correctTotal = 3;
+            var correct = 0;
+            var incorrect = 0;
+            var error_msg = "";
+
+            $("input:checkbox[name='at4[]']").each(function() {
+                if ($(this).prop('checked')) {
+                    if ($(this).val() == 1) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                        console.log($(this));
+                    }
+                }
+            });
+
+            return true;
+        }
+    </script>
+
+{% endblock %}

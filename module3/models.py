@@ -18,6 +18,9 @@ db_fields = [
     'at4',
     'at4_least',
     'at4_most',
+    'at5',
+    'at5_least',
+    'at5_most',
     'biases',
     'br',
     'cc',
@@ -46,6 +49,9 @@ class Module3(BaseModule):
     at4 = models.TextField(default='')
     at4_least = models.TextField(default='')
     at4_most = models.TextField(default='')
+    at5 = models.TextField(default='')
+    at5_least = models.TextField(default='')
+    at5_most = models.TextField(default='')
     biases = models.TextField(default='')
     # br = bias remedies
     br = models.TextField(default='')
@@ -176,6 +182,43 @@ class Module3(BaseModule):
                 'key': "4",
                 'label': "The public image of my Target is consistent with the way the Target described itself in Absolute",
                 'answer': "",
+            },
+        ]
+
+        return at_numbers
+
+    @staticmethod
+    def get_at5_numbers():
+        at_numbers = [
+            {
+                'key': "1",
+                'label': "I understand my Target differently now-more positively for making my decision",
+                'answer': "I have a more clear path forward to making my decision",
+                'color': "green",
+            },
+            {
+                'key': "2",
+                'label': "I understand my Target differently now-more negatively impacting my decision",
+                'answer': "This made me question my decision",
+                'color': "green",
+            },
+            {
+                'key': "3",
+                'label': "I have a lot more questions now",
+                'answer': "I need more data/sources to help me make my decision",
+                'color': "red",
+            },
+            {
+                'key': "4",
+                'label': "The news search gave me a new direction to pursue",
+                'answer': "",
+                'color': "red",
+            },
+            {
+                'key': "5",
+                'label': "The articles provided me with possible sources to contact to ask questions about my decision",
+                'answer': "I am finding people who are knowledgeable about my problem who may be able to shed light on my decision",
+                'color': "green",
             },
         ]
 
