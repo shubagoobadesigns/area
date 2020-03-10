@@ -1,6 +1,5 @@
 {% extends 'decisions/base.html' %}
-{% load bootstrap %}
-{% load module_tags %}
+{% load bootstrap module_tags static %}
 {% block title %}{% block h1 %}What is AREA?
 {% endblock %}{% endblock %}
 {% block content %}
@@ -15,6 +14,10 @@
 
     <p>AREA is an acronym for a decision-making system that uniquely controls for and counteracts bias, focuses on
         the incentives of others and expands knowledge while improving judgment.</p>
+
+    <div style="text-align: center">
+        <img src="{% static 'decisions/img/backpocket/progressbar_screenshot.jpg'  %}" width="300"/>
+    </div>
 
     <p>On the top of each of the pages, you’ll see a progress bar similar to the image above.
         This will help us keep track of your progress and help you on your decision journey.
