@@ -31,13 +31,14 @@
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
 
-                $('#showProfileBtn').click(function () {
+                $('#showExampleBtn').click(function () {
                     /* Show modal */
-                    $('.modal').css('display', 'block');
+                    // console.log("example button clicked");
+                    $('#show_example').css('display', 'block');
                     return false;
                 });
 
-                $('#closeBtn').click(function () {
+                $('.closeBtn').click(function () {
                     /* Hide modal */
                     $('.modal').css('display', 'none');
                     return false;
@@ -59,7 +60,7 @@
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
 
-        <div class="modal">
+        <div class="modal" id="show_example">
             <div class="modal-content">
                 <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
                 <h2>{% block modal_title %}Example{% endblock %}</h2>
@@ -68,10 +69,12 @@
                 </div>
                 <div style="padding-top: 10px;"></div>
                 <p class="center">
-                    <button id="closeBtn">Click to Close</button>
+                    <button class="closeBtn">Click to Close</button>
                 </p>
             </div>
         </div>
+
+    {% block extra_modal %}{% endblock %}
 
     {% include progressBarTemplate %}
     <h2 class="center">{{ pageTitle }}</h2>
@@ -80,7 +83,7 @@
 
     <div style="min-height: 250px;">
         <div style="float: right; padding-top: 50px;">
-            <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+            <img id="showExampleBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
         </div>
         <div style="float: left; padding-top: 10px; padding-right: 0px; width: 77%;">
             {% block content_body %}{% endblock %}
