@@ -47,19 +47,6 @@
     </script>
 {% endblock %}
 
-{% block extra_modal %}
-    <div class="modal" id="more_time">
-        <div class="modal-content">
-            <p>You'll want to see your target in context for our next page.</p>
-            <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
-            <p class="center">
-                <button class="closeBtn">I Need More Time</button>
-                <button id="completeBtn">Ready to Go!</button>
-            </p>
-        </div>
-    </div>
-{% endblock %}
-
 {% block modal_content %}
     <p>Robyn’s Research:</p>
     <ul>
@@ -76,9 +63,17 @@
     </ul>
 {% endblock %}
 
-{% block pause_content %}
-    <p>You'll want to learn from other perspectives about your Decision Target for our next page.</p>
-    <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
+{% block extra_modal %}
+    <div class="modal" id="more_time">
+        <div class="modal-content">
+            <p>You'll want to see your target in context for our next page.</p>
+            <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
+            <p class="center">
+                <button class="closeBtn">I Need More Time</button>
+                <button id="completeBtn">Ready to Go!</button>
+            </p>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content_body %}
