@@ -1,178 +1,90 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{% block h1 %}Relative: Map vs Terrain
-{% endblock %}{% endblock %}
-{% block content %}
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "Relative: Map vs Terrain" %}
+    {% define 'nextBtnLabel' "Start the Pause Now" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block extra_js %}
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+         $(document).ready(function () {
+             $('#completeBtn').click(function () {
+                 $('form').submit();
+                 return true;
+             });
+         });
 
         function countdown() {
-            $('#timer').show()
-            var timeleft = 3;
+            var ctr = 3;
+            var initialCtr = ctr;
+
+            // Always reset the counter to the beginning
+            $('#time').text(initialCtr);
+            $('#timer').show();
+
             var downloadTimer = setInterval(function () {
-                timeleft--;
-                $("#time").text(timeleft);
-                if (timeleft <= 0) {
+                ctr--;
+                // console.log("text: " + $("#time").text() + ", " + ctr);
+                $('#time').text(ctr);
+                if (ctr <= 0) {
                     clearInterval(downloadTimer);
                     // window.location.href = '{{ nav.nextUrl }}';
-                    $('#more_time').css('display', 'block');
+
+                    /* If the more time modal exists, show that after the timer */
+                    if ($('#more_time')[0]) {
+                        $('#more_time').css('display', 'block');
+                    }
+
                     $('#timer').hide();
                     return false;
                 }
             }, 1000);
             return false;
         }
-
     </script>
+{% endblock %}
 
-    <style type="text/css">
-        #why_options div {
-            margin-bottom: 10px;
-        }
-
-        label {
-            font-size: large;
-            border: 1px solid #dddddd;
-            width: 100%;
-            padding: 5px;
-        }
-
-        :checked + span {
-            font-weight: bold;
-        }
-    </style>
-
-    <style type="text/css">
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
-
-        .modal-content {
-            background-color: #eee;
-            margin: auto;
-            padding: 20px;
-            /* border: 1px solid #888888; */
-            width: 70%;
-        }
-
-        .table .cheetahQuestions {
-            width: 60%;
-            margin-top: 10px;
-        }
-
-        .question {
-            color: #1e2846;
-            font-size: 18px;
-            font-weight: 800 !important;
-        }
-    </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var minTextLength = 2;
-
-            function validate() {
-                var valid = true;
-
-                /* Scan each text field and ensure that it has at least min chars length */
-                return valid;
-            }
-
-            $('#showProfileBtn').click(function () {
-                /* Show modal */
-                $('#show_example').css('display', 'block');
-                return false;
-            });
-
-            $('#closeBtn').click(function () {
-                /* Hide modal */
-                $('.modal').css('display', 'none');
-                return false;
-            });
-
-            /* Validate the form and submit */
-            $('#completeBtn').click(function () {
-                var results = validate();
-                if (results) {
-                    $('form').submit();
-                }
-                return results;
-            });
-
-            /* Force the redirect back to the previous page */
-            $('#back').click(function () {
-                window.location.href = $(this).attr('href');
-            });
-
-            /* Clicking anywhere outside of the modal closes the modal */
-            $(window).click(function (e) {
-                $('.modal').css('display', 'none');
-                return false;
-            });
-        })
-    </script>
-
-    <div class="modal" id="show_example">
-        <div class="modal-content">
-            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
-            <h2>{% block modal_title %}Example{% endblock %}</h2>
-            <div style="display: block; padding-left: 75px;">
-                <p>Robyn’s industry research:</p>
-                <ul>
-                    <li>Comparing current job with new job responsibilities</li>
-                    <li>Comparing current travel to new travel demands</li>
-                    <li>Comparing costs in Milwaukee to Boston</li>
-                    <li>Comparing opportunities for single professionals</li>
-                </ul>
-            </div>
-            <div style="padding-top: 10px;"></div>
-            <p class="center">
-                <button id="closeBtn">Click to Close</button>
-            </p>
-        </div>
-    </div>
-
+{% block extra_modal %}
     <div class="modal" id="more_time">
         <div class="modal-content">
             <p>You'll want to see your target in context for our next page.</p>
             <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
             <p class="center">
-                <button id="closeBtn">I Need More Time</button>
+                <button class="closeBtn">I Need More Time</button>
                 <button id="completeBtn">Ready to Go!</button>
             </p>
         </div>
     </div>
+{% endblock %}
 
-    {% include 'module3/progress_bar/r.html' %}
-    <div class="center">
-        <h2 class="center">Relative: Map vs Terrain</h2>
+{% block modal_content %}
+    <p>Robyn’s industry research:</p>
+    <ul>
+        <li>Comparing current job with new job responsibilities</li>
+        <li>Comparing current travel to new travel demands</li>
+        <li>Comparing costs in Milwaukee to Boston</li>
+        <li>Comparing opportunities for single professionals</li>
+    </ul>
+{% endblock %}
+
+{% block pause_content %}
+    <p>You'll want to see your target in context for our next page.</p>
+    <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
+{% endblock %}
+
+{% block content_body %}
+    <p>You’ve examined your Target itself. Now put your Target into its broader ecosystem. How does your Target stack up against its competition? And does that change how you see and understand your Target.</p>
+    <p>Pause the module here. Search for information about your Target’s industry or competitors.</p>
+
+    <div style="text-align: center;">
+        <img src="{% static 'decisions/img/backpocket/mountain_terrain.gif' %}" height="250px"/>
     </div>
+{% endblock %}
 
-
-    <div style="float: right; padding-top: 50px;">
-        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
-    </div>
-    <div style="float: left; width: 75%; padding-top: 10px;">
-        <p>You’ve examined your Target itself. Now put your Target into its broader ecosystem. How does your Target stack up against its competition? And does that change how you see and understand your Target.</p>
-        <p>Pause the module here. Search for information about your Target’s industry or competitors.</p>
-
-        <div style="text-align: center;">
-            <img src="{% static 'decisions/img/backpocket/mountain_terrain.gif' %}" height="250px"/>
-        </div>
-    </div>
-
+{% block next_btn %}
     <div class="center start">
         <button id="next" type="button"><a href="#" onclick="return countdown()">Start the Pause Now!</a></button>
     </div>
@@ -181,5 +93,4 @@
          id="timer">
         <div style="font-size: 256px; color: #f6653c" id="time">3</div>
     </div>
-
 {% endblock %}
