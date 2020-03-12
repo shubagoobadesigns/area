@@ -42,6 +42,9 @@ class ExampleStudent:
 class MasterTerm:
     def __init__(self):
         self.master_terms = {
+            "Absolute Targets": {
+                'definition': "Absolute Targets are the entities at the center of your decision. If choosing a college to attend, the Absolute Targets would the colleges you are considering.",
+            },
             "Authority Bias": {
                 'definition': "The tendency to take on the opinion of someone who is seen as an authority figure",
             },
