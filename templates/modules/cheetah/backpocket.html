@@ -1,0 +1,100 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{{ pageTitle }}{% endblock %}
+{% block content %}
+    {% block modal_header %}
+        <style type="text/css">
+            /* The Modal (background) */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                padding-top: 100px; /* Location of the box */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgb(0, 0, 0); /* Fallback color */
+                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            }
+
+            .modal-content {
+                background-color: #eee;
+                margin: auto;
+                padding: 20px;
+                /* border: 1px solid #888888; */
+                width: 70%;
+            }
+        </style>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+
+                $('#showExampleBtn').click(function () {
+                    /* Show modal */
+                    // console.log("example button clicked");
+                    $('#show_example').css('display', 'block');
+                    return false;
+                });
+
+                $('.closeBtn').click(function () {
+                    /* Hide modal */
+                    $('.modal').css('display', 'none');
+                    return false;
+                });
+
+                /* Force the redirect back to the previous page */
+                $('#back').click(function () {
+                    window.location.href = $(this).attr('href');
+                });
+
+                /* Clicking anywhere outside of the modal closes the modal */
+                $(window).click(function (e) {
+                    $('.modal').css('display', 'none');
+                    return false;
+                });
+            })
+        </script>
+    {% endblock %}
+    {% block extra_css %}{% endblock %}
+    {% block extra_js %}{% endblock %}
+
+        <div class="modal" id="show_example">
+            <div class="modal-content">
+                <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+                <h2>{% block modal_title %}Example{% endblock %}</h2>
+                <div style="display: block; padding-left: 75px;">
+                    {% block modal_content %}{% endblock %}
+                </div>
+                <div style="padding-top: 10px;"></div>
+                <p class="center">
+                    <button class="closeBtn">Click to Close</button>
+                </p>
+            </div>
+        </div>
+
+    {% block extra_modal %}{% endblock %}
+
+    {% include progressBarTemplate %}
+    <h2 class="center">{{ pageTitle }}</h2>
+
+    {% block content_header %}{% endblock %}
+
+    <div style="min-height: 250px;">
+        <div style="float: right; padding-top: 50px;">
+            <img id="showExampleBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
+        </div>
+        <div style="float: left; padding-top: 10px; padding-right: 0px; width: 77%;">
+            {% block content_body %}{% endblock %}
+        </div>
+    </div>
+
+    {% block next_btn %}
+        <div class="center">
+            <button id="completeBtn" value="{{ nextBtnLabel }}" onclick="submit();">{{ nextBtnLabel }}</button>
+        </div>
+    {% endblock %}
+    {% block previous_btn %}{% get_back_link module nav.previousUrl %}{% endblock %}
+
+{% endblock %}

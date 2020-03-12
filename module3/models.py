@@ -28,6 +28,8 @@ db_fields = [
     'dd_params',
     'feeling_end',
     'feeling_start',
+    'good_prospects',
+    'great_questions',
     'pro_con_least',
     'pro_con_most',
     'problem_to_solve',
@@ -62,6 +64,8 @@ class Module3(BaseModule):
     dd_params = models.TextField(default='')
     feeling_end = models.TextField(default='')
     feeling_start = models.TextField(default='')
+    good_prospects = models.TextField(default='')
+    great_questions = models.TextField(default='')
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
     problem_to_solve = models.TextField(default='')
@@ -391,6 +395,32 @@ class Module3(BaseModule):
         }
 
         return game_questions
+
+    @staticmethod
+    def get_great_questions_list():
+        great_questions_list = [
+            {
+                'key': "1",
+                'label': "Behavior Questions",
+                'answer': "What someone does or has done.",
+            },
+            {
+                'key': "2",
+                'label': "Opinion Questions",
+                'answer': "What someone thinks about a topic, action or event.",
+            },
+            {
+                'key': "3",
+                'label': "Feeling Questions",
+                'answer': "How someone respond emotionally?",
+            },
+            {
+                'key': "4",
+                'label': "Knowledge Questions",
+                'answer': "To find out factual information the respondent has.",
+            },
+        ]
+        return great_questions_list
 
     @staticmethod
     def get_relative_map():

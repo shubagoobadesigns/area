@@ -320,20 +320,23 @@ def cheetah5_sheet(request):
     return render_page(request, module, parsed, context)
 
 @active_user_required
-def cheetah5_sheet(request):
+def cheetah6_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
     if request.method == 'POST':
+        module.great_questions = json.dumps(request.POST.getlist('great_questions[]'))
         return save_form(request, module, parsed)
 
     context = {
         'cheetah_sheet': cheetah_sheet6,
+        'great_questions': ViewHelper.load_json(module.great_questions),
+        'great_questions_list': Module.get_great_questions_list(),
     }
     return render_page(request, module, parsed, context)
 
 @active_user_required
-def cheetah5_sheet2(request):
+def cheetah6_sheet2(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
@@ -346,7 +349,7 @@ def cheetah5_sheet2(request):
     return render_page(request, module, parsed, context)
 
 @active_user_required
-def cheetah5_sheet3(request):
+def cheetah6_sheet3(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 

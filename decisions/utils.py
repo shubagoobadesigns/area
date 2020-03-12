@@ -45,6 +45,9 @@ class MasterTerm:
             "Authority Bias": {
                 'definition': "The tendency to take on the opinion of someone who is seen as an authority figure",
             },
+            "Confirmation Bias": {
+                'definition': "When we overvalue information that confirms our existing belief and neglect contradictory information",
+            },
             "Decision Target": {
                 'definition': "The person, place or thing at the center of your decision problem"
             },

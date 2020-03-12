@@ -1,31 +1,5 @@
-<p>Based on researching your Target’s ecosystem check all that apply:</p>
-{% if mode == 'print' %}
-    <ul>
-        {% for item in at_numbers %}
-            {% if item.key in at5 %}
-                <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-{% else %}
-    <div id="why_options">
-        {% for item in at_numbers %}
-            <div>
-                <label>
-                    {% if item.key in at5 %}
-                    <input type="checkbox" name="at5[]" value="{{ item.key }}" checked="checked"/>
-                    <span>{{ item.label }}</span>
-                    <span class="explanation" style="display: block; visibility: visible;">{{ item.answer }}</span>
-                    {% else %}
-                    <input type="checkbox" name="at5[]" value="{{ item.key }}"/>
-                    <span>{{ item.label }}</span>
-                    <span class="explanation">{{ item.answer }}</span>
-                    {% endif %}
-                </label>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+{% load module_tags %}
+<p>Write one answer to each question:</p>
 
 <h3>What kinds of answers do I need? These should be targeted on your Critical Concepts.</h3>
 {% if mode == 'print' %}
@@ -49,10 +23,33 @@
     <textarea name="at5_least" class="auto-text-area">{{ at5_least }}</textarea>
 {% endif %}
 
+<p>To craft {% get_master_term "Great Questions" %} consider that there are four types of questions.</p>
+<p>To get the answers you've identified that you need, check all that apply below that will best help you get those answers?</p>
 
-{#To craft Great Questions consider that there are four types of questions. To get the answers you’ve identified that you need, check all that apply below that will best help you get those answers?#}
-{##}
-{#Behavior Questions: What someone does or has done.#}
-{#Opinion Questions: What someone thinks about a topic, action or event.#}
-{#Feeling Questions: How someone respond emotionally?#}
-{#Knowledge Question: To find out factual information the respondent has.#}
+{% if mode == 'print' %}
+    <ul>
+        {% for item in great_questions_list %}
+            {% if item.key in great_questions %}
+                <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <div id="why_options">
+        {% for item in great_questions_list %}
+            <div>
+                <label>
+                    {% if item.key in great_questions %}
+                    <input type="checkbox" name="great_questions[]" value="{{ item.key }}" checked="checked"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation" style="display: block; visibility: visible;">{{ item.answer }}</span>
+                    {% else %}
+                    <input type="checkbox" name="great_questions[]" value="{{ item.key }}"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation">{{ item.answer }}</span>
+                    {% endif %}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
