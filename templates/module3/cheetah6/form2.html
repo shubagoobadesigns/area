@@ -1,0 +1,30 @@
+{% load module_tags %}
+
+<h3>Finding {% get_master_term "Good Prospects" %}: Who could help you answer your questions? Check all that apply:</h3>
+{% if mode == 'print' %}
+    <ul>
+        {% for item in good_prospects_list %}
+            {% if item.key in great_questions %}
+                <li><span style="border-bottom: 1px solid black;">{{ item.label }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% else %}
+    <div id="why_options">
+        {% for item in good_prospects_list %}
+            <div>
+                <label>
+                    {% if item.key in good_prospects_list %}
+                    <input type="checkbox" name="good_prospects[]" value="{{ item.key }}" checked="checked"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation" style="display: block; visibility: visible;">{{ item.answer }}</span>
+                    {% else %}
+                    <input type="checkbox" name="good_prospects[]" value="{{ item.key }}"/>
+                    <span>{{ item.label }}</span>
+                    <span class="explanation">{{ item.answer }}</span>
+                    {% endif %}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

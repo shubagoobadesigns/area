@@ -54,12 +54,8 @@
             $('#next').click(validate);
             $("input:checkbox[name='{{ checkboxName }}[]']").click(showExplanation);
 
-            var minTextLength = 2;
-
             function validate() {
                 var valid = true;
-
-                /* Scan each text field and ensure that it has at least min chars length */
                 return valid;
             }
 
@@ -91,6 +87,34 @@
             });
         });
 
+        function countdown() {
+            var ctr = 3;
+            var initialCtr = ctr;
+
+            // Always reset the counter to the beginning
+            $('#time').text(initialCtr);
+            $('#timer').show();
+
+            var downloadTimer = setInterval(function () {
+                ctr--;
+                // console.log("text: " + $("#time").text() + ", " + ctr);
+                $('#time').text(ctr);
+                if (ctr <= 0) {
+                    clearInterval(downloadTimer);
+                    // window.location.href = '{{ nav.nextUrl }}';
+
+                    /* If the more time modal exists, show that after the timer */
+                    if ($('#more_time')[0]) {
+                        $('#more_time').css('display', 'block');
+                    }
+
+                    $('#timer').hide();
+                    return false;
+                }
+            }, 1000);
+            return false;
+        }
+
         function showExplanation() {
             var checked = $(this).prop('checked');
             var explanation = $(this).next().next();
@@ -101,26 +125,26 @@
                 explanation.css('display', 'none').css('visibility', 'hidden');
             }
         }
-
-        function validate() {
-            var correctTotal = 3;
-            var correct = 0;
-            var incorrect = 0;
-            var error_msg = "";
-
-            $("input:checkbox[name='{{ checkboxName }}[]']").each(function() {
-                if ($(this).prop('checked')) {
-                    if ($(this).val() == 1) {
-                        correct++;
-                    } else {
-                        incorrect++;
-                        console.log($(this));
-                    }
-                }
-            });
-
-            return true;
-        }
+{##}
+{#        function validate() {#}
+{#            var correctTotal = 3;#}
+{#            var correct = 0;#}
+{#            var incorrect = 0;#}
+{#            var error_msg = "";#}
+{##}
+{#            $("input:checkbox[name='{{ checkboxName }}[]']").each(function() {#}
+{#                if ($(this).prop('checked')) {#}
+{#                    if ($(this).val() == 1) {#}
+{#                        correct++;#}
+{#                    } else {#}
+{#                        incorrect++;#}
+{#                        console.log($(this));#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{##}
+{#            return true;#}
+{#        }#}
     </script>
 
     {% block extra_css %}{% endblock %}
@@ -155,7 +179,21 @@
 
     <div class="space"></div>
 
-    <div class="center">
-        <button id="completeBtn" value="Complete Cheetah Sheet">Questions Crafted!</button>
+    {% block next_btn_footer %}
+        {% if showTimer == "true" %}
+        <div class="center start">
+            <button id="next" type="button"><a href="#" onclick="return countdown()">Start the Pause Now!</a></button>
+        </div>
+        {% else %}
+        <div class="center">
+            <button id="completeBtn" value="Complete Cheetah Sheet">{{ nextBtnLabel }}</button>
+        </div>
+        {% endif %}
+    {% endblock %}
+
+    <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 20%"
+         id="timer">
+        <div style="font-size: 256px; color: #f6653c" id="time">3</div>
     </div>
+
 {% endblock %}

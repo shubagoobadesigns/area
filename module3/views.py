@@ -335,18 +335,23 @@ def cheetah6_sheet(request):
     }
     return render_page(request, module, parsed, context)
 
+
 @active_user_required
 def cheetah6_sheet2(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
     if request.method == 'POST':
+        module.good_prospects = json.dumps(request.POST.getlist('good_prospects[]'))
         return save_form(request, module, parsed)
 
     context = {
         'cheetah_sheet': cheetah_sheet6_2,
+        'good_prospects': ViewHelper.load_json(module.good_prospects),
+        'good_prospects_list': Module.get_good_prospects_list(),
     }
     return render_page(request, module, parsed, context)
+
 
 @active_user_required
 def cheetah6_sheet3(request):
@@ -360,6 +365,7 @@ def cheetah6_sheet3(request):
         'cheetah_sheet': cheetah_sheet6_3,
     }
     return render_page(request, module, parsed, context)
+
 
 @active_user_required
 def ddd(request):
@@ -494,6 +500,7 @@ def game(request):
     }
 
     return render_page(request, module, parsed, context)
+
 
 @active_user_required
 def game1_results(request):

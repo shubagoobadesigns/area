@@ -403,6 +403,32 @@ class Module3(BaseModule):
         return game_questions
 
     @staticmethod
+    def get_good_prospects_list():
+        good_prospects_list = [
+            {
+                'key': "1",
+                'label': "Insiders who know your Target and its ecosystem",
+                'answer': "",
+            },
+            {
+                'key': "2",
+                'label': "Experts who can frame and opine on your decision problem",
+                'answer': "",
+            },
+            {
+                'key': "3",
+                'label': "Customers/competitors who can give their perspective",
+                'answer': "",
+            },
+            {
+                'key': "4",
+                'label': "Friends/family who know you as a decision-maker, your interests and values and can hold you accountable for assumptions and judgements",
+                'answer': "",
+            },
+        ]
+        return good_prospects_list
+
+    @staticmethod
     def get_great_questions_list():
         great_questions_list = [
             {
