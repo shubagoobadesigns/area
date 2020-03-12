@@ -1,50 +1,19 @@
-{% extends 'modules/base/backpocket.html' %}
+{% extends 'modules/cheetah/backpocket.html' %}
 {% load module_tags static %}
 
 {% block title %}
     {% define 'pageTitle' "Relative: Internet Search" %}
-    {% define 'nextBtnLabel' "Start the Pause Now" %}
-    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
     {{ block.super }}
 {% endblock %}
-
-{% block extra_js %}
-    <script type="text/javascript">
-         $(document).ready(function () {
-             $('#completeBtn').click(function () {
-                 $('form').submit();
-                 return true;
-             });
-         });
-
-        function countdown() {
-            var ctr = 3;
-            var initialCtr = ctr;
-
-            // Always reset the counter to the beginning
-            $('#time').text(initialCtr);
-            $('#timer').show();
-
-            var downloadTimer = setInterval(function () {
-                ctr--;
-                // console.log("text: " + $("#time").text() + ", " + ctr);
-                $('#time').text(ctr);
-                if (ctr <= 0) {
-                    clearInterval(downloadTimer);
-                    // window.location.href = '{{ nav.nextUrl }}';
-
-                    /* If the more time modal exists, show that after the timer */
-                    if ($('#more_time')[0]) {
-                        $('#more_time').css('display', 'block');
-                    }
-
-                    $('#timer').hide();
-                    return false;
-                }
-            }, 1000);
-            return false;
-        }
-    </script>
+{% block content %}
+    {% define 'checkboxName' 'great_questions' %}
+    {% define 'nextBtnLabel' 'Start the Pause Now' %}
+    {% define 'showTimer' 'true' %}
+    {{ block.super }}
+{% endblock %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
+    {{ block.super }}
 {% endblock %}
 
 {% block modal_content %}
@@ -63,17 +32,8 @@
     </ul>
 {% endblock %}
 
-{% block extra_modal %}
-    <div class="modal" id="more_time">
-        <div class="modal-content">
-            <p>You'll want to see your target in context for our next page.</p>
-            <p>Clicking "I need more time" will take you back to the previous page to give you more time to conduct your research.</p>
-            <p class="center">
-                <button class="closeBtn">I Need More Time</button>
-                <button id="completeBtn">Ready to Go!</button>
-            </p>
-        </div>
-    </div>
+{% block extra_modal_instructions %}
+    <p>You'll want to learn from other perspectives about your Decision Target for our next page.</p>
 {% endblock %}
 
 {% block content_body %}
@@ -83,17 +43,5 @@
 
     <div style="text-align: center;">
         <img src="{% static 'decisions/img/backpocket/panda-research.gif' %}" height="250px"/>
-    </div>
-{% endblock %}
-
-
-{% block next_btn %}
-    <div class="center start">
-        <button id="next" type="button"><a href="#" onclick="return countdown()">Start the Pause Now!</a></button>
-    </div>
-
-    <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 20%"
-         id="timer">
-        <div style="font-size: 256px; color: #f6653c" id="time">3</div>
     </div>
 {% endblock %}
