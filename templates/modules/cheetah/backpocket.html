@@ -1,83 +1,146 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{{ pageTitle }}{% endblock %}
-{% block content %}
-    {% block modal_header %}
-        <style type="text/css">
-            /* The Modal (background) */
-            .modal {
-                display: none; /* Hidden by default */
-                position: fixed; /* Stay in place */
-                z-index: 1; /* Sit on top */
-                padding-top: 100px; /* Location of the box */
-                left: 0;
-                top: 0;
-                width: 100%; /* Full width */
-                height: 100%; /* Full height */
-                overflow: auto; /* Enable scroll if needed */
-                background-color: rgb(0, 0, 0); /* Fallback color */
-                background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+{% extends 'modules/cheetah/sheet.html' %}
+{% load static module_tags %}
+{% block cheetah_content %}
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        .explanation {
+            display: none;
+            font-size: 0.8em;
+            padding-top: 5px;
+            visibility: hidden;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('#next').click(validate);
+            $("input:checkbox[name='{{ checkboxName }}[]']").click(showExplanation);
+
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
             }
 
-            .modal-content {
-                background-color: #eee;
-                margin: auto;
-                padding: 20px;
-                /* border: 1px solid #888888; */
-                width: 70%;
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            $('#showExampleBtn').click(function () {
+                /* Show modal */
+                // console.log("example button clicked");
+                $('#show_example').css('display', 'block');
+                return false;
+            });
+
+            $('.closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Force the redirect back to the previous page */
+            $('#back').click(function () {
+                window.location.href = $(this).attr('href');
+            });
+        });
+
+        function showExplanation() {
+            var checked = $(this).prop('checked');
+            var explanation = $(this).next().next();
+            var current = explanation.css('display');
+            if (current == 'none') {
+                explanation.css('display', 'block').css('visibility', 'visible');
+            } else {
+                explanation.css('display', 'none').css('visibility', 'hidden');
             }
-        </style>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip();
+        }
 
-                $('#showExampleBtn').click(function () {
-                    /* Show modal */
-                    // console.log("example button clicked");
-                    $('#show_example').css('display', 'block');
-                    return false;
-                });
+        function validate() {
+            var correctTotal = 3;
+            var correct = 0;
+            var incorrect = 0;
+            var error_msg = "";
 
-                $('.closeBtn').click(function () {
-                    /* Hide modal */
-                    $('.modal').css('display', 'none');
-                    return false;
-                });
+            $("input:checkbox[name='{{ checkboxName }}[]']").each(function() {
+                if ($(this).prop('checked')) {
+                    if ($(this).val() == 1) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                        console.log($(this));
+                    }
+                }
+            });
 
-                /* Force the redirect back to the previous page */
-                $('#back').click(function () {
-                    window.location.href = $(this).attr('href');
-                });
+            return true;
+        }
+    </script>
 
-                /* Clicking anywhere outside of the modal closes the modal */
-                $(window).click(function (e) {
-                    $('.modal').css('display', 'none');
-                    return false;
-                });
-            })
-        </script>
-    {% endblock %}
     {% block extra_css %}{% endblock %}
     {% block extra_js %}{% endblock %}
 
-        <div class="modal" id="show_example">
-            <div class="modal-content">
-                <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
-                <h2>{% block modal_title %}Example{% endblock %}</h2>
-                <div style="display: block; padding-left: 75px;">
-                    {% block modal_content %}{% endblock %}
-                </div>
-                <div style="padding-top: 10px;"></div>
-                <p class="center">
-                    <button class="closeBtn">Click to Close</button>
-                </p>
+    <div class="modal" id="show_example">
+        <div class="modal-content">
+            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>{% block modal_title %}Example{% endblock %}</h2>
+            <div style="display: block; padding-left: 75px;">
+                {% block modal_content %}{% endblock %}
             </div>
+            <div style="padding-top: 10px;"></div>
+            <p class="center">
+                <button class="closeBtn">Click to Close</button>
+            </p>
         </div>
+    </div>
 
     {% block extra_modal %}{% endblock %}
-
-    {% include progressBarTemplate %}
-    <h2 class="center">{{ pageTitle }}</h2>
 
     {% block content_header %}{% endblock %}
 
@@ -90,11 +153,9 @@
         </div>
     </div>
 
-    {% block next_btn %}
-        <div class="center">
-            <button id="completeBtn" value="{{ nextBtnLabel }}" onclick="submit();">{{ nextBtnLabel }}</button>
-        </div>
-    {% endblock %}
-    {% block previous_btn %}{% get_back_link module nav.previousUrl %}{% endblock %}
+    <div class="space"></div>
 
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Questions Crafted!</button>
+    </div>
 {% endblock %}

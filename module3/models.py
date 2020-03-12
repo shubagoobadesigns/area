@@ -29,6 +29,9 @@ db_fields = [
     'feeling_end',
     'feeling_start',
     'good_prospects',
+    'gq_1',
+    'gq_2',
+    'gq_3',
     'great_questions',
     'pro_con_least',
     'pro_con_most',
@@ -65,6 +68,9 @@ class Module3(BaseModule):
     feeling_end = models.TextField(default='')
     feeling_start = models.TextField(default='')
     good_prospects = models.TextField(default='')
+    gq_1 = models.TextField(default='')
+    gq_2 = models.TextField(default='')
+    gq_3 = models.TextField(default='')
     great_questions = models.TextField(default='')
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
