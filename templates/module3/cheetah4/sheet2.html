@@ -1,207 +1,44 @@
-{% extends 'modules/cheetah/sheet.html' %}
-{% load static module_tags %}
+{% extends 'modules/cheetah/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "Relative: Internet Search" %}
+    {{ block.super }}
+{% endblock %}
+{% block content %}
+    {% define 'checkboxName' 'at4' %}
+    {% define 'nextBtnLabel' 'Terrain Mapped!' %}
+    {{ block.super }}
+{% endblock %}
 {% block progress_bar %}
     {% define 'progressBarTemplate' 'module3/progress_bar/r.html' %}
     {{ block.super }}
 {% endblock %}
-{% block cheetah_content %}
-    <style type="text/css">
-        #why_options div {
-            margin-bottom: 10px;
-        }
 
-        label {
-            font-size: large;
-            border: 1px solid #dddddd;
-            width: 100%;
-            padding: 5px;
-        }
+{% block modal_content %}
+    <p>Robyn's answers</p>
+    <ol>
+        <li>Yes (Higher salary)</li>
+        <li>Yes (Lower cost of living)</li>
+        <li>Yes (More travel, less workplace diversity, more laid back culture)</li>
+        <li>No (The information was focused on tourism versus business development)</li>
+    </ol>
+{% endblock %}
 
-        :checked + span {
-            font-weight: bold;
-        }
+{% block content_body %}
+    {% if results == "yes" %}
+        <p>Nice Job!</p>
+        <p>You understand your target's ecosystem.</p>
+        <p>Your challenge: Develop a few questions that you can answer in our next step: A news search.</p>
+    {% endif %}
+    {% if results == "no" %}
+        <p>If your Target’s value isn't clear, why might that be?</p>
+        <p>Your challenge: Formulate a few hypotheses as to why the value isn’t clear. Might you need more data or analysis?</p>
+    {% endif %}
+    {% if results == "mixed" %}
+        <p>You've identified some of the reasons your Target is unique, but some elude you.</p>
+        <p>Your challenge: What other data would be useful to gain clarity? Develop a few questions that can direct your work and thinking.</p>
+    {% endif %}
 
-    .explanation {
-        display: none;
-        font-size: 0.8em;
-        padding-top: 5px;
-        visibility: hidden;
-    }
-    </style>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-
-            var minTextLength = 2;
-
-            function validate() {
-                var valid = true;
-
-                /* Scan each text field and ensure that it has at least min chars length */
-                return valid;
-            }
-
-            /* Validate the form and submit */
-            $('#completeBtn').click(function () {
-                var results = validate();
-                if (results) {
-                    $('form').submit();
-                }
-                return results;
-            });
-
-            $('#showProfileBtn').click(function () {
-                /* Show modal */
-                $('.modal').css('display', 'block');
-                return false;
-            });
-
-            $('#closeBtn').click(function () {
-                /* Hide modal */
-                $('.modal').css('display', 'none');
-                return false;
-            });
-
-            /* Causes the button clicks to fail */
-            /*
-            $(window).click(function (e) {
-                $('.modal').css('display', 'none');
-                return false;
-            });*/
-        });
-    </script>
-
-    <style type="text/css">
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0); /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        }
-
-        .modal-content {
-            background-color: #eee;
-            margin: auto;
-            padding: 20px;
-            /* border: 1px solid #888888; */
-            width: 70%;
-        }
-
-        #pro_con {
-            background-color: #eee;
-        }
-
-        #why_options div {
-            margin-bottom: 10px;
-        }
-
-        label {
-            font-size: large;
-            border: 1px solid #dddddd;
-            width: 100%;
-            padding: 5px;
-        }
-
-        :checked + span {
-            font-weight: bold;
-        }
-    </style>
-
-    <div id="pro_con" class="modal">
-        <div class="modal-content">
-            <img src="{% static 'decisions/img/backpocket/robyn.png' %}" style="float: left; margin-right: 15px;" width="60"/>
-            <h2>{% block modal_title %}Example{% endblock %}</h2>
-            <div style="display: block; padding-left: 75px;">
-                <p>Robyn's answers</p>
-                <ol>
-                    <li>Yes (Higher salary)</li>
-                    <li>Yes (Lower cost of living)</li>
-                    <li>Yes (More travel, less workplace diversity, more laid back culture)</li>
-                    <li>No (The information was focused on tourism versus business development)</li>
-                </ol>
-
-                <p class="center">
-                    <button id="closeBtn">Click to Close</button>
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <p>Based on researching your Target’s ecosystem check all that apply:</p>
-
-    <div style="float: right; padding-top: 50px;">
-        <img id="showProfileBtn" src="{% static 'decisions/img/backpocket/thought_bubble_example.png' %}" height="100px"/>
-    </div>
-    <div style="float: left; width: 75%; padding-top: 10px; padding-bottom: 40px;">
-        {% if results == "yes" %}
-            <p>Nice Job!</p>
-            <p>You understand your target's ecosystem.</p>
-            <p>Your challenge: Develop a few questions that you can answer in our next step: A news search.</p>
-        {% endif %}
-        {% if results == "no" %}
-            <p>If your Target’s value isn't clear, why might that be?</p>
-            <p>Your challenge: Formulate a few hypotheses as to why the value isn’t clear. Might you need more data or analysis?</p>
-        {% endif %}
-        {% if results == "mixed" %}
-            <p>You've identified some of the reasons your Target is unique, but some elude you.</p>
-            <p>Your challenge: What other data would be useful to gain clarity? Develop a few questions that can direct your work and thinking.</p>
-        {% endif %}
-
-        {% include 'module3/cheetah4/form2.html' %}
-    </div>
-
-    <div class="space"></div>
-
-    <div class="center">
-        <button id="completeBtn" value="Complete Cheetah Sheet">Terrain Mapped!</button>
-    </div>
-
-
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#next').click(validate);
-            $("input:checkbox[name='at4[]']").click(showExplanation);
-        });
-
-        function showExplanation() {
-            var checked = $(this).prop('checked');
-            var explanation = $(this).next().next();
-            var current = explanation.css('display');
-            if (current == 'none') {
-                explanation.css('display', 'block').css('visibility', 'visible');
-            } else {
-                explanation.css('display', 'none').css('visibility', 'hidden');
-            }
-        }
-
-        function validate() {
-            var correctTotal = 3;
-            var correct = 0;
-            var incorrect = 0;
-            var error_msg = "";
-
-            $("input:checkbox[name='at4[]']").each(function() {
-                if ($(this).prop('checked')) {
-                    if ($(this).val() == 1) {
-                        correct++;
-                    } else {
-                        incorrect++;
-                        console.log($(this));
-                    }
-                }
-            });
-
-            return true;
-        }
-    </script>
-
+    {% include 'module3/cheetah4/form2.html' %}
 {% endblock %}
