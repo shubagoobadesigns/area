@@ -47,5 +47,8 @@ urlpatterns = [
     url(r'^cheetah6/sheet/?$', views.cheetah6_sheet, name='module3_cheetah6_sheet'),
     url(r'^cheetah6/sheet2/?$', views.cheetah6_sheet2, name='module3_cheetah6_sheet2'),
     url(r'^cheetah6/sheet3/?$', views.cheetah6_sheet3, name='module3_cheetah6_sheet3'),
+    url(r'^cheetah6/sheet4/?$', views.cheetah6_sheet4, name='module3_cheetah6_sheet4'),
 
+    url(r'^pre_mortem/?$', views.pre_mortem, name='module3_pre_mortem'),
+    url(r'^conviction/?$', views.conviction, name='module3_conviction'),
 ]

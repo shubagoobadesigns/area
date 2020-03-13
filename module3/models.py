@@ -23,7 +23,16 @@ db_fields = [
     'at5_most',
     'biases',
     'br',
+    'cah1',
+    'cah2',
+    'cah3',
+    'cah4',
+    'cah5',
     'cc',
+    'conviction_decision',
+    'conviction_confidence',
+    'conviction_rate',
+    'conviction_why',
     'dd_as_question',
     'dd_params',
     'feeling_end',
@@ -37,6 +46,7 @@ db_fields = [
     'pro_con_least',
     'pro_con_most',
     'problem_to_solve',
+    'safeguards',
     'success_terms',
     'vs',
 ]
@@ -61,8 +71,17 @@ class Module3(BaseModule):
     biases = models.TextField(default='')
     # br = bias remedies
     br = models.TextField(default='')
+    cah1 = models.TextField(default='')
+    cah2 = models.TextField(default='')
+    cah3 = models.TextField(default='')
+    cah4 = models.TextField(default='')
+    cah5 = models.TextField(default='')
     # cc = critical concepts
     cc = models.TextField(default='')
+    conviction_decision = models.TextField(default='')
+    conviction_confidence = models.TextField(default='')
+    conviction_rate = models.TextField(default='')
+    conviction_why = models.TextField(default='')
     dd_as_question = models.TextField(default='')
     # decision dilemma parameters
     dd_params = models.TextField(default='')
@@ -77,6 +96,7 @@ class Module3(BaseModule):
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
     problem_to_solve = models.TextField(default='')
+    safeguards = models.TextField(default='')
     success_terms = models.TextField(default='')
     # vs = vision of success
     vs = models.TextField(default='')

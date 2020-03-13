@@ -45,6 +45,9 @@ class MasterTerm:
             "Absolute Targets": {
                 'definition': "Absolute Targets are the entities at the center of your decision. If choosing a college to attend, the Absolute Targets would the colleges you are considering.",
             },
+            "Analysis": {
+                'definition': "The final A in AREA helps you consider where you might have failures of data or analysis and then helps you come to conviction on your decision",
+            },
             "Authority Bias": {
                 'definition': "The tendency to take on the opinion of someone who is seen as an authority figure",
             },

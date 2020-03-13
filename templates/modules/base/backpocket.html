@@ -26,10 +26,33 @@
                 /* border: 1px solid #888888; */
                 width: 70%;
             }
+
+            #why_options div {
+                margin-bottom: 10px;
+            }
+
+            label {
+                font-size: large;
+                border: 1px solid #dddddd;
+                width: 100%;
+                padding: 5px;
+            }
+
+            :checked + span {
+                font-weight: bold;
+            }
+
+            .explanation {
+                display: none;
+                font-size: 0.8em;
+                padding-top: 5px;
+                visibility: hidden;
+            }
         </style>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
+                $("input:checkbox[name='{{ checkboxName }}[]']").click(showExplanation);
 
                 $('#showExampleBtn').click(function () {
                     /* Show modal */
@@ -48,13 +71,18 @@
                 $('#back').click(function () {
                     window.location.href = $(this).attr('href');
                 });
+            });
 
-                /* Clicking anywhere outside of the modal closes the modal */
-                $(window).click(function (e) {
-                    $('.modal').css('display', 'none');
-                    return false;
-                });
-            })
+            function showExplanation() {
+                var checked = $(this).prop('checked');
+                var explanation = $(this).next().next();
+                var current = explanation.css('display');
+                if (current == 'none') {
+                    explanation.css('display', 'block').css('visibility', 'visible');
+                } else {
+                    explanation.css('display', 'none').css('visibility', 'hidden');
+                }
+            }
         </script>
     {% endblock %}
     {% block extra_css %}{% endblock %}

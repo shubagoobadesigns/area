@@ -1,0 +1,45 @@
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "Analysis: Pre-Mortem" %}
+    {% define 'nextBtnLabel' "Making Mistakes BEFORE Making Them!" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/a2.html' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block modal_content %}
+    <p>Robyn's safeguards:</p>
+    <ol>
+        <li>She will do fewer and longer road trips to handle the direct flight issue and time away from her son.</li>
+        <li>She will sign up for a running group to make friends and a class for her and her son to meet families.</li>
+        <li>She will interview local office employees and develop a Midwest customersurvey for recommendations to improve Milwaukee office operations.</li>
+    </ol>
+{% endblock %}
+
+{% block content_body %}
+    <p>In the final A: {% get_master_term "Analysis" %} of AREA you are almost ready to come to conviction on a decision. But first, here are the weaknesses you’ve identified in your decision research:</p>
+
+    <p>populate here a list of all RED answers</p>
+
+    <h3>Can you set up three safeguards to prevent your decision from failing from the above weaknesses?</h3>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="safeguards[]" class="auto-text-area">{{ safeguards.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="safeguards[]" class="auto-text-area">{{ safeguards.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="safeguards[]" class="auto-text-area">{{ safeguards.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>PRO | CON</p>
+    <p>Table placeholder</p>
+{% endblock %}

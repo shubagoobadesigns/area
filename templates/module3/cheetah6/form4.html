@@ -1,0 +1,117 @@
+<p>What problem do you need to solve?</p>
+<p style="border-bottom: 1px solid black;">{{  module.problem_to_solve }}</p>
+
+<p>Reframe the decision dilemma as a question</p>
+<p style="border-bottom: 1px solid black;">{{ module.dd_as_question }}</p>
+
+<p>Success Phrases</p>
+{% for value in module.get_success_terms %}
+    {% if value.answer in success_terms %}
+        <p style="border-bottom: 1px solid black;">{{ value.answer }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>Vision of Success</p>
+{% for vos in vs %}
+    <p style="border-bottom: 1px solid black;">{{ vos }}</p>
+{% endfor %}
+
+<p>Critical Concepts</p>
+{% for critical_concept in cc %}
+    <p style="border-bottom: 1px solid black;">{{ critical_concept }}</p>
+{% endfor %}
+
+<p>Your tendency is</p>
+{% for bias in biases %}
+    <p style="border-bottom: 1px solid black;">{{ bias.label }}</p>
+{% endfor %}
+
+<p>What is at the center of your decision problem</p>
+{% for absolute_target in at %}
+    <p style="border-bottom: 1px solid black;">{{ absolute_target }}</p>
+{% endfor %}
+
+<p>Cheetah Sheet 2: Absolute Data Quality</p>
+<p>Did you find numbers that help you better understand your Decision Target?</p>
+{% for item in at2_numbers %}
+    {% if item.key in at2 %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>What numerical data was <strong><u>MOST useful</u></strong>?</p>
+<p style="border-bottom: 1px solid black;">{{ at2_most }}</p>
+
+<p>Cheetah Sheet 3: Absolute Website Data Quality</p>
+<p>What did you learn from reading the Target's website?</p>
+{% for item in at3_numbers %}
+    {% if item.key in at3 %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>What about the website information was <strong>MOST</strong> useful?</p>
+<p style="border-bottom: 1px solid black;">{{ at3_most }}</p>
+
+<p>What website information was LEAST useful to solving your problem?</p>
+<p style="border-bottom: 1px solid black;">{{ at3_least }}</p>
+
+
+<p>Cheetah Sheet 4: Relative Map vs Terrain</p>
+<p>Based on researching your Target's ecosystem check all that apply:</p>
+{% for item in at4_numbers %}
+    {% if item.key in at4 %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>What about the mapping exercise was <strong><u>MOST useful</u></strong> to putting your Target into its broader ecosystem?</p>
+<p style="border-bottom: 1px solid black;">{{ module.at4_most }}</p>
+
+<p>What about the mapping exercise was <strong><u>LEAST useful</u></strong> to understanding how your Target fits into its broader ecosystem?</p>
+<p style="border-bottom: 1px solid black;">{{ module.at4_least }}</p>
+
+<p>Cheetah Sheet 5: Relative: Internet Search</p>
+<p>Search for news, industry and expert reports about your decision problem and then answer the following questions. Check all that apply</p>
+{% for item in at5_numbers %}
+    {% if item.key in at5 %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>What about the Literature Review was <strong><u>MOST useful</u></strong> to learning from the perspective of published sources</p>
+<p style="border-bottom: 1px solid black;">{{ module.at5_most }}</p>
+
+<p>What about the Literature Review was <strong><u>LEAST useful</u></strong> to learning from the perspective of published sources?</p>
+<p style="border-bottom: 1px solid black;">{{ module.at5_least }}</p>
+
+<p>Cheetah Sheet 6: Exploration Great Questions Roadmap</p>
+<p>What kinds of answers do I need? These should be targeted on your Critical Concepts.</p>
+<p style="border-bottom: 1px solid black;">{{ module.gq_1 }}</p>
+
+<p>What do I want to find out and why?</p>
+<p style="border-bottom: 1px solid black;">{{ module.gq_2 }}</p>
+
+<p>What difference would that information make?</p>
+<p style="border-bottom: 1px solid black;">{{ module.gq_3 }}</p>
+
+<p>To get the answers you've identified that you need, who will best help you get those answers?</p>
+{% for item in great_questions_list %}
+    {% if item.key in great_questions %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>Who could help you answer your questions?</p>
+{% for item in good_prospects_list %}
+    {% if item.key in good_prospects %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}
+
+<p>After asking your Great Questions to your Good Prospects</p>
+{% for item in iq_list %}
+    {% if item.key in iq %}
+        <p style="border-bottom: 1px solid black;">{{ item.label }}</p>
+    {% endif %}
+{% endfor %}

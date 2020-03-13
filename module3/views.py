@@ -53,6 +53,10 @@ cheetah_sheet6_3 = CheetahSheet()
 cheetah_sheet6_3.num = 6
 cheetah_sheet6_3.title = "Exploration: Interview Quality"
 
+cheetah_sheet6_4 = CheetahSheet()
+cheetah_sheet6_4.num = 6
+cheetah_sheet6_4.title = "Exploitation"
+
 nylah = Nylah()
 
 # Create your views here.
@@ -94,7 +98,9 @@ def navigation():
         reverse('module3_cheetah6_sheet'),
         reverse('module3_cheetah6_sheet2'),
         reverse('module3_cheetah6_sheet3'),
-
+        reverse('module3_cheetah6_sheet4'),
+        reverse('module3_pre_mortem'),
+        reverse('module3_conviction'),
     ]
 
     return urls
@@ -176,6 +182,7 @@ def cheetah2_sheet(request):
     }
     return render_page(request, module, parsed, context)
 
+
 @active_user_required
 def cheetah2_sheet2(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
@@ -207,6 +214,7 @@ def cheetah3_sheet(request):
     }
     return render_page(request, module, parsed, context)
 
+
 @active_user_required
 def cheetah3_sheet2(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
@@ -224,6 +232,7 @@ def cheetah3_sheet2(request):
     }
     return render_page(request, module, parsed, context)
 
+
 @active_user_required
 def cheetah4_intro(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
@@ -236,6 +245,7 @@ def cheetah4_intro(request):
         'cheetah_sheet': cheetah_sheet4,
     }
     return render_page(request, module, parsed, context)
+
 
 @active_user_required
 def cheetah4_sheet(request):
@@ -252,6 +262,7 @@ def cheetah4_sheet(request):
         'cheetah_sheet': cheetah_sheet4,
     }
     return render_page(request, module, parsed, context)
+
 
 @active_user_required
 def cheetah4_sheet2(request):
@@ -301,6 +312,7 @@ def cheetah5_intro(request):
     }
     return render_page(request, module, parsed, context)
 
+
 @active_user_required
 def cheetah5_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
@@ -318,6 +330,7 @@ def cheetah5_sheet(request):
         'cheetah_sheet': cheetah_sheet5,
     }
     return render_page(request, module, parsed, context)
+
 
 @active_user_required
 def cheetah6_sheet(request):
@@ -369,6 +382,72 @@ def cheetah6_sheet3(request):
     }
     return render_page(request, module, parsed, context)
 
+
+@active_user_required
+def cheetah6_sheet4(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.cah1 = json.dumps(request.POST.getlist('cah1[]'))
+        module.cah2 = json.dumps(request.POST.getlist('cah2[]'))
+        module.cah3 = json.dumps(request.POST.getlist('cah3[]'))
+        module.cah4 = json.dumps(request.POST.getlist('cah4[]'))
+        module.cah5 = json.dumps(request.POST.getlist('cah5[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'cheetah_sheet': cheetah_sheet6_4,
+        'success_terms': ViewHelper.load_json(module.success_terms),   #7
+        'cc': ViewHelper.load_json(module.cc),  # 8
+        'vs': ViewHelper.load_json(module.vs),  # 8
+        'biases': calculate_bias_result(module),  # 10, 11
+        'at': ViewHelper.load_json(module.at),  # 13
+        'at2': ViewHelper.load_json(module.at2),  # 15
+        'at2_most': module.at2_most, # 15
+        'at2_numbers': Module.get_at2_numbers(), # 15
+        'at3': ViewHelper.load_json(module.at3),  # 17
+        'at3_numbers': Module.get_at3_numbers(),  # 17
+        'at4': ViewHelper.load_json(module.at4),  # 20
+        'at4_numbers': Module.get_at4_numbers(),  # 20
+        'at5': ViewHelper.load_json(module.at5),  # 23
+        'at5_numbers': Module.get_at5_numbers(),  # 23
+        'great_questions': ViewHelper.load_json(module.great_questions),   #24
+        'great_questions_list': Module.get_great_questions_list(),   #24
+        'good_prospects': ViewHelper.load_json(module.good_prospects),   #25
+        'good_prospects_list': Module.get_good_prospects_list(),   #25
+        'iq': ViewHelper.load_json(module.iq),   #26
+        'iq_list': Module.get_iq_list(),   #26
+        'cah1': ViewHelper.load_json(module.cah1),
+        'cah2': ViewHelper.load_json(module.cah2),
+        'cah3': ViewHelper.load_json(module.cah3),
+        'cah4': ViewHelper.load_json(module.cah4),
+        'cah5': ViewHelper.load_json(module.cah5),
+    }
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def conviction(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
+    conviction_confidence = 1
+    if module.conviction_confidence != "":
+        conviction_confidence = int(module.conviction_confidence)
+
+    conviction_rate = 1
+    if module.conviction_rate != "":
+        conviction_rate = int(module.conviction_rate)
+
+    context = {
+        'conviction_confidence': conviction_confidence,
+        'conviction_rate': conviction_rate,
+    }
+    return render_page(request, module, parsed, context)
 
 @active_user_required
 def ddd(request):
@@ -514,35 +593,27 @@ def game1_results(request):
         module.br = json.dumps(request.POST.getlist('br[]'))
         return save_form(request, module, parsed)
 
-    bias_results = []
-    biases = load_json(module.biases)
-
-    bias_definitions = Module2.get_biases()
-    for key,value in biases.items():
-        # Return the top two biases
-        if len(bias_results) >= 2:
-            break
-
-        # Find the label and definition
-        for definition in bias_definitions:
-            if definition['key'] == key:
-                # Get the label and definition
-                bias_results.append({
-                    'key': key,
-                    'label': definition['label'],
-                    'definition': definition['definition']
-                })
-                break
-
-    print("Total bias results")
-    print(bias_results)
-    print(parsed)
-
     context = {
         'answers': module.answers_json,
-        'biases': bias_results,
+        'biases': calculate_bias_result(module),
         'br': ViewHelper.load_json(module.br),
         'questions': module.get_game_questions(),
+    }
+
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def pre_mortem(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.safeguards = json.dumps(request.POST.getlist('safeguards[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'safeguards': ViewHelper.load_json(module.safeguards),
     }
 
     return render_page(request, module, parsed, context)
@@ -619,6 +690,31 @@ def calculate_biases(game_questions, answers):
             biases[bias]['biased'] += 1
         biases[bias]['ratio'] = int(float(biases[bias]['biased']) / float(biases[bias]['total']) * 100)
     return biases
+
+
+def calculate_bias_result(module):
+    bias_results = []
+    biases = ViewHelper.load_json(module.biases)
+
+    bias_definitions = Module2.get_biases()
+    for key,value in biases.items():
+        # Return the top two biases
+        if len(bias_results) >= 2:
+            break
+
+        # Find the label and definition
+        for definition in bias_definitions:
+            if definition['key'] == key:
+                # Get the label and definition
+                bias_results.append({
+                    'key': key,
+                    'label': definition['label'],
+                    'definition': definition['definition']
+                })
+                break
+
+    return bias_results
+
 
 def calculate_sum_up(module):
     # See https://docs.google.com/spreadsheets/d/14oco-rnnKWTQ1SnSdUAQVBZjWnUSNsr08QFYxQpQg-I/edit#gid=0

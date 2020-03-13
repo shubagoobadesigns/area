@@ -1,0 +1,40 @@
+{% extends 'modules/cheetah/backpocket.html' %}
+{% load static module_tags %}
+
+{% block content %}
+    {% define 'checkboxName' 'iq' %}
+    {% define 'nextBtnLabel' 'Answers Analyzed!' %}
+    {{ block.super }}
+{% endblock %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/e.html' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block modal_content %}
+    <p>Robyn’s CAH:</p>
+    <p>Hypotheses: Take the job, Don’t Take it</p>
+    <p>Evidence</p>
+    <ol>
+        <li>+ More money</li>
+        <li>+ Cheaper city</li>
+        <li>- More travel and travel time bc fewer direct flights</li>
+        <li>- Regional office needs revamp (big job!)</li>
+        <li>- Would need to build social life</li>
+        <li>+ More seniority</li>
+        <li>- High School Graduation rates vary a lot</li>
+        <li>+/- Would need to stay at least 3 years</li>
+    </ol>
+    <p>Robyn's conclusions: Her answer is sensitive to the travel and whether she wants a big job.
+    She concludes that a big job is ok and that in three years her son will be 10 so graduation rates are not relevant.
+    She decides to circle back to get more data about the necessity to travel.
+    Three years is not too long.</p>
+{% endblock %}
+
+{% block content_body %}
+    <p>Now let’s analyze some of your outside research responses and turn your lens inward on yourself as a decision-maker.</p>
+    <p>Here is a Pro/Con Analysis based upon your earlier answers that shows you how you are thinking about your research and your decision-problem:</p>
+
+    {% include 'module3/cheetah6/form4.html' %}
+    {% include 'module3/cheetah6/form5.html' %}
+{% endblock %}

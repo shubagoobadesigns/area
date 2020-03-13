@@ -1,0 +1,104 @@
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "Coming to Conviction" %}
+    {% define 'nextBtnLabel' "My Decision!" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/a2.html' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block extra_css %}
+    <style type="text/css">
+        .main div:first-child {
+            margin-top: 0px;
+        }
+
+        .slider.slider-horizontal {
+            width: 450px;
+        }
+
+        #ex1Slider .slider-selection {
+            background: #BABABA;
+        }
+
+        #feeling_text {
+            text-align: left;
+        }
+
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var tick_labels = [1, 2, 3];
+
+            $('#ex1').slider({
+                min: 1,
+                max: tick_labels.length,
+                step: 1,
+                ticks: [1, 2, 3],
+                ticks_labels: tick_labels,
+                value: {{ conviction_confidence }}
+            });
+
+            $('#ex2').slider({
+                min: 1,
+                max: tick_labels.length,
+                step: 1,
+                ticks: [1, 2, 3],
+                ticks_labels: tick_labels,
+                value: {{ conviction_rate }}
+            });
+
+            var originalVal;
+            var originalVal2;
+
+            $('#ex1').slider().on('slideStart', function(ev){
+                originalVal = $('#ex1').data('slider').getValue();
+            });
+
+            $('#ex1').slider().on('slideStop', function(ev){
+                var newVal = $('#ex1').data('slider').getValue();
+                if(originalVal != newVal) {
+                    console.log(originalVal + " has changed to " + newVal);
+                }
+            });
+
+            $('#ex2').slider().on('slideStart', function(ev){
+                originalVal2 = $('#ex2').data('slider').getValue();
+            });
+
+            $('#ex2').slider().on('slideStop', function(ev){
+                var newVal = $('#ex2').data('slider').getValue();
+                if(originalVal2 != newVal) {
+                    console.log(originalVal2 + " has changed to " + newVal);
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+
+{% block modal_content %}
+    <p>Robyn's decisions:</p>
+    <p>Meet your new Milwaukee VP of Sales!</p>
+{% endblock %}
+
+{% block content_body %}
+    <h3>Based upon using the AREA Method what will you decide to solve your decision problem?</h3>
+    <textarea name="conviction_decision" class="auto-text-area">{{ conviction_decision }}</textarea>
+
+    <h3>How confident do you feel that this decision will succeed for you now?</h3>
+    <input id="ex1" data-slider-id='ex1Slider' type="text" name="conviction_confidence"/>
+
+    <h3>Why?</h3>
+    <textarea name="why" class="auto-text-area">{{ conviction_why }}</textarea>
+
+    <p>Pay It Forward: Share your anonymized decision and AREA Research to help others solve their problems</p>
+
+    <h3>Rate this module: How useful was the AREA Method?</h3>
+    <input id="ex2" data-slider-id='ex2Slider' type="text" name="conviction_rate"/>
+
+{% endblock %}
