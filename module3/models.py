@@ -33,6 +33,7 @@ db_fields = [
     'gq_2',
     'gq_3',
     'great_questions',
+    'iq',
     'pro_con_least',
     'pro_con_most',
     'problem_to_solve',
@@ -72,6 +73,7 @@ class Module3(BaseModule):
     gq_2 = models.TextField(default='')
     gq_3 = models.TextField(default='')
     great_questions = models.TextField(default='')
+    iq = models.TextField(default='')
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
     problem_to_solve = models.TextField(default='')
@@ -450,6 +452,36 @@ class Module3(BaseModule):
                 'key': "4",
                 'label': "Knowledge Questions",
                 'answer': "To find out factual information the respondent has.",
+            },
+        ]
+        return great_questions_list
+
+    @staticmethod
+    def get_iq_list():
+        great_questions_list = [
+            {
+                'key': "1",
+                'label': "I understand my decision problem and Critical Concepts better.",
+                'answer': "",
+                'color': "green",
+            },
+            {
+                'key': "2",
+                'label': "I have a better idea of what decision I want to make.",
+                'answer': "",
+                'color': "green",
+            },
+            {
+                'key': "3",
+                'label': "I am more confused about my decision.",
+                'answer': "",
+                'color': "red",
+            },
+            {
+                'key': "4",
+                'label': "I am less clear that I want to make this decision.",
+                'answer': "",
+                'color': "red",
             },
         ]
         return great_questions_list

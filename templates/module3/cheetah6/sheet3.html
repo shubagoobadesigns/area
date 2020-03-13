@@ -1,0 +1,27 @@
+{% extends 'modules/cheetah/backpocket.html' %}
+{% load static module_tags %}
+
+{% block content %}
+    {% define 'checkboxName' 'iq' %}
+    {% define 'nextBtnLabel' 'Interviews Analyzed!' %}
+    {{ block.super }}
+{% endblock %}
+{% block progress_bar %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/e.html' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block modal_content %}
+    <p>Robyn’s Great Questions:</p>
+    <p>What qualities have been successful in this job in the past?</p>
+    <ol>
+        <li>Insider: Current acting VP of Midwest Sales</li>
+        <li>Insider: Former Milwaukee sales office employee</li>
+        <li>Customer: Key customer in the area</li>
+        <li>Family: Mom and dad</li>
+    </ol>
+{% endblock %}
+
+{% block content_body %}
+    {% include 'module3/cheetah6/form3.html' %}
+{% endblock %}

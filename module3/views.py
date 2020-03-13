@@ -359,10 +359,13 @@ def cheetah6_sheet3(request):
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
     if request.method == 'POST':
+        module.iq = json.dumps(request.POST.getlist('iq[]'))
         return save_form(request, module, parsed)
 
     context = {
         'cheetah_sheet': cheetah_sheet6_3,
+        'iq': ViewHelper.load_json(module.iq),
+        'iq_list': Module.get_iq_list(),
     }
     return render_page(request, module, parsed, context)
 
