@@ -1,27 +1,29 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{% block h1 %}What is AREA?
-{% endblock %}{% endblock %}
-{% block content %}
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
-    </script>
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
 
-    <h2 class="center">What is AREA?</h2>
+{% block title %}
+    {% define 'pageTitle' "What is AREA?" %}
+    {% define 'nextBtnLabel' "I'm Ready" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/id.html' %}
+    {{ block.super }}
+{% endblock %}
 
-    <p>AREA is an acronym for a decision-making system that uniquely controls for and counteracts bias, focuses on
-        the incentives of others and expands knowledge while improving judgment.</p>
 
-    <div style="text-align: center">
-        <img src="{% static 'decisions/img/backpocket/progressbar_screenshot.jpg'  %}" width="300"/>
-    </div>
+{% block modal_content %}
+    <p>Hi! I’m Robyn and I’ll be going through this module alongside you.</p>
+    <p>I'm a single working professional in sales for a major consumer products company.</p>
+    <p>I've been offered a big promotion and don't know if I want to relocate and take the position - I love my home and my support network.</p>
+{% endblock %}
+
+{% block content_body %}
+    <p>You will be guided through the module by AREA - a decision-making system that uniquely controls for and counteracts bias, focuses on the incentives of others and expands knowledge while improving judgment.</p>
+
+{#    <div style="text-align: center">#}
+{#        <img src="{% static 'decisions/img/backpocket/progressbar_screenshot.jpg'  %}" width="300"/>#}
+{#    </div>#}
 
     <p>On the top of each of the pages, you’ll see a progress bar similar to the image above.
-        This will help us keep track of your progress and help you on your decision journey.
-        We'll start by teasing out your “id” and identifying unconscious bias.</p>
+        This will help us keep track of your progress and help you on your decision journey.</p>
 
-    {% get_next_btn module "I'm Ready!" nav.nextUrl %}
-    {% get_back_link module nav.previousUrl %}
+    <p>We'll start with how you’re feeling and confront unconscious bias and then you’ll define your Decision Dilemma.</p>
 {% endblock %}

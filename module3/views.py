@@ -509,6 +509,9 @@ def ddd_explain(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
+    if request.method == 'POST':
+        return save_form(request, module, parsed)
+
     ddd_parameters = module.get_ddd_parameters()
 
     total = 0

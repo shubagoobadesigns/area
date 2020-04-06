@@ -12,14 +12,13 @@
     <p>Robyn’s tendency: Authority and Optimism</p>
     <p>Robyn’s Bias Remedies:</p>
     <ul>
-        <li>Check for facts</li>
-        <li>Get a second opinion</li>
-        <li>Get feedback on strengths and blind spots</li>
+        <li>For Authority Bias, noticing this tendency combined with checking for facts can help you know when to follow authority with greater confidence.</li>
+        <li>To thwart Optimism Bias, get a second opinion, especially from someone who knows your strengths and blind spots.</li>
     </ul>
 {% endblock %}
 
 {% block content_header %}
-    <p>Your tendency is:</p>
+    <p>Your top results are:</p>
     <ul>
     {% for bias in biases %}
         <li>{% get_master_term bias.label %}</li>
@@ -28,31 +27,41 @@
 {% endblock %}
 
 {% block content_body %}
-    <p>
-        Try these BIAS remedies to check and challenge your assumptions and judgements:
-        <ul>
-            <li>Be more conscious and aware of actions</li>
-            <li>Check for facts</li>
-            <li>Get a second opinion</li>
-            <li>Get feedback on your strengths and blind spots from someone who knows you, your values and how you make decisions</li>
-        </ul>
-    </p>
+    <p>There are a few Bias Remedies:</p>
+    <ul>
+        <li>Social Proof, try checking the wisdom of crowds with facts.</li>
+        <li>For the Planning Fallacy, compare similar activities to your current activities for more realistic time projections.</li>
+        <li>To thwart Optimism Bias, get a second opinion, especially from someone who knows your strengths and blind spots.</li>
+        <li>For Confirmation Bias, thwart this tendency by focusing on finding disconfirming data.</li>
+        <li>To sidestep Liking Bias, get a second opinion from someone outside your circle and check the facts.</li>
+        <li>For Authority Bias, noticing this tendency combined with checking for facts can help you know when to follow authority with greater confidence.</li>
+    </ul>
 
-    <h3>Commit! How will you use the Bias Remedies you selected?</h3>
-    <table class="table">
-        <tbody>
-        <tr>
-            <td width="5">1.</td>
-            <td><textarea name="br[]" class="auto-text-area">{{ br.0 }}</textarea></td>
-        </tr>
-        <tr>
-            <td width="5">2.</td>
-            <td><textarea name="br[]" class="auto-text-area">{{ br.1 }}</textarea></td>
-        </tr>
-        <tr>
-            <td width="5">3.</td>
-            <td><textarea name="br[]" class="auto-text-area">{{ br.2 }}</textarea></td>
-        </tr>
-        </tbody>
-    </table>
+{#    <p>#}
+{#        Try these BIAS remedies to check and challenge your assumptions and judgements:#}
+{#        <ul>#}
+{#            <li>Be more conscious and aware of actions</li>#}
+{#            <li>Check for facts</li>#}
+{#            <li>Get a second opinion</li>#}
+{#            <li>Get feedback on your strengths and blind spots from someone who knows you, your values and how you make decisions</li>#}
+{#        </ul>#}
+{#    </p>#}
+{##}
+{#    <h3>Commit! How will you use the Bias Remedies you selected?</h3>#}
+{#    <table class="table">#}
+{#        <tbody>#}
+{#        <tr>#}
+{#            <td width="5">1.</td>#}
+{#            <td><textarea name="br[]" class="auto-text-area">{{ br.0 }}</textarea></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td width="5">2.</td>#}
+{#            <td><textarea name="br[]" class="auto-text-area">{{ br.1 }}</textarea></td>#}
+{#        </tr>#}
+{#        <tr>#}
+{#            <td width="5">3.</td>#}
+{#            <td><textarea name="br[]" class="auto-text-area">{{ br.2 }}</textarea></td>#}
+{#        </tr>#}
+{#        </tbody>#}
+{#    </table>#}
 {% endblock %}

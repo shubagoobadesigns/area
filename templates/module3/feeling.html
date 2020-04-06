@@ -1,15 +1,47 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{% block h1 %}How are you feeling?{% endblock %}{% endblock %}
-{% block extra_head %}
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "How are you feeling?" %}
+    {% define 'nextBtnLabel' "Tell Me More" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/id.html' %}
+    {{ block.super }}
 {% endblock %}
-{% block content %}
+
+{% block modal_content %}
+    <p>Robyn’s emotion about deciding whether to take the promotion: Confused.</p>
+    <p>I'm excited for the job recognition and the opportunity for professional development.</p>
+    <p>At the same time, I love my life and would have to "start over" far away (and it’s even snowier than where I am now in Boston).</p>
+{% endblock %}
+
+{% block extra_css %}
+    <style type="text/css">
+        .main div:first-child {
+            margin-top: 0px;
+        }
+
+        .slider.slider-horizontal {
+            width: 570px;
+        }
+
+        #ex1Slider .slider-selection {
+            background: #BABABA;
+        }
+
+        #feeling_text {
+            text-align: left;
+        }
+
+    </style>
+{% endblock %}
+
+{% block extra_js %}
     <script type="text/javascript">
         $(document).ready(function () {
 
             $('#ex1').slider({
-                ticks: [1, 2, 3, 4, 5],
-                ticks_labels: ['Fear', 'Overwhelmed', 'Frustrated', 'Confused', 'Energized'],
+                ticks: [1, 2, 3, 4, 5, 6],
+                ticks_labels: ['Fear', 'Overwhelmed', 'Frustrated', 'Confused', 'Nervous Excited', 'Energized'],
             });
 
             // When page loads
@@ -36,6 +68,7 @@
                     '/static/decisions/img/backpocket/overwhelmed.jpg',
                     '/static/decisions/img/backpocket/frustrated.png',
                     '/static/decisions/img/backpocket/confused.jpg',
+                    '/static/decisions/img/backpocket/confused.jpg',
                     '/static/decisions/img/backpocket/thumbs-up.jpg'
                 ];
 
@@ -45,6 +78,7 @@
                     "<h3>Overwhelmed</h3>Naming your feelings is part of getting past your biases and a rush to judgment.  So glad you found AREA! It will help you break down and frame your problem and give you clear steps to follow.",
                     "<h3>Frustrated</h3>You feel Frustrated. Getting started can feel off-putting. So glad you found AREA! It will help you frame your Vision of Success and zero-in on what matters to you.",
                     "<h3>Confused</h3>You feel confused. AREA will help you have a process for how to break down, frame and research your big decision.",
+                    "<h3>Nervous Excited</h3>Placeholder.",
                     "<h3>Energized</h3>You feel ready to take on this challenge!  So glad you found AREA! It will help channel your excitement so that you don’t skip steps and ensure that you confront your assumptions."
                 ]
 
@@ -57,33 +91,15 @@
 
         });
     </script>
-    <style type="text/css">
-        .main div:first-child {
-            margin-top: 0px;
-        }
+{% endblock %}
 
-        .slider.slider-horizontal {
-            width: 450px;
-        }
-
-        #ex1Slider .slider-selection {
-            background: #BABABA;
-        }
-
-        #feeling_text {
-            text-align: left;
-        }
-
-    </style>
-
-    {% include 'module3/progress_bar/id.html' %}
-    <h2 class="center">How are you feeling?</h2>
+{% block content_body %}
     <p>
         Before you get started, use the slider below to let us know how you are feeling about making your big decision.
     </p>
 
     <div class="center">
-        <div style="padding-top: 15px;"></div>
+        <div style="padding-top: 55px;"></div>
 
         <input id="ex1" data-slider-id='ex1Slider' type="text"
                data-slider-min="0" data-slider-max="5" data-slider-step="1" data-slider-value="{{ feeling_start }}" name="feeling_start"/>
@@ -94,9 +110,4 @@
 
         <p id="feeling_text"></p>
     </div>
-
-    <div id="nextBtnSection">
-        {% get_next_btn module "Tell Me More" nav.nextUrl "submit" %}
-    </div>
-    {% get_back_link module nav.previousUrl %}
 {% endblock %}

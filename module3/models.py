@@ -400,7 +400,7 @@ class Module3(BaseModule):
                 'bias_answer': 0,
             },
             'optimism2': {
-                'question': 'You buy a new car and are considering getting AAA, do you',
+                'question': 'You buy a new car and are considering paying for roadside assistance service, do you',
                 'answer0': 'Absolutely get it - you never know what could happen',
                 'answer1': 'Assume you’ll be able to figure it out if anything happens',
                 'bias': 'optimism',

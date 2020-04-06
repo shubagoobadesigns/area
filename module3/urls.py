@@ -50,5 +50,5 @@ urlpatterns = [
     url(r'^cheetah6/sheet4/?$', views.cheetah6_sheet4, name='module3_cheetah6_sheet4'),
 
     url(r'^pre_mortem/?$', views.pre_mortem, name='module3_pre_mortem'),
-    url(r'^conviction/?$', views.conviction, name='module3_conviction'),
+    url(r'^conviction/?$', views.conviction , name='module3_conviction'),
 ]

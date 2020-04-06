@@ -1,28 +1,32 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap module_tags static %}
-{% block title %}{% block h1 %}Decision Dilemma Feedback
-{% endblock %}{% endblock %}
-{% block content %}
-    <div class="center">
-    {% include 'module3/progress_bar/id.html' %}
-        <h2 class="center">How High Stakes Is Your Decision?</h2>
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
 
-        <p>
-        {% if total >= 8 and total <= 11 %}
-            You indicate that you have a likely answer to solve your problem and that there’s not a great sense of urgency. Following AREA and checking your assumptions with evidence will bolster your confidence and give you better conviction about your decision path.
-        {% endif %}
-        {% if total >= 12 and total <= 16 %}
-            You indicate that there’s some discomfort about the outcome, the potential cost of making a poor decision and some time urgency. AREA will help you better examine the ramifications of various outcome to give you confidence and conviction that you’ve made the right choice.
-        {% endif %}
-        {% if total >= 17 and total <= 20 %}
-            You have some trepidation about the parameters of your decision such as how long term the impact might be and the cost of a poor decision. AREA will help you identify a Vision of Success to give a clear target to reach and then guide you on the research process to make a good decision for you personally.
-        {% endif %}
-        {% if total >= 21 and total <= 24 %}
-            You have a high stakes decision; one where the outcome is unknown, the impact long-term and price for getting it wrong could be costly. Framing your problem to focus on what matters most to you and then conducting research will help you evaluate your options and come to conviction.
-        {% endif %}
-        </p>
+{% block title %}
+    {% define 'pageTitle' "How High Stakes Is Your Decision?" %}
+    {% define 'nextBtnLabel' "Ready to Write My Problem Statement!" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/id.html' %}
+    {{ block.super }}
+{% endblock %}
 
-        {% get_next_btn module "Ready to Write My Problem Statement!" nav.nextUrl %}
-    </div>
-    {% get_back_link module nav.previousUrl %}
+{% block modal_content %}
+    <p>Robyn's answers:</p>
+    <p>I’m feeling a little uncomfortable about my decision.</p>
+    <p>I want to move up the corporate ladder but am not sure I want to relocate to Milwaukee, where the Midwest sales office is located. I also don't really know what the new job entails yet. </p>
+{% endblock %}
+
+{% block content_body %}
+    <p>
+    {% if total >= 8 and total <= 11 %}
+        You indicate that you have a likely answer to solve your problem and that there’s not a great sense of urgency. Following AREA and checking your assumptions with evidence will bolster your confidence and give you better conviction about your decision path.
+    {% endif %}
+    {% if total >= 12 and total <= 16 %}
+        You indicate that there’s some discomfort about the outcome, the potential cost of making a poor decision and some time urgency. AREA will help you better examine the ramifications of various outcome to give you confidence and conviction that you’ve made the right choice.
+    {% endif %}
+    {% if total >= 17 and total <= 20 %}
+        You have some trepidation about the parameters of your decision such as how long term the impact might be and the cost of a poor decision. AREA will help you identify a Vision of Success to give a clear target to reach and then guide you on the research process to make a good decision for you personally.
+    {% endif %}
+    {% if total >= 21 and total <= 24 %}
+        You have a high stakes decision; one where the outcome is unknown, the impact long-term and price for getting it wrong could be costly. Framing your problem to focus on what matters most to you and then conducting research will help you evaluate your options and come to conviction.
+    {% endif %}
+    </p>
 {% endblock %}
