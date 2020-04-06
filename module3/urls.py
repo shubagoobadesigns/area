@@ -27,6 +27,9 @@ urlpatterns = [
     url(r'^game1/game/?$', views.game, name='module3_game1_game'),
     url(r'^game1/results/?$', views.game1_results, name='module3_game1_results'),
 
+    url(r'^options/find/?$', views.options_find, name='module3_options_find'),
+    url(r'^options/rank/?$', views.options_rank, name='module3_options_rank'),
+
     url(r'^cheetah1/intro/?$', views.generic_page_controller, name='module3_cheetah1_intro'),
     url(r'^cheetah1/sheet/?$', views.cheetah1_sheet, name='module3_cheetah1_sheet'),
 

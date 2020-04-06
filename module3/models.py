@@ -43,6 +43,7 @@ db_fields = [
     'gq_3',
     'great_questions',
     'iq',
+    'my_options',
     'pro_con_least',
     'pro_con_most',
     'problem_to_solve',
@@ -93,6 +94,7 @@ class Module3(BaseModule):
     gq_3 = models.TextField(default='')
     great_questions = models.TextField(default='')
     iq = models.TextField(default='')
+    my_options = models.TextField(default='')
     pro_con_least = models.TextField(default='')
     pro_con_most = models.TextField(default='')
     problem_to_solve = models.TextField(default='')

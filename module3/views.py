@@ -83,6 +83,8 @@ def navigation():
         reverse('module3_game1_instructions'),
         reverse('module3_game1_game'),
         reverse('module3_game1_results'),
+        reverse('module3_options_find'),
+        reverse('module3_options_rank'),
         reverse('module3_cheetah1_intro'),
         reverse('module3_cheetah1_sheet'),
         reverse('module3_cheetah2_sheet'),
@@ -601,6 +603,38 @@ def game1_results(request):
         'biases': calculate_bias_result(module),
         'br': ViewHelper.load_json(module.br),
         'questions': module.get_game_questions(),
+    }
+
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def options_find(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.my_options = json.dumps(request.POST.getlist('my_options[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'my_options': ViewHelper.load_json(module.my_options),
+    }
+
+    return render_page(request, module, parsed, context)
+
+
+@active_user_required
+def options_rank(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.my_options = json.dumps(request.POST.getlist('my_options[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'my_options': ViewHelper.load_json(module.my_options),
     }
 
     return render_page(request, module, parsed, context)

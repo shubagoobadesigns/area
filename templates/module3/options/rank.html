@@ -1,0 +1,73 @@
+{% extends 'modules/base/backpocket.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' "Ranking Options" %}
+    {% define 'nextBtnLabel' "I'm Ready" %}
+    {% define 'progressBarTemplate' 'module3/progress_bar/id.html' %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block modal_content %}
+    <p>Robyns Answer to Question 1: Using her  Decision Dilemma: and Critical Concepts:</p>
+    <ul>
+        <li>What skills are necessary?</li>
+        <li>Do I feel knowledgeable about the new location?</li>
+        <li>Once I understand the job and location, how do I feel?</li>
+    </ul>
+
+    <p>As a guide, Robyn came up with three options:</p>
+    <ul>
+        <li>Take the VP of Sales Midwest promotion and move to Milwaukee, Wisconsin.</li>
+        <li>Don't take the promotion and don't move.</li>
+    </ul>
+
+    <p>Robyn pushed herself to think what might make the promotion more attractive to her personally and came up with Option 3: Could she take the new job but NOT move to Milwaukee?</p>
+
+    <p>She wondered: Might that be possible? How could I find out?</p>
+{% endblock %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        function update_rank() {
+            var rank = [];
+            $('#sortable li').each(function (index, value) {
+                console.log(index);
+                var item = $(value).data('value');
+                if ('undefined' !== typeof item) {
+                    console.log("Pushing: " + item);
+                    rank.push(item);
+                }
+            });
+
+            var sorted = rank.join(",")
+            $('#options_rank').val(sorted);
+
+            console.log(sorted);
+
+        }
+
+        update_rank();
+
+        $('#sortable').sortable({
+           change: function (event, ui) {
+               update_rank();
+           }
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block content_body %}
+    <input type="hidden" name="options_rank" id="options_rank" value=""/>
+    <p>Drag and drop to rank the options in order of how likely you are to choose them as your decision</p>
+    <ul id="sortable" class="list-group">
+    {% for my_option in my_options %}
+      <li class="list-group-item" data-value="{{ forloop.counter0 }}">{{ my_option }}</li>
+    {% endfor %}
+    </ul>
+
+    <p>How do you feel about choosing that option?</p>
+{% endblock %}
